@@ -1,0 +1,3641 @@
+{
+  "SaveName": "Changer Experiment",
+  "GameMode": "Casino Background",
+  "Date": "5/21/2020 10:32:38 PM",
+  "Gravity": 0.5,
+  "PlayArea": 0.5,
+  "GameType": "",
+  "GameComplexity": "",
+  "Tags": [],
+  "Table": "Table_Square",
+  "Sky": "Sky_Museum",
+  "SkyURL": "http://cloud-3.steamusercontent.com/ugc/863988012265905439/D68056617C649B2A1CA6D4DDB3159516783F72D4/",
+  "Note": "",
+  "Rules": "",
+  "MusicPlayer": {
+    "RepeatSong": false,
+    "PlaylistEntry": 20,
+    "CurrentAudioTitle": "Awakening",
+    "CurrentAudioURL": "http://cloud-3.steamusercontent.com/ugc/792010997184359809/DA27CF611C537C0C6A94893C0330B24358296475/",
+    "AudioLibrary": [
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184359809/DA27CF611C537C0C6A94893C0330B24358296475/",
+        "Item2": "Awakening"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184371128/145B47EC47D331B4AE1CB59FDE75E0116E10280D/",
+        "Item2": "Calm"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184371906/F8E4FC7CBD21DD2430F906F77055819AD0474996/",
+        "Item2": "Day Travel"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184374182/B0FF76DCB3D979C6A3A630F45A9FD58E7390D6C6/",
+        "Item2": "Death"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184376716/0407BB616E681D199DDEC384058B3CBF3DD3FEAD/",
+        "Item2": "Epilude"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184379961/314F9E57AF4CF475B86BAF58AD5A006DB16CE86D/",
+        "Item2": "Goblin Combat"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184385296/1A83AFF3AF0959546E8444D9A3F4174BC35E5336/",
+        "Item2": "Human Combat 1"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184387091/0554504FC54BACCAA83CAB542EB33FC41C87346B/",
+        "Item2": "Human Combat 2"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184389261/F753ACB43BA28C799B808388D6A6E4A71BDB78CB/",
+        "Item2": "Intrigue"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184392871/C1ACD1C3E628B836F6DEFF643B618418A339EECC/",
+        "Item2": "Map"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184394727/6212F5FF59B6D980AA95CCF1B06BE32F8DFF3366/",
+        "Item2": "Mistique"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184397131/B462582B327D41981E3A3893AED045C9DFA37D68/",
+        "Item2": "Night Travel"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184398544/F8246EDA891BDFDE3CE9183A139D514F78A582CF/",
+        "Item2": "Orc Combat 1"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184400189/F25ADB6B0FA920C0D9F6A67546DAD85C70C9504E/",
+        "Item2": "Orc Combat 2"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184402108/415A2E2F690E8241A23FBBAFB8D9BAB0D469F8F4/",
+        "Item2": "Prelude"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184404898/8956C1A3A9A41B0F54B4DE400EC76F7723332310/",
+        "Item2": "Reflective"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184406070/21B923240147A1785E49CAE3AFA27C045405694C/",
+        "Item2": "Setting Up"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184407878/A2458FAB2EE78A3AA4B26271485982FA02665FDA/",
+        "Item2": "Tension"
+      },
+      {
+        "Item1": "http://cloud-3.steamusercontent.com/ugc/792010997184409426/32FB9FCA1D2DD24CF88150A31E16108CEB21559D/",
+        "Item2": "Undead Combat"
+      }
+    ]
+  },
+  "Grid": {
+    "Type": 0,
+    "Lines": false,
+    "Color": {
+      "r": 0.0,
+      "g": 0.0,
+      "b": 0.0
+    },
+    "Opacity": 0.75,
+    "ThickLines": false,
+    "Snapping": false,
+    "Offset": false,
+    "BothSnapping": false,
+    "xSize": 0.0,
+    "ySize": 0.0,
+    "PosOffset": {
+      "x": 0.0,
+      "y": 1.0,
+      "z": 0.0
+    }
+  },
+  "Lighting": {
+    "LightIntensity": 0.611438036,
+    "LightColor": {
+      "r": 1.0,
+      "g": 0.9804,
+      "b": 0.8902
+    },
+    "AmbientIntensity": 1.14212644,
+    "AmbientType": 0,
+    "AmbientSkyColor": {
+      "r": 0.5,
+      "g": 0.5,
+      "b": 0.5
+    },
+    "AmbientEquatorColor": {
+      "r": 0.5,
+      "g": 0.5,
+      "b": 0.5
+    },
+    "AmbientGroundColor": {
+      "r": 0.5,
+      "g": 0.5,
+      "b": 0.5
+    },
+    "ReflectionIntensity": 1.0,
+    "LutIndex": 0,
+    "LutContribution": 1.0,
+    "LutURL": ""
+  },
+  "Hands": {
+    "Enable": true,
+    "DisableUnused": false,
+    "Hiding": 0,
+    "HandTransforms": [
+      {
+        "Color": "Green",
+        "Transform": {
+          "posX": -77.91122,
+          "posY": 21.8962822,
+          "posZ": -3.614563,
+          "rotX": 0.0,
+          "rotY": 89.90786,
+          "rotZ": 0.0,
+          "scaleX": 8.572154,
+          "scaleY": 7.00324869,
+          "scaleZ": 4.562017
+        }
+      },
+      {
+        "Color": "Teal",
+        "Transform": {
+          "posX": -78.06915,
+          "posY": 21.8992653,
+          "posZ": 8.742428,
+          "rotX": 0.0,
+          "rotY": 89.90786,
+          "rotZ": 0.0,
+          "scaleX": 10.0912094,
+          "scaleY": 7.003262,
+          "scaleZ": 5.114208
+        }
+      },
+      {
+        "Color": "Blue",
+        "Transform": {
+          "posX": -73.29498,
+          "posY": 21.8967552,
+          "posZ": 28.6608963,
+          "rotX": 0.0,
+          "rotY": 136.38623,
+          "rotZ": 0.0,
+          "scaleX": 10.7694035,
+          "scaleY": 7.00331,
+          "scaleZ": 4.653553
+        }
+      },
+      {
+        "Color": "Purple",
+        "Transform": {
+          "posX": -53.2833252,
+          "posY": 21.8959274,
+          "posZ": 34.4038658,
+          "rotX": 0.0,
+          "rotY": 180.0361,
+          "rotZ": 0.0,
+          "scaleX": 9.710773,
+          "scaleY": 7.00332451,
+          "scaleZ": 4.791273
+        }
+      },
+      {
+        "Color": "Pink",
+        "Transform": {
+          "posX": -38.8014755,
+          "posY": 21.89597,
+          "posZ": 34.3285065,
+          "rotX": 0.0,
+          "rotY": 180.0361,
+          "rotZ": 0.0,
+          "scaleX": 9.843497,
+          "scaleY": 7.00333166,
+          "scaleZ": 4.924041
+        }
+      },
+      {
+        "Color": "Brown",
+        "Transform": {
+          "posX": 49.9014244,
+          "posY": 21.89603,
+          "posZ": 34.07364,
+          "rotX": 0.0,
+          "rotY": 180.0361,
+          "rotZ": 0.0,
+          "scaleX": 10.7735319,
+          "scaleY": 7.003335,
+          "scaleZ": 4.791321
+        }
+      },
+      {
+        "Color": "Red",
+        "Transform": {
+          "posX": 70.61398,
+          "posY": 21.8967285,
+          "posZ": 28.594471,
+          "rotX": 0.0,
+          "rotY": 234.848755,
+          "rotZ": 0.0,
+          "scaleX": 12.2347345,
+          "scaleY": 7.00329,
+          "scaleZ": 5.3187
+        }
+      },
+      {
+        "Color": "Orange",
+        "Transform": {
+          "posX": 75.5327,
+          "posY": 21.8986549,
+          "posZ": 10.6345367,
+          "rotX": 0.0,
+          "rotY": 270.0015,
+          "rotZ": 0.0,
+          "scaleX": 9.42451,
+          "scaleY": 7.003276,
+          "scaleZ": 5.158488
+        }
+      },
+      {
+        "Color": "Yellow",
+        "Transform": {
+          "posX": 75.1401,
+          "posY": 21.8976936,
+          "posZ": -2.25915146,
+          "rotX": 0.0,
+          "rotY": 270.0015,
+          "rotZ": 0.0,
+          "scaleX": 9.424536,
+          "scaleY": 7.0032835,
+          "scaleZ": 5.27054644
+        }
+      },
+      {
+        "Color": "Black",
+        "Transform": {
+          "posX": -2.91477585,
+          "posY": 21.897274,
+          "posZ": -29.58728,
+          "rotX": 0.0,
+          "rotY": 0.131027609,
+          "rotZ": 0.0,
+          "scaleX": 14.7674,
+          "scaleY": 7.00335169,
+          "scaleZ": 5.7924695
+        }
+      },
+      {
+        "Color": "White",
+        "Transform": {
+          "posX": 31.6125736,
+          "posY": 4.462879,
+          "posZ": 34.5627327,
+          "rotX": 0.0,
+          "rotY": 177.786163,
+          "rotZ": 0.0,
+          "scaleX": 22.0330238,
+          "scaleY": 7.00077772,
+          "scaleZ": 8.650757
+        }
+      }
+    ]
+  },
+  "Turns": {
+    "Enable": false,
+    "Type": 0,
+    "TurnOrder": [],
+    "Reverse": false,
+    "SkipEmpty": false,
+    "DisableInteractions": false,
+    "PassTurns": true,
+    "TurnColor": ""
+  },
+  "TabStates": {
+    "0": {
+      "title": "Rules",
+      "body": "",
+      "color": "Grey",
+      "visibleColor": {
+        "r": 0.5,
+        "g": 0.5,
+        "b": 0.5
+      },
+      "id": 0
+    },
+    "1": {
+      "title": "White",
+      "body": "\n",
+      "color": "White",
+      "visibleColor": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "id": 1
+    },
+    "2": {
+      "title": "Brown",
+      "body": "",
+      "color": "Brown",
+      "visibleColor": {
+        "r": 0.443,
+        "g": 0.231,
+        "b": 0.09
+      },
+      "id": 2
+    },
+    "3": {
+      "title": "Red",
+      "body": "",
+      "color": "Red",
+      "visibleColor": {
+        "r": 0.856,
+        "g": 0.1,
+        "b": 0.094
+      },
+      "id": 3
+    },
+    "4": {
+      "title": "Orange",
+      "body": "",
+      "color": "Orange",
+      "visibleColor": {
+        "r": 0.956,
+        "g": 0.392,
+        "b": 0.113
+      },
+      "id": 4
+    },
+    "5": {
+      "title": "Yellow",
+      "body": "",
+      "color": "Yellow",
+      "visibleColor": {
+        "r": 0.905,
+        "g": 0.898,
+        "b": 0.172
+      },
+      "id": 5
+    },
+    "6": {
+      "title": "Green",
+      "body": "",
+      "color": "Green",
+      "visibleColor": {
+        "r": 0.192,
+        "g": 0.701,
+        "b": 0.168
+      },
+      "id": 6
+    },
+    "7": {
+      "title": "Blue",
+      "body": "",
+      "color": "Blue",
+      "visibleColor": {
+        "r": 0.118,
+        "g": 0.53,
+        "b": 1.0
+      },
+      "id": 7
+    },
+    "8": {
+      "title": "Teal",
+      "body": "",
+      "color": "Teal",
+      "visibleColor": {
+        "r": 0.129,
+        "g": 0.694,
+        "b": 0.607
+      },
+      "id": 8
+    },
+    "9": {
+      "title": "Purple",
+      "body": "",
+      "color": "Purple",
+      "visibleColor": {
+        "r": 0.627,
+        "g": 0.125,
+        "b": 0.941
+      },
+      "id": 9
+    },
+    "10": {
+      "title": "Pink",
+      "body": "",
+      "color": "Pink",
+      "visibleColor": {
+        "r": 0.96,
+        "g": 0.439,
+        "b": 0.807
+      },
+      "id": 10
+    },
+    "11": {
+      "title": "Black",
+      "body": "",
+      "color": "Black",
+      "visibleColor": {
+        "r": 0.25,
+        "g": 0.25,
+        "b": 0.25
+      },
+      "id": 11
+    }
+  },
+  "DecalPallet": [],
+  "ObjectStates": [
+    {
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -2.87432861,
+        "posY": 2.43298984,
+        "posZ": 24.07349,
+        "rotX": 8.288109E-06,
+        "rotY": 269.987946,
+        "rotZ": 0.000221009745,
+        "scaleX": 0.350000441,
+        "scaleY": 0.350000441,
+        "scaleZ": 0.350000441
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.9921606,
+        "b": 0.9999998
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "http://pastebin.com/raw.php?i=vEpB7Ped",
+        "DiffuseURL": "https://www.textures.com/system/gallery/photos/Substance/127304/Substance0077_9_download600.jpg",
+        "NormalURL": "",
+        "ColliderURL": "http://pastebin.com/raw.php?i=vEpB7Ped",
+        "Convex": false,
+        "MaterialIndex": 1,
+        "TypeIndex": 0,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "4f5443"
+    },
+    {
+      "Name": "Custom_Model_Stack",
+      "Transform": {
+        "posX": 29.4407215,
+        "posY": 2.27622557,
+        "posZ": -20.4373074,
+        "rotX": 0.289095253,
+        "rotY": 0.01161205,
+        "rotZ": 0.000793540734,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "$10",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 31,
+      "CustomMesh": {
+        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361769/E5409DE7E80EFCA0105DA6D63D10EAAA3A0D6674/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 5,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.854901969,
+            "g": 0.854901969,
+            "b": 0.854901969
+          },
+          "SpecularIntensity": 0.2,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 1.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "7ecc25"
+    },
+    {
+      "Name": "Custom_Model_Stack",
+      "Transform": {
+        "posX": 34.1207047,
+        "posY": 2.276187,
+        "posZ": -20.4367256,
+        "rotX": 0.287063926,
+        "rotY": 0.01595441,
+        "rotZ": 0.001047198,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "$25",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 31,
+      "CustomMesh": {
+        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361922/105D98788659BFCEA5A9AF0AE36282F3371774B7/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 5,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.854901969,
+            "g": 0.854901969,
+            "b": 0.854901969
+          },
+          "SpecularIntensity": 0.2,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 1.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "1f52ff"
+    },
+    {
+      "Name": "Custom_Model_Stack",
+      "Transform": {
+        "posX": 27.8806973,
+        "posY": 2.27614713,
+        "posZ": -20.435564,
+        "rotX": 0.2823657,
+        "rotY": 0.0066088466,
+        "rotZ": 0.0005468229,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "$5",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 23,
+      "CustomMesh": {
+        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361594/14E1444F5FE41B6B7E73A306A2CB1FB2F5EE6737/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 5,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.854901969,
+            "g": 0.854901969,
+            "b": 0.854901969
+          },
+          "SpecularIntensity": 0.2,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 1.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "5e4fc1"
+    },
+    {
+      "Name": "Custom_Model_Stack",
+      "Transform": {
+        "posX": 35.6807442,
+        "posY": 2.27622747,
+        "posZ": -20.4376736,
+        "rotX": 0.290558726,
+        "rotY": 0.02075616,
+        "rotZ": 0.001337233,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "$100",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 32,
+      "CustomMesh": {
+        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197362056/137B247775B41E250CF6085A2F2A6579560D60CD/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 5,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.854901969,
+            "g": 0.854901969,
+            "b": 0.854901969
+          },
+          "SpecularIntensity": 0.2,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 1.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "291798"
+    },
+    {
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 50.9635735,
+        "posY": 2.28907156,
+        "posZ": -16.1203556,
+        "rotX": -8.197401E-06,
+        "rotY": 0.02337739,
+        "rotZ": 179.999954,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomImage": {
+        "ImageURL": "https://i.imgur.com/PCTKkgx.png",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.14500016,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "916652"
+    },
+    {
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 50.9064445,
+        "posY": 2.43657136,
+        "posZ": -16.1276264,
+        "rotX": 358.350433,
+        "rotY": 0.0232613981,
+        "rotZ": -0.0014428423,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomImage": {
+        "ImageURL": "https://i.imgur.com/I9CJlt5.png",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.150000155,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "JointFixed": {
+        "ConnectedBodyGUID": "916652",
+        "EnableCollision": false,
+        "Axis": {
+          "x": 1.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Anchor": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "ConnectedAnchor": {
+          "x": 0.0571242832,
+          "y": -0.147500038,
+          "z": -0.007294016
+        },
+        "BreakForce": "Infinity",
+        "BreakTorgue": "Infinity"
+      },
+      "GUID": "edf005"
+    },
+    {
+      "Name": "Custom_Model_Stack",
+      "Transform": {
+        "posX": 32.5606728,
+        "posY": 5.636129,
+        "posZ": -20.4199467,
+        "rotX": 0.286649674,
+        "rotY": 0.0142966118,
+        "rotZ": 180.000717,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "$500",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 31,
+      "CustomMesh": {
+        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197362257/2F8B751A869CCE2807D8D21D5B6A4F5C04CF7C29/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 5,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.854901969,
+            "g": 0.854901969,
+            "b": 0.854901969
+          },
+          "SpecularIntensity": 0.2,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 1.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "38c53e"
+    },
+    {
+      "Name": "Figurine_Custom",
+      "Transform": {
+        "posX": -29.8852978,
+        "posY": 15.6427345,
+        "posZ": -24.5564251,
+        "rotX": 6.95033032E-06,
+        "rotY": -0.000804160663,
+        "rotZ": 3.29769537E-05,
+        "scaleX": 2.549999,
+        "scaleY": 2.549999,
+        "scaleZ": 2.549999
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomImage": {
+        "ImageURL": "https://i.imgur.com/41gsabY.png",
+        "ImageSecondaryURL": "https://i.imgur.com/41gsabY.png",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "f340b0"
+    },
+    {
+      "Name": "Custom_Model_Stack",
+      "Transform": {
+        "posX": 31.000679,
+        "posY": 5.63611,
+        "posZ": -20.41954,
+        "rotX": 0.285619378,
+        "rotY": 359.979645,
+        "rotZ": 179.998718,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "$100",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 31,
+      "CustomMesh": {
+        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197362056/137B247775B41E250CF6085A2F2A6579560D60CD/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 5,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.854901969,
+            "g": 0.854901969,
+            "b": 0.854901969
+          },
+          "SpecularIntensity": 0.2,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 1.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "4fc15d"
+    },
+    {
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -60.5838928,
+        "posY": 2.28909087,
+        "posZ": 2.67935872,
+        "rotX": -1.77943875E-05,
+        "rotY": 0.02146643,
+        "rotZ": 180.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomImage": {
+        "ImageURL": "https://i.imgur.com/PCTKkgx.png",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.14500016,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "ac7044"
+    },
+    {
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -60.64102,
+        "posY": 2.43659043,
+        "posZ": 2.67208624,
+        "rotX": 358.3504,
+        "rotY": 0.0212937612,
+        "rotZ": -0.00124116417,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomImage": {
+        "ImageURL": "https://i.imgur.com/I9CJlt5.png",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.150000155,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "JointFixed": {
+        "ConnectedBodyGUID": "ac7044",
+        "EnableCollision": false,
+        "Axis": {
+          "x": 1.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Anchor": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "ConnectedAnchor": {
+          "x": 0.0571242832,
+          "y": -0.147500038,
+          "z": -0.007294016
+        },
+        "BreakForce": "Infinity",
+        "BreakTorgue": "Infinity"
+      },
+      "GUID": "e75309"
+    },
+    {
+      "Name": "Custom_Model_Stack",
+      "Transform": {
+        "posX": 37.2406845,
+        "posY": 2.27619934,
+        "posZ": -20.4368649,
+        "rotX": 0.287197828,
+        "rotY": -0.004184893,
+        "rotZ": -0.0001753262,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "$1",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 30,
+      "CustomMesh": {
+        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361404/F445EAEF5DD560F5A4CDFAC30CBDCBF5942B15B4/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 5,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.854901969,
+            "g": 0.854901969,
+            "b": 0.854901969
+          },
+          "SpecularIntensity": 0.2,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 1.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "cc3784"
+    },
+    {
+      "Name": "Die_6_Rounded",
+      "Transform": {
+        "posX": 55.66185,
+        "posY": 2.79408383,
+        "posZ": 3.283352,
+        "rotX": -5.749384E-05,
+        "rotY": 255.8233,
+        "rotZ": 5.45333642E-05,
+        "scaleX": 1.6499995,
+        "scaleY": 1.6499995,
+        "scaleZ": 1.6499995
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": 1,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "fb85e1",
+      "RotationValues": [
+        {
+          "Value": 1,
+          "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        },
+        {
+          "Value": 2,
+          "Rotation": {
+            "x": 90.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        },
+        {
+          "Value": 3,
+          "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 90.0
+          }
+        },
+        {
+          "Value": 4,
+          "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -90.0
+          }
+        },
+        {
+          "Value": 5,
+          "Rotation": {
+            "x": -90.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        },
+        {
+          "Value": 6,
+          "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -180.0
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Die_6_Rounded",
+      "Transform": {
+        "posX": 53.7591438,
+        "posY": 2.79407382,
+        "posZ": 1.82096362,
+        "rotX": 90.0,
+        "rotY": 160.8547,
+        "rotZ": 0.0,
+        "scaleX": 1.6499995,
+        "scaleY": 1.6499995,
+        "scaleZ": 1.6499995
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": 1,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "04e437",
+      "RotationValues": [
+        {
+          "Value": 1,
+          "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        },
+        {
+          "Value": 2,
+          "Rotation": {
+            "x": 90.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        },
+        {
+          "Value": 3,
+          "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 90.0
+          }
+        },
+        {
+          "Value": 4,
+          "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -90.0
+          }
+        },
+        {
+          "Value": 5,
+          "Rotation": {
+            "x": -90.0,
+            "y": 0.0,
+            "z": 0.0
+          }
+        },
+        {
+          "Value": 6,
+          "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -180.0
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -2.18478249E-07,
+        "posY": -24.7834129,
+        "posZ": -1.83272839,
+        "rotX": 0.0,
+        "rotY": 90.0,
+        "rotZ": 0.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/967597981814546386/F7B25B661EDBB26575D9E8631AC69F46D0900CAF/",
+        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/967597981817405349/5476C4681756153975B0B87D9BE5B5F34ACC0604/",
+        "NormalURL": "",
+        "ColliderURL": "http://cloud-3.steamusercontent.com/ugc/967597981814546386/F7B25B661EDBB26575D9E8631AC69F46D0900CAF/",
+        "Convex": false,
+        "MaterialIndex": 3,
+        "TypeIndex": 4,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "a2893d"
+    },
+    {
+      "Name": "BlockSquare",
+      "Transform": {
+        "posX": -0.0159381516,
+        "posY": 10.850256,
+        "posZ": -22.910944,
+        "rotX": 0.07871673,
+        "rotY": 0.03373705,
+        "rotZ": -7.511709E-07,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Chip Value Manager [b][v1.1.3][/b]",
+      "Description": "This cube will manage values of all the chips. Required on your table!",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.353657216,
+        "g": 0.353657216,
+        "b": 0.353657216
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "-- Created by Atomik\r\n-- If there are any problems, send a comment to the workshop.\r\n--\r\n-- Only edit the code if you understand what you are doing.\r\n\r\nlocal chipValues = {}\r\nlocal modelByDiffuse = {}\r\nlocal loopIds = {}\r\n\r\nfunction onLoad()\r\n    local chipValueManager = Global.getVar(\"chipValueManager\")\r\n    if chipValueManager ~= nil then\r\n        self.destruct()\r\n        print(\"[ff0000]Chip Value Manager is destroying itself as another one already exists.[-]\")\r\n        return\r\n    end\r\n\r\n    Global.setVar(\"chipValueManager\", self)\r\n\r\n    local import = false\r\n    local chipValuesGlobal = Global.getVar(\"cvm_chipValues\")\r\n    local modelByDiffuseGlobal = Global.getVar(\"cvm_modelByDiffuse\")\r\n\r\n    if chipValuesGlobal ~= nil then\r\n        chipValues = chipValuesGlobal\r\n        import = true\r\n    end\r\n    if modelByDiffuseGlobal ~= nil then\r\n        modelByDiffuse = modelByDiffuseGlobal\r\n        import = true\r\n    end\r\n\r\n    if import then\r\n        print(\"[00ff00]Chip Value Manager imported data from another Chip Value Manager.[-]\")\r\n    end\r\nend\r\n\r\nfunction addChipValue(params)\r\n    chipValues[params.diffuse] = params.value\r\n    modelByDiffuse[params.diffuse] = params.model\r\n\r\n    Global.setTable(\"cvm_chipValues\", chipValues)\r\n    Global.setTable(\"cvm_modelByDiffuse\", modelByDiffuse)\r\n\r\n    for i,v in pairs(getAllObjects()) do\r\n        local customObj = v.getCustomObject()\r\n        if customObj ~= nil then\r\n            if customObj.diffuse then\r\n                if chipValues[customObj.diffuse] ~= nil then\r\n                    if modelByDiffuse[customObj.diffuse] == customObj.mesh then\r\n                        v.value = chipValues[customObj.diffuse]\r\n                        if v.getQuantity() > -1 then\r\n                            v.value = chipValues[customObj.diffuse] * v.getQuantity()\r\n\r\n                            if loopIds[v.getGUID()] == nil then\r\n                                local guid = v.getGUID()\r\n                                loopIds[v.getGUID()] = Wait.time(function()\r\n                                    if v == nil then\r\n                                        Wait.stop(loopIds[guid])\r\n                                        return\r\n                                    end\r\n                                    if v.getQuantity() == -1 then\r\n                                        Wait.stop(loopIds[guid])\r\n                                        return\r\n                                    end\r\n\r\n                                    v.value = chipValues[customObj.diffuse] * v.getQuantity()\r\n                                end, 3, -1)\r\n                            end\r\n                        end\r\n                        v.value_flags = 1\r\n                    end\r\n                end\r\n            end\r\n        end\r\n    end\r\nend\r\n\r\nfunction onObjectSpawn(object)\r\n    local customObj = object.getCustomObject()\r\n    if customObj ~= nil then\r\n        if customObj.diffuse then\r\n            if chipValues[customObj.diffuse] ~= nil then\r\n                if modelByDiffuse[customObj.diffuse] == customObj.mesh then\r\n                    object.script_state = JSON.encode({ value = chipValues[customObj.diffuse] })\r\n                    object.value = chipValues[customObj.diffuse]\r\n                    if object.getQuantity() > -1 then\r\n                        object.value = chipValues[customObj.diffuse] * object.getQuantity()\r\n\r\n                        if loopIds[object.getGUID()] == nil then\r\n                            local guid = object.getGUID()\r\n                            loopIds[object.getGUID()] = Wait.time(function()\r\n                                if object == nil then\r\n                                    Wait.stop(loopIds[guid])\r\n                                    return\r\n                                end\r\n                                if object.getQuantity() == -1 then\r\n                                    Wait.stop(loopIds[guid])\r\n                                    return\r\n                                end\r\n\r\n                                object.value = chipValues[customObj.diffuse] * object.getQuantity()\r\n                            end, 3, -1)\r\n                        end\r\n                    end\r\n                    object.value_flags = 1\r\n\r\n                    return\r\n                end\r\n            end\r\n        end\r\n    end\r\nend\r\n\r\nfunction onObjectEnterContainer(container, enter_object)\r\n    if container.getQuantity() > -1 and container.tag ~= \"Deck\" and container.tag ~= \"Infinite\" and container.tag ~= \"Bag\" then\r\n        local customObj = enter_object.getCustomObject()\r\n        if customObj ~= nil then\r\n            if customObj.diffuse then\r\n                if chipValues[customObj.diffuse] ~= nil then\r\n                    if modelByDiffuse[customObj.diffuse] == customObj.mesh then\r\n                        container.value = chipValues[customObj.diffuse] * container.getQuantity()\r\n                        container.value_flags = 1\r\n                    end\r\n                end\r\n            end\r\n        end\r\n\r\n    end\r\nend\r\n\r\nfunction onObjectLeaveContainer(container, leave_object)\r\n    if container.getQuantity() > -1 and container.tag ~= \"Deck\" and container.tag ~= \"Infinite\" and container.tag ~= \"Bag\" then\r\n        local customObj = leave_object.getCustomObject()\r\n        if customObj ~= nil then\r\n            if customObj.diffuse then\r\n                if chipValues[customObj.diffuse] ~= nil then\r\n                    if modelByDiffuse[customObj.diffuse] == customObj.mesh then\r\n                        container.value = chipValues[customObj.diffuse] * container.getQuantity()\r\n                        container.value_flags = 1\r\n                    end\r\n                end\r\n            end\r\n        end\r\n    end\r\nend",
+      "LuaScriptState": "",
+      "GUID": "df703e"
+    },
+    {
+      "Name": "Infinite_Bag",
+      "Transform": {
+        "posX": 15.2483711,
+        "posY": 2.20152473,
+        "posZ": -20.1731434,
+        "rotX": 0.115591332,
+        "rotY": 359.993225,
+        "rotZ": -0.000155262867,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "1",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "LuaScript": "-- Created by Atomik\r\n-- If there are any problems, send a comment to the workshop.\r\n--\r\n-- Only edit the code if you understand what you are doing.\r\n\r\nlocal lastDesc = \"\"\r\nlocal diffuse = \"\"\r\nlocal model = \"\"\r\n\r\nfunction onLoad()\r\n    lastDesc = self.getDescription()\r\n\r\n    local json = JSON.decode(self.getJSON())\r\n    local containedObjs = json.ContainedObjects\r\n    if containedObjs ~= nil then\r\n        local obj = json.ContainedObjects[1]\r\n        if obj.CustomMesh then\r\n            local mesh = obj.CustomMesh\r\n            diffuse = mesh.DiffuseURL\r\n            model = mesh.MeshURL\r\n\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n        end\r\n    end\r\n\r\n    Wait.time(function()\r\n        if self.getDescription() ~= lastDesc then\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            lastDesc = self.getDescription()\r\n        end\r\n    end, 2, -1)\r\nend\r\n\r\nfunction onObjectEnterContainer(container, enter_object)\r\n    if container == self then\r\n        local customObj = enter_object.getCustomObject()\r\n        if customObj ~= nil then\r\n            if customObj.diffuse then\r\n                diffuse = customObj.diffuse\r\n                model = customObj.mesh\r\n\r\n                local valueManager = Global.getVar(\"chipValueManager\")\r\n                valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            end\r\n        end\r\n    end\r\nend",
+      "LuaScriptState": "",
+      "ContainedObjects": [
+        {
+          "Name": "Custom_Model",
+          "Transform": {
+            "posX": 18.3656387,
+            "posY": 4.34862471,
+            "posZ": 10.2964821,
+            "rotX": 358.7529,
+            "rotY": 359.973755,
+            "rotZ": 0.493522048,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "$1",
+          "Description": "",
+          "GMNotes": "",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": true,
+          "Snap": true,
+          "IgnoreFoW": false,
+          "MeasureMovement": false,
+          "DragSelectable": true,
+          "Autoraise": true,
+          "Sticky": true,
+          "Tooltip": true,
+          "GridProjection": false,
+          "HideWhenFaceDown": false,
+          "Hands": false,
+          "CustomMesh": {
+            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361404/F445EAEF5DD560F5A4CDFAC30CBDCBF5942B15B4/",
+            "NormalURL": "",
+            "ColliderURL": "",
+            "Convex": true,
+            "MaterialIndex": 0,
+            "TypeIndex": 5,
+            "CustomShader": {
+              "SpecularColor": {
+                "r": 0.854901969,
+                "g": 0.854901969,
+                "b": 0.854901969
+              },
+              "SpecularIntensity": 0.2,
+              "SpecularSharpness": 2.0,
+              "FresnelStrength": 1.0
+            },
+            "CastShadows": true
+          },
+          "LuaScript": "",
+          "LuaScriptState": "",
+          "XmlUI": "",
+          "GUID": "6212a6"
+        }
+      ],
+      "GUID": "14ec8d"
+    },
+    {
+      "Name": "Infinite_Bag",
+      "Transform": {
+        "posX": 9.524366,
+        "posY": 2.201524,
+        "posZ": -20.1731415,
+        "rotX": 0.115526117,
+        "rotY": 359.993835,
+        "rotZ": -0.000112087029,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "25",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "LuaScript": "-- Created by Atomik\r\n-- If there are any problems, send a comment to the workshop.\r\n--\r\n-- Only edit the code if you understand what you are doing.\r\n\r\nlocal lastDesc = \"\"\r\nlocal diffuse = \"\"\r\nlocal model = \"\"\r\n\r\nfunction onLoad()\r\n    lastDesc = self.getDescription()\r\n\r\n    local json = JSON.decode(self.getJSON())\r\n    local containedObjs = json.ContainedObjects\r\n    if containedObjs ~= nil then\r\n        local obj = json.ContainedObjects[1]\r\n        if obj.CustomMesh then\r\n            local mesh = obj.CustomMesh\r\n            diffuse = mesh.DiffuseURL\r\n            model = mesh.MeshURL\r\n\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n        end\r\n    end\r\n\r\n    Wait.time(function()\r\n        if self.getDescription() ~= lastDesc then\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            lastDesc = self.getDescription()\r\n        end\r\n    end, 2, -1)\r\nend\r\n\r\nfunction onObjectEnterContainer(container, enter_object)\r\n    if container == self then\r\n        local customObj = enter_object.getCustomObject()\r\n        if customObj ~= nil then\r\n            if customObj.diffuse then\r\n                diffuse = customObj.diffuse\r\n                model = customObj.mesh\r\n\r\n                local valueManager = Global.getVar(\"chipValueManager\")\r\n                valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            end\r\n        end\r\n    end\r\nend",
+      "LuaScriptState": "",
+      "ContainedObjects": [
+        {
+          "Name": "Custom_Model",
+          "Transform": {
+            "posX": 10.0244617,
+            "posY": 4.34705639,
+            "posZ": 8.633454,
+            "rotX": 359.050934,
+            "rotY": 359.982117,
+            "rotZ": 0.9055493,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "$25",
+          "Description": "",
+          "GMNotes": "",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": true,
+          "Snap": true,
+          "IgnoreFoW": false,
+          "MeasureMovement": false,
+          "DragSelectable": true,
+          "Autoraise": true,
+          "Sticky": true,
+          "Tooltip": true,
+          "GridProjection": false,
+          "HideWhenFaceDown": false,
+          "Hands": false,
+          "CustomMesh": {
+            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361922/105D98788659BFCEA5A9AF0AE36282F3371774B7/",
+            "NormalURL": "",
+            "ColliderURL": "",
+            "Convex": true,
+            "MaterialIndex": 0,
+            "TypeIndex": 5,
+            "CustomShader": {
+              "SpecularColor": {
+                "r": 0.854901969,
+                "g": 0.854901969,
+                "b": 0.854901969
+              },
+              "SpecularIntensity": 0.2,
+              "SpecularSharpness": 2.0,
+              "FresnelStrength": 1.0
+            },
+            "CastShadows": true
+          },
+          "LuaScript": "",
+          "LuaScriptState": "",
+          "XmlUI": "",
+          "GUID": "5b8a0c"
+        }
+      ],
+      "GUID": "cff43a"
+    },
+    {
+      "Name": "Infinite_Bag",
+      "Transform": {
+        "posX": 13.3403692,
+        "posY": 2.2015245,
+        "posZ": -20.17314,
+        "rotX": 0.115536839,
+        "rotY": 359.993347,
+        "rotZ": -0.0001602699,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "5",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "LuaScript": "-- Created by Atomik\r\n-- If there are any problems, send a comment to the workshop.\r\n--\r\n-- Only edit the code if you understand what you are doing.\r\n\r\nlocal lastDesc = \"\"\r\nlocal diffuse = \"\"\r\nlocal model = \"\"\r\n\r\nfunction onLoad()\r\n    lastDesc = self.getDescription()\r\n\r\n    local json = JSON.decode(self.getJSON())\r\n    local containedObjs = json.ContainedObjects\r\n    if containedObjs ~= nil then\r\n        local obj = json.ContainedObjects[1]\r\n        if obj.CustomMesh then\r\n            local mesh = obj.CustomMesh\r\n            diffuse = mesh.DiffuseURL\r\n            model = mesh.MeshURL\r\n\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n        end\r\n    end\r\n\r\n    Wait.time(function()\r\n        if self.getDescription() ~= lastDesc then\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            lastDesc = self.getDescription()\r\n        end\r\n    end, 2, -1)\r\nend\r\n\r\nfunction onObjectEnterContainer(container, enter_object)\r\n    if container == self then\r\n        local customObj = enter_object.getCustomObject()\r\n        if customObj ~= nil then\r\n            if customObj.diffuse then\r\n                diffuse = customObj.diffuse\r\n                model = customObj.mesh\r\n\r\n                local valueManager = Global.getVar(\"chipValueManager\")\r\n                valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            end\r\n        end\r\n    end\r\nend",
+      "LuaScriptState": "",
+      "ContainedObjects": [
+        {
+          "Name": "Custom_Model",
+          "Transform": {
+            "posX": 14.0968895,
+            "posY": 4.346331,
+            "posZ": 9.779866,
+            "rotX": 358.876526,
+            "rotY": 359.984436,
+            "rotZ": 0.6229654,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "$5",
+          "Description": "",
+          "GMNotes": "",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": true,
+          "Snap": true,
+          "IgnoreFoW": false,
+          "MeasureMovement": false,
+          "DragSelectable": true,
+          "Autoraise": true,
+          "Sticky": true,
+          "Tooltip": true,
+          "GridProjection": false,
+          "HideWhenFaceDown": false,
+          "Hands": false,
+          "CustomMesh": {
+            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361594/14E1444F5FE41B6B7E73A306A2CB1FB2F5EE6737/",
+            "NormalURL": "",
+            "ColliderURL": "",
+            "Convex": true,
+            "MaterialIndex": 0,
+            "TypeIndex": 5,
+            "CustomShader": {
+              "SpecularColor": {
+                "r": 0.854901969,
+                "g": 0.854901969,
+                "b": 0.854901969
+              },
+              "SpecularIntensity": 0.2,
+              "SpecularSharpness": 2.0,
+              "FresnelStrength": 1.0
+            },
+            "CastShadows": true
+          },
+          "LuaScript": "",
+          "LuaScriptState": "",
+          "XmlUI": "",
+          "GUID": "11ab34"
+        }
+      ],
+      "GUID": "68a5fd"
+    },
+    {
+      "Name": "Chinese_Checkers_Piece",
+      "Transform": {
+        "posX": -19.5596313,
+        "posY": 12.0522289,
+        "posZ": -24.2474289,
+        "rotX": 6.993008,
+        "rotY": 0.9586968,
+        "rotZ": 7.92925739,
+        "scaleX": 4.44999838,
+        "scaleY": 4.44999838,
+        "scaleZ": 4.44999838
+      },
+      "Nickname": "ChipOwnerManager",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.0,
+        "g": 0.00512166228,
+        "b": 0.742647052
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": 4,
+      "LuaScript": "\n\n--todo - doesn't currently handle correclty if you drop a whole stack of chips onto someone else's chips.  It'll just remove one chip.\nchipColor = nil\npayoutBagGUIDS = {Red = '0d754b',\n                  White = '765aaf'}\n\n\nfunction filterObjectEnterContainer(container, enter_object)\n    --this event doesn't seem to fire on chip containers so this doesn't work for anything other than bags.\n    --I posted a suggestion to Bezerk to make this event fire for chip containers\n    if (container.getDescription() ~= \"\" and container.getDescription() ~= nil) then\n      if(enter_object.getDescription() ~= container.getDescription()) then\n        print(\"Cannot put an item into another player's bag.\")\n        return false\n      end\n    end\n    return true -- Allows object to enter.\nend\n\nfunction onPlayerChangeColor(color)\n    if(color == \"White\" or color == \"Red\") then\n      getObjectFromGUID(payoutBagGUIDS[color]).setDescription('Owner '..Player[color].steam_name)\n    end\nend\n\nfunction onObjectEnterContainer(container, enter_object)\n  if enter_object.tag == \"Chip\" then\n  end\n\n  if (container.tag == \"Chip\" and container.getDescription() ~= \"\" and container.getDescription() ~= nil) then\n    if(enter_object.getDescription() ~= container.getDescription() and enter_object.getDescription() ~= \"\" and enter_object.getDescription() ~= nil) then\n      newChip = container.takeObject({\n        position          = {container.getPosition().x + 5,container.getPosition().y + 5,container.getPosition().z + 5},\n        smooth            = false\n      })\n      Wait.time(function() deposit(newChip,enter_object.getDescription()) end,1)\n\n      --  newChip = container.deal(1,enter_object.getDescription())\n        --log(newChip,\"newChip\")\n      end\n    end\nend\n\nfunction deposit(obj,player_color)\n  getObjectFromGUID(payoutBagGUIDS[player_color]).putObject(obj)\nend\n\n\nfunction resetChipOwner(obj,player_color)\n    obj.setDescription('Owner ' .. Player[player_color].steam_name)\nend\n\nfunction onObjectLeaveContainer(bag, obj)\n\n    if((bag.tag == \"Chip\") and bag.getDescription() ~= nil and bag.getDescription() ~= \"\") then\n      --they are taking a chip off a stack.\n      if(obj.spawning) then\n      Wait.condition(function () assignChipToPlayer(obj,bag.getDescription(),bag) end, function() return not obj.spawning end)\n      else\n        assignChipToPlayer(obj,bag.getDescription(),bag)\n      end\n    elseif\n      (bag.tag == \"Bag\" and bag.getName() == \"Payouts\") then\n        if(obj.spawning) then\n        Wait.condition(function () obj.setDescription(bag.getDescription()) end, function() return not obj.spawning end)\n        else\n\n        end\n    else\n      if(obj.tag == 'Chip' or obj.tag == \"Generic\") then\n        if(obj.spawning) then\n        Wait.condition(function () assignChipToPlayer(obj) end, function() return not obj.spawning end)\n        else\n        assignChipToPlayer(obj)\n        end\n      end\n    end\nend\n\nfunction assignChipToPlayer (obj,color,stack)\n  if(color) then\n    if(obj.held_by_color ~= nil and obj.held_by_color ~= color) then\n        obj.setDescription(color)\n        obj.drop()\n        if(stack) then\n          stack.putObject(obj)\n        end\n      end\n  else\n    if(obj.held_by_color ~= nil) then\n      obj.setDescription('Owner ' .. Player[obj.held_by_color].steam_name)\n    end\n\n  end\nend\n\nfunction onObjectPickUp(colorName, obj)\n  if(obj.spawning) then\n  else\n\n  if(obj.tag == \"Chip\" or obj.tag == \"Generic\") then\n    if((obj.getDescription() ~= nil and obj.getDescription() ~= \"\") and obj.getDescription() ~= ('Owner ' .. Player[colorName].steam_name)) then\n      obj.lock()\n      obj.drop()\n      broadcastToColor('That is not your chip',colorName)\n      Wait.frames(function() unlockObj(obj) end,1)\n      --obj.drop()\n    elseif (obj.getDescription() == nil or obj.getDescription() == \"\") then\n      log(colorName,'colorname for setDescription')\n      obj.setDescription('Owner ' .. Player[colorName].steam_name)\n    end\n    log(obj,'chip object to set value')\n    log(obj.getValue(),'getValue')\n    log(obj.value, 'value')\n    if(obj.getValue() == nil and obj.value ~= nil) then\n      obj.setValue(obj.value)\n    end\n  end\nend\nend\n\nfunction unlockObj (obj)\n  obj.unlock()\nend\n\n-- (or however you obtain a \"tile\" object)",
+      "LuaScriptState": "",
+      "GUID": "992268"
+    },
+    {
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 49.56072,
+        "posY": 16.9070873,
+        "posZ": -23.4814339,
+        "rotX": 0.131277248,
+        "rotY": -0.000182804477,
+        "rotZ": 359.9863,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "500",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992163,
+        "b": 0.9999998
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 0,
+      "CustomMesh": {
+        "MeshURL": "http://pastebin.com/raw.php?i=hJvCwi4Q",
+        "DiffuseURL": "http://i.imgur.com/UvFy087.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 6,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "SpecularIntensity": 0.0,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 0.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.0,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
+      },
+      "Rigidbody": {
+        "Mass": 0.0,
+        "Drag": 0.1,
+        "AngularDrag": 0.1,
+        "UseGravity": true
+      },
+      "GUID": "c16577"
+    },
+    {
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 51.17938,
+        "posY": 16.9067421,
+        "posZ": -23.5004635,
+        "rotX": 0.131276444,
+        "rotY": 0.000669748231,
+        "rotZ": 359.986237,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "1000",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992163,
+        "b": 0.9999998
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 0,
+      "CustomMesh": {
+        "MeshURL": "http://pastebin.com/raw.php?i=hJvCwi4Q",
+        "DiffuseURL": "http://i.imgur.com/2rgLWDP.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 6,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "SpecularIntensity": 0.0,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 0.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.0,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
+      },
+      "Rigidbody": {
+        "Mass": 0.0,
+        "Drag": 0.1,
+        "AngularDrag": 0.1,
+        "UseGravity": true
+      },
+      "GUID": "45c16c"
+    },
+    {
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 47.9152,
+        "posY": 15.7680206,
+        "posZ": -23.5343971,
+        "rotX": 359.9863,
+        "rotY": 270.000336,
+        "rotZ": 359.868774,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992163837,
+        "b": 0.9999998
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "http://pastebin.com/raw.php?i=XiSLBVX6",
+        "DiffuseURL": "http://i.imgur.com/2Go1i3Q.png",
+        "NormalURL": "",
+        "ColliderURL": "http://pastebin.com/raw.php?i=XiSLBVX6",
+        "Convex": false,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.0,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 0.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "67e6a9"
+    },
+    {
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 47.9384651,
+        "posY": 16.9075451,
+        "posZ": -23.512085,
+        "rotX": 0.1312793,
+        "rotY": 1.77459024E-05,
+        "rotZ": 359.9863,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "100",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992163,
+        "b": 0.9999998
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "CustomMesh": {
+        "MeshURL": "http://pastebin.com/raw.php?i=hJvCwi4Q",
+        "DiffuseURL": "http://i.imgur.com/812fdnD.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 6,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "SpecularIntensity": 0.0,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 0.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "ContainedObjects": [
+        {
+          "Name": "Custom_Model",
+          "Transform": {
+            "posX": 30.691618,
+            "posY": 4.39218473,
+            "posZ": 4.599112,
+            "rotX": -4.1972703E-06,
+            "rotY": 359.991852,
+            "rotZ": 9.898209E-06,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "$5",
+          "Description": "White",
+          "GMNotes": "",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": true,
+          "Snap": true,
+          "IgnoreFoW": false,
+          "MeasureMovement": false,
+          "DragSelectable": true,
+          "Autoraise": true,
+          "Sticky": true,
+          "Tooltip": true,
+          "GridProjection": false,
+          "HideWhenFaceDown": false,
+          "Hands": false,
+          "CustomMesh": {
+            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361594/14E1444F5FE41B6B7E73A306A2CB1FB2F5EE6737/",
+            "NormalURL": "",
+            "ColliderURL": "",
+            "Convex": true,
+            "MaterialIndex": 0,
+            "TypeIndex": 5,
+            "CustomShader": {
+              "SpecularColor": {
+                "r": 0.854901969,
+                "g": 0.854901969,
+                "b": 0.854901969
+              },
+              "SpecularIntensity": 0.2,
+              "SpecularSharpness": 2.0,
+              "FresnelStrength": 1.0
+            },
+            "CastShadows": true
+          },
+          "LuaScript": "",
+          "LuaScriptState": "{\"value\":5}",
+          "XmlUI": "",
+          "GUID": "dc2e37"
+        },
+        {
+          "Name": "Custom_Model",
+          "Transform": {
+            "posX": 30.6424332,
+            "posY": 4.39229536,
+            "posZ": 4.41590643,
+            "rotX": -1.72190266E-05,
+            "rotY": 359.9918,
+            "rotZ": 4.2184427E-05,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "$5",
+          "Description": "White",
+          "GMNotes": "",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": true,
+          "Snap": true,
+          "IgnoreFoW": false,
+          "MeasureMovement": false,
+          "DragSelectable": true,
+          "Autoraise": true,
+          "Sticky": true,
+          "Tooltip": true,
+          "GridProjection": false,
+          "HideWhenFaceDown": false,
+          "Hands": false,
+          "CustomMesh": {
+            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361594/14E1444F5FE41B6B7E73A306A2CB1FB2F5EE6737/",
+            "NormalURL": "",
+            "ColliderURL": "",
+            "Convex": true,
+            "MaterialIndex": 0,
+            "TypeIndex": 5,
+            "CustomShader": {
+              "SpecularColor": {
+                "r": 0.854901969,
+                "g": 0.854901969,
+                "b": 0.854901969
+              },
+              "SpecularIntensity": 0.2,
+              "SpecularSharpness": 2.0,
+              "FresnelStrength": 1.0
+            },
+            "CastShadows": true
+          },
+          "LuaScript": "",
+          "LuaScriptState": "{\"value\":5}",
+          "XmlUI": "",
+          "GUID": "7139b3"
+        },
+        {
+          "Name": "Custom_Model",
+          "Transform": {
+            "posX": 30.63704,
+            "posY": 4.39224434,
+            "posZ": 5.049676,
+            "rotX": -2.05401147E-06,
+            "rotY": 359.99176,
+            "rotZ": -7.712132E-06,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "$5",
+          "Description": "White",
+          "GMNotes": "",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": true,
+          "Snap": true,
+          "IgnoreFoW": false,
+          "MeasureMovement": false,
+          "DragSelectable": true,
+          "Autoraise": true,
+          "Sticky": true,
+          "Tooltip": true,
+          "GridProjection": false,
+          "HideWhenFaceDown": false,
+          "Hands": false,
+          "CustomMesh": {
+            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361594/14E1444F5FE41B6B7E73A306A2CB1FB2F5EE6737/",
+            "NormalURL": "",
+            "ColliderURL": "",
+            "Convex": true,
+            "MaterialIndex": 0,
+            "TypeIndex": 5,
+            "CustomShader": {
+              "SpecularColor": {
+                "r": 0.854901969,
+                "g": 0.854901969,
+                "b": 0.854901969
+              },
+              "SpecularIntensity": 0.2,
+              "SpecularSharpness": 2.0,
+              "FresnelStrength": 1.0
+            },
+            "CastShadows": true
+          },
+          "LuaScript": "",
+          "LuaScriptState": "{\"value\":5}",
+          "XmlUI": "",
+          "GUID": "0c68f1"
+        }
+      ],
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.0,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
+      },
+      "Rigidbody": {
+        "Mass": 0.0,
+        "Drag": 0.1,
+        "AngularDrag": 0.1,
+        "UseGravity": true
+      },
+      "GUID": "5aab75"
+    },
+    {
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 46.283905,
+        "posY": 16.90775,
+        "posZ": -23.428524,
+        "rotX": 0.131280676,
+        "rotY": -0.001686586,
+        "rotZ": 359.9863,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "50",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992163,
+        "b": 0.9999998
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 0,
+      "CustomMesh": {
+        "MeshURL": "http://pastebin.com/raw.php?i=hJvCwi4Q",
+        "DiffuseURL": "http://i.imgur.com/HUp6AXD.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 6,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "SpecularIntensity": 0.0,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 0.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.0,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
+      },
+      "Rigidbody": {
+        "Mass": 0.0,
+        "Drag": 0.1,
+        "AngularDrag": 0.1,
+        "UseGravity": true
+      },
+      "GUID": "420507"
+    },
+    {
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 44.645752,
+        "posY": 16.9082985,
+        "posZ": -23.4973049,
+        "rotX": 0.131281212,
+        "rotY": 0.0023191527,
+        "rotZ": 359.986267,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "10",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992163,
+        "b": 0.9999998
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": false,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 0,
+      "CustomMesh": {
+        "MeshURL": "http://pastebin.com/raw.php?i=hJvCwi4Q",
+        "DiffuseURL": "http://i.imgur.com/TJMoRgI.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 6,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "SpecularIntensity": 0.0,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 0.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.0,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
+      },
+      "Rigidbody": {
+        "Mass": 0.0,
+        "Drag": 0.1,
+        "AngularDrag": 0.1,
+        "UseGravity": true
+      },
+      "GUID": "2a0e38"
+    },
+    {
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 62.068306,
+        "posY": 15.7678089,
+        "posZ": 21.959856,
+        "rotX": 0.00536402967,
+        "rotY": 135.00058,
+        "rotZ": 359.89328,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Payouts",
+      "Description": "Red",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992163837,
+        "b": 0.9999998
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 0,
+      "CustomMesh": {
+        "MeshURL": "http://pastebin.com/raw.php?i=XiSLBVX6",
+        "DiffuseURL": "http://i.imgur.com/2Go1i3Q.png",
+        "NormalURL": "",
+        "ColliderURL": "http://pastebin.com/raw.php?i=XiSLBVX6",
+        "Convex": false,
+        "MaterialIndex": 1,
+        "TypeIndex": 6,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.0,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 0.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "0d754b"
+    },
+    {
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 32.1440163,
+        "posY": 15.7707462,
+        "posZ": 24.1822262,
+        "rotX": 1.604603E-05,
+        "rotY": 90.00028,
+        "rotZ": -4.92300569E-05,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Payouts",
+      "Description": "White",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992163837,
+        "b": 0.9999998
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "Number": 0,
+      "CustomMesh": {
+        "MeshURL": "http://pastebin.com/raw.php?i=XiSLBVX6",
+        "DiffuseURL": "http://i.imgur.com/2Go1i3Q.png",
+        "NormalURL": "",
+        "ColliderURL": "http://pastebin.com/raw.php?i=XiSLBVX6",
+        "Convex": false,
+        "MaterialIndex": 1,
+        "TypeIndex": 6,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.0,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 0.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "765aaf"
+    },
+    {
+      "Name": "Notecard",
+      "Transform": {
+        "posX": -0.7299227,
+        "posY": 10.281271,
+        "posZ": -23.6526146,
+        "rotX": 359.921722,
+        "rotY": 180.002182,
+        "rotZ": 1.027443E-05,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Don't delete these bags",
+      "Description": "these bags are used with this chip value manager to auto set the values and totals on any matching chip on the table.",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "b8a861"
+    },
+    {
+      "Name": "Notecard",
+      "Transform": {
+        "posX": 40.01679,
+        "posY": 15.286396,
+        "posZ": -23.813839,
+        "rotX": 359.869446,
+        "rotY": 180.003525,
+        "rotZ": 0.01366296,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Chip Tray with 4 \"bags\"",
+      "Description": "pulled this from the workshop.  it was set up ans infinite bags of standard poker chips.   I mad them regular bags.   Something like this could be used to try to approximate the feeling of a chip rail.",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "1a20d9"
+    },
+    {
+      "Name": "Notecard",
+      "Transform": {
+        "posX": 49.139473,
+        "posY": 15.2840271,
+        "posZ": 24.3687782,
+        "rotX": 0.131278917,
+        "rotY": 180.003387,
+        "rotZ": 0.0137250237,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Payout Bags as chip trays",
+      "Description": "I made these chip trays act as bags and set my chip manager (blue orb) to put chips in these for red and white players if they try to place a chip on a stack they don't own.   Could be used for payouts as I mentioned.",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "65921b"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 33.4525757,
+        "posY": 4.766589,
+        "posZ": 13.7418118,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 34.7995262,
+        "scaleY": 5.1,
+        "scaleZ": 4.0944066
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "67c5ba"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 31.13729,
+        "posY": 4.766589,
+        "posZ": 4.69936275,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 30.2746544,
+        "scaleY": 5.1,
+        "scaleZ": 4.931388
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "73ffbe"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 32.45257,
+        "posY": 4.766593,
+        "posZ": -1.86582756,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 33.1321831,
+        "scaleY": 5.1,
+        "scaleZ": 6.72066975
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "101bb3"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 41.07319,
+        "posY": 4.766589,
+        "posZ": -10.0818806,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 5.186083,
+        "scaleY": 5.1,
+        "scaleZ": 5.953547
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "8bd16e"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 35.4341736,
+        "posY": 4.76658726,
+        "posZ": -10.06401,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 5.3438735,
+        "scaleY": 5.1,
+        "scaleZ": 5.9535737
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "97cdf1"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 29.7855148,
+        "posY": 4.76658726,
+        "posZ": -10.1000319,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 5.05694437,
+        "scaleY": 5.1,
+        "scaleZ": 5.98942
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "f7e456"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 24.0837536,
+        "posY": 4.766589,
+        "posZ": -10.1006546,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 5.37976,
+        "scaleY": 5.1,
+        "scaleZ": 5.953567
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "47145d"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 18.5355,
+        "posY": 4.766589,
+        "posZ": -10.0998144,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 4.949357,
+        "scaleY": 5.1,
+        "scaleZ": 5.98944569
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "5861c8"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 12.789732,
+        "posY": 4.766589,
+        "posZ": -10.1367607,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 5.5949,
+        "scaleY": 5.1,
+        "scaleZ": 6.02529955
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "b315b4"
+    },
+    {
+      "Name": "ScriptingTrigger",
+      "Transform": {
+        "posX": 33.20703,
+        "posY": 4.766589,
+        "posZ": 17.62261,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 35.0945625,
+        "scaleY": 5.1,
+        "scaleZ": 2.72109365
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.509803951
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "80b675"
+    },
+    {
+      "Name": "Notecard",
+      "Transform": {
+        "posX": -14.1603451,
+        "posY": 10.2812424,
+        "posZ": -23.62786,
+        "rotX": 359.9217,
+        "rotY": 179.977539,
+        "rotZ": 3.94716371E-05,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Chip Owner Management",
+      "Description": "The blue orb has the scripting attached that I wrote to play around with ways to control accidental touching, stacking or taking other players' chips.",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "5f55aa"
+    },
+    {
+      "Name": "Chinese_Checkers_Piece",
+      "Transform": {
+        "posX": -0.0552535243,
+        "posY": 5.20070457,
+        "posZ": 0.885549068,
+        "rotX": 14.4366636,
+        "rotY": 359.700653,
+        "rotZ": 358.770538,
+        "scaleX": 4.44999838,
+        "scaleY": 4.44999838,
+        "scaleZ": 4.44999838
+      },
+      "Nickname": "PayoutManager",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 0.0,
+        "g": 0.00512166228,
+        "b": 0.742647052
+      },
+      "Locked": true,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": 4,
+      "LuaScript": "\n\nregisteredPlayer = {\n}\n\nchipBankBagGUID = {\n  [1] = '14ec8d',\n  [5] = '68a5fd',\n  [10] = 'b86727',\n  [25] = 'cff43a',\n  [100] = '3454fd',\n  [500] = '722c6c'\n}\n\npayoutBag = {\n  Red = '0d754b',\n  White = '765aaf'\n}\n\nchipDenoms = {1,5,10,25,100,500}\n\nmaxAllowedLoops = 100 -- maximum number of while loop iterations\n\nfunction onLoad()\n  Global.setVar(\"PayoutManager\", self)\n  ply = getSeatedPlayers()\n  for _,v in pairs(ply) do\n    if (payoutBag[v] ~= nil) then\n      getObjectFromGUID(payoutBag[v]).setDescription(\"Owner \"..Player[v].steam_name)\n    end\n  end\nend\n\nfunction onChat(message, player)\n    if (message == 'pay me') then\n      payment = 5426\n      payPlayerByColor (player.color, payment)\n    end\nend\n\nfunction onPlayerChangeColor(color)\n    if(payoutBag[color] ~= nil) then\n      registerPlayer(Player[color].steam_name, payoutBag[color] )\n    end\nend\n\nfunction registerPlayer (playerSteamName, bagGUID)\n  if (getObjectFromGUID(bagGUID) ~= nil and getObjectFromGUID(bagGUID).tag == \"Bag\") then\n    registeredPlayer[playerSteamName] = bagGUID\n  else\n    print ('Could not register player.  Provided player bag could not be found.')\n  end\nend\n\nfunction payPlayerBySteamName (playerSteamName, amt)\n  local bag = registeredPlayer[playerSteamName]\n  if(bag) then\n    return payPlayerBag(getObjectFromGUID(bag), amt)\n  else\n    print (\"Could not pay player.   Could not located registered pay location for steam name \"..playerSteamName)\n  end\nend\n\nfunction payPlayerByColor (playerColor, amt)\n  local bag = payoutBag[playerColor]\n  if(bag) then\n    return payPlayerBag(getObjectFromGUID(bag), amt)\n  else\n    print (\"Could not pay player.   Could not locate pay location for color \"..playerColor)\n  end\nend\n\nfunction payPlayerBag (playerBag, amt)\n  log(playerBag,\"player bag\")\n  local payLoc = playerBag.getPosition()\n  local yIncrement = 2\n  local yValue = 5\n\n  if (playerBag ~= nil and amt > 0) then\n    -- determine what chips are needed to pay the players\n    denom = getNextDenom()\n    remainingUnpaidAmt = amt\n    loopCount1= 0\n\n    while (remainingUnpaidAmt > 0 and loopCount1 < maxAllowedLoops) do\n      loopCount2= 0\n      --print(\"Denom:\"..denom)\n      print(remaining )\n      while (remainingUnpaidAmt < denom and denom ~= 0 and loopCount2 < maxAllowedLoops) do\n        --print(\"Denom:\"..denom)\n        --print ('Getting next denom from '..denom)\n        denom = getNextDenom(denom)\n        --print ('next denom is'..denom)\n        loopCount2 = loopCount2 + 1\n      end\n      payCount = math.floor(remainingUnpaidAmt/denom)\n      --log ('Pay count '..payCount..'in denom '..denom)\n      remainingUnpaidAmt = remainingUnpaidAmt - (denom*payCount)\n      for i=1, payCount ,1 do\n        getObjectFromGUID(chipBankBagGUID[denom]).takeObject({\n          position          = {payLoc.x, payLoc.y + yValue, payLoc.z},\n          smooth            = false\n        })\n        yValue = yValue + yIncrement\n      end\n      loopCount1 = loopCount1 + 1\n    end\n    if (loopCount2 == maxAllowedLoops or loopCount1 == maxAllowedLoops) then\n      print ('While loop timed out')\n    end\n    broadcastToAll(\"Paid player \"..amt)\n    return true\n  else\n    print ('Unable to pay player by color.  Could not locate a payout bag for player or amount was zero: '..playerBag..':'..amt)\n    return false\n  end\nend\n\n\n\nfunction getNextDenom (denom)\n  if denom == nil then\n    for _,v in ipairs(chipDenoms) do\n        newDenom = v\n    end\n  else\n    newDenom = 0\n    if (denom > 0) then\n      for _,v in ipairs(chipDenoms) do\n        if (v < denom) then\n          newDenom = v\n        end\n      end\n    end\n  end\n  return newDenom\nend\n",
+      "LuaScriptState": "",
+      "GUID": "d73f5a"
+    },
+    {
+      "Name": "Infinite_Bag",
+      "Transform": {
+        "posX": 7.61636543,
+        "posY": 2.20152426,
+        "posZ": -20.1731415,
+        "rotX": 0.115555853,
+        "rotY": -0.00555634173,
+        "rotZ": -5.824666E-05,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "100",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "LuaScript": "-- Created by Atomik\r\n-- If there are any problems, send a comment to the workshop.\r\n--\r\n-- Only edit the code if you understand what you are doing.\r\n\r\nlocal lastDesc = \"\"\r\nlocal diffuse = \"\"\r\nlocal model = \"\"\r\n\r\nfunction onLoad()\r\n    lastDesc = self.getDescription()\r\n\r\n    local json = JSON.decode(self.getJSON())\r\n    local containedObjs = json.ContainedObjects\r\n    if containedObjs ~= nil then\r\n        local obj = json.ContainedObjects[1]\r\n        if obj.CustomMesh then\r\n            local mesh = obj.CustomMesh\r\n            diffuse = mesh.DiffuseURL\r\n            model = mesh.MeshURL\r\n\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n        end\r\n    end\r\n\r\n    Wait.time(function()\r\n        if self.getDescription() ~= lastDesc then\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            lastDesc = self.getDescription()\r\n        end\r\n    end, 2, -1)\r\nend\r\n\r\nfunction onObjectEnterContainer(container, enter_object)\r\n    if container == self then\r\n        local customObj = enter_object.getCustomObject()\r\n        if customObj ~= nil then\r\n            if customObj.diffuse then\r\n                diffuse = customObj.diffuse\r\n                model = customObj.mesh\r\n\r\n                local valueManager = Global.getVar(\"chipValueManager\")\r\n                valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            end\r\n        end\r\n    end\r\nend",
+      "LuaScriptState": "",
+      "ContainedObjects": [
+        {
+          "Name": "Custom_Model",
+          "Transform": {
+            "posX": 2.586219,
+            "posY": 4.35823631,
+            "posZ": -19.253582,
+            "rotX": 0.482396781,
+            "rotY": -0.0008945675,
+            "rotZ": 180.297318,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "$100",
+          "Description": "Owner TheDorito",
+          "GMNotes": "",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": true,
+          "Snap": true,
+          "IgnoreFoW": false,
+          "MeasureMovement": false,
+          "DragSelectable": true,
+          "Autoraise": true,
+          "Sticky": true,
+          "Tooltip": true,
+          "GridProjection": false,
+          "HideWhenFaceDown": false,
+          "Hands": false,
+          "CustomMesh": {
+            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197362056/137B247775B41E250CF6085A2F2A6579560D60CD/",
+            "NormalURL": "",
+            "ColliderURL": "",
+            "Convex": true,
+            "MaterialIndex": 0,
+            "TypeIndex": 5,
+            "CustomShader": {
+              "SpecularColor": {
+                "r": 0.854901969,
+                "g": 0.854901969,
+                "b": 0.854901969
+              },
+              "SpecularIntensity": 0.2,
+              "SpecularSharpness": 2.0,
+              "FresnelStrength": 1.0
+            },
+            "CastShadows": true
+          },
+          "LuaScript": "",
+          "LuaScriptState": "",
+          "XmlUI": "",
+          "GUID": "e44f6b"
+        }
+      ],
+      "GUID": "3454fd"
+    },
+    {
+      "Name": "Infinite_Bag",
+      "Transform": {
+        "posX": 11.4323692,
+        "posY": 2.20152688,
+        "posZ": -20.1731434,
+        "rotX": 0.115596682,
+        "rotY": -0.00563691556,
+        "rotZ": -8.438208E-05,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "10",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "LuaScript": "-- Created by Atomik\r\n-- If there are any problems, send a comment to the workshop.\r\n--\r\n-- Only edit the code if you understand what you are doing.\r\n\r\nlocal lastDesc = \"\"\r\nlocal diffuse = \"\"\r\nlocal model = \"\"\r\n\r\nfunction onLoad()\r\n    lastDesc = self.getDescription()\r\n\r\n    local json = JSON.decode(self.getJSON())\r\n    local containedObjs = json.ContainedObjects\r\n    if containedObjs ~= nil then\r\n        local obj = json.ContainedObjects[1]\r\n        if obj.CustomMesh then\r\n            local mesh = obj.CustomMesh\r\n            diffuse = mesh.DiffuseURL\r\n            model = mesh.MeshURL\r\n\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n        end\r\n    end\r\n\r\n    Wait.time(function()\r\n        if self.getDescription() ~= lastDesc then\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            lastDesc = self.getDescription()\r\n        end\r\n    end, 2, -1)\r\nend\r\n\r\nfunction onObjectEnterContainer(container, enter_object)\r\n    if container == self then\r\n        local customObj = enter_object.getCustomObject()\r\n        if customObj ~= nil then\r\n            if customObj.diffuse then\r\n                diffuse = customObj.diffuse\r\n                model = customObj.mesh\r\n\r\n                local valueManager = Global.getVar(\"chipValueManager\")\r\n                valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            end\r\n        end\r\n    end\r\nend",
+      "LuaScriptState": "",
+      "ContainedObjects": [
+        {
+          "Name": "Custom_Model",
+          "Transform": {
+            "posX": 15.2434568,
+            "posY": 4.3475,
+            "posZ": -17.0043545,
+            "rotX": 0.582003057,
+            "rotY": 359.993,
+            "rotZ": 358.817444,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "$10",
+          "Description": "Owner TheDorito",
+          "GMNotes": "",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": true,
+          "Snap": true,
+          "IgnoreFoW": false,
+          "MeasureMovement": false,
+          "DragSelectable": true,
+          "Autoraise": true,
+          "Sticky": true,
+          "Tooltip": true,
+          "GridProjection": false,
+          "HideWhenFaceDown": false,
+          "Hands": false,
+          "CustomMesh": {
+            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361769/E5409DE7E80EFCA0105DA6D63D10EAAA3A0D6674/",
+            "NormalURL": "",
+            "ColliderURL": "",
+            "Convex": true,
+            "MaterialIndex": 0,
+            "TypeIndex": 5,
+            "CustomShader": {
+              "SpecularColor": {
+                "r": 0.854901969,
+                "g": 0.854901969,
+                "b": 0.854901969
+              },
+              "SpecularIntensity": 0.2,
+              "SpecularSharpness": 2.0,
+              "FresnelStrength": 1.0
+            },
+            "CastShadows": true
+          },
+          "LuaScript": "",
+          "LuaScriptState": "",
+          "XmlUI": "",
+          "GUID": "0b11c9"
+        }
+      ],
+      "GUID": "b86727"
+    },
+    {
+      "Name": "Infinite_Bag",
+      "Transform": {
+        "posX": 5.70836353,
+        "posY": 2.20152783,
+        "posZ": -20.1731415,
+        "rotX": 0.115635581,
+        "rotY": -0.005544765,
+        "rotZ": -0.000162782409,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "500",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "MaterialIndex": -1,
+      "MeshIndex": -1,
+      "LuaScript": "-- Created by Atomik\r\n-- If there are any problems, send a comment to the workshop.\r\n--\r\n-- Only edit the code if you understand what you are doing.\r\n\r\nlocal lastDesc = \"\"\r\nlocal diffuse = \"\"\r\nlocal model = \"\"\r\n\r\nfunction onLoad()\r\n    lastDesc = self.getDescription()\r\n\r\n    local json = JSON.decode(self.getJSON())\r\n    local containedObjs = json.ContainedObjects\r\n    if containedObjs ~= nil then\r\n        local obj = json.ContainedObjects[1]\r\n        if obj.CustomMesh then\r\n            local mesh = obj.CustomMesh\r\n            diffuse = mesh.DiffuseURL\r\n            model = mesh.MeshURL\r\n\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n        end\r\n    end\r\n\r\n    Wait.time(function()\r\n        if self.getDescription() ~= lastDesc then\r\n            local valueManager = Global.getVar(\"chipValueManager\")\r\n            valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            lastDesc = self.getDescription()\r\n        end\r\n    end, 2, -1)\r\nend\r\n\r\nfunction onObjectEnterContainer(container, enter_object)\r\n    if container == self then\r\n        local customObj = enter_object.getCustomObject()\r\n        if customObj ~= nil then\r\n            if customObj.diffuse then\r\n                diffuse = customObj.diffuse\r\n                model = customObj.mesh\r\n\r\n                local valueManager = Global.getVar(\"chipValueManager\")\r\n                valueManager.call(\"addChipValue\", { model = model, diffuse = diffuse, value = tonumber(self.getDescription()) })\r\n            end\r\n        end\r\n    end\r\nend",
+      "LuaScriptState": "",
+      "ContainedObjects": [
+        {
+          "Name": "Custom_Model",
+          "Transform": {
+            "posX": 0.74919,
+            "posY": 4.356061,
+            "posZ": -19.4562778,
+            "rotX": 0.169562623,
+            "rotY": -0.00235908129,
+            "rotZ": 179.045441,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "$500",
+          "Description": "Owner TheDorito",
+          "GMNotes": "",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": true,
+          "Snap": true,
+          "IgnoreFoW": false,
+          "MeasureMovement": false,
+          "DragSelectable": true,
+          "Autoraise": true,
+          "Sticky": true,
+          "Tooltip": true,
+          "GridProjection": false,
+          "HideWhenFaceDown": false,
+          "Hands": false,
+          "CustomMesh": {
+            "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+            "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197362257/2F8B751A869CCE2807D8D21D5B6A4F5C04CF7C29/",
+            "NormalURL": "",
+            "ColliderURL": "",
+            "Convex": true,
+            "MaterialIndex": 0,
+            "TypeIndex": 5,
+            "CustomShader": {
+              "SpecularColor": {
+                "r": 0.854901969,
+                "g": 0.854901969,
+                "b": 0.854901969
+              },
+              "SpecularIntensity": 0.2,
+              "SpecularSharpness": 2.0,
+              "FresnelStrength": 1.0
+            },
+            "CastShadows": true
+          },
+          "LuaScript": "",
+          "LuaScriptState": "",
+          "XmlUI": "",
+          "GUID": "069d38"
+        }
+      ],
+      "GUID": "722c6c"
+    },
+    {
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -74.22229,
+        "posY": 18.7933922,
+        "posZ": -3.251443,
+        "rotX": 9.082985,
+        "rotY": 90.02211,
+        "rotZ": 179.998566,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "$100",
+      "Description": "Owner TheDorito",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": true,
+      "CustomMesh": {
+        "MeshURL": "http://cloud-3.steamusercontent.com/ugc/920291347197361309/DF75E4211B85AA54752089AE8852BD6387B85716/",
+        "DiffuseURL": "http://cloud-3.steamusercontent.com/ugc/920291347197362056/137B247775B41E250CF6085A2F2A6579560D60CD/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 5,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.854901969,
+            "g": 0.854901969,
+            "b": 0.854901969
+          },
+          "SpecularIntensity": 0.2,
+          "SpecularSharpness": 2.0,
+          "FresnelStrength": 1.0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "e44f6b"
+    },
+    {
+      "Name": "ChipStack",
+      "Transform": {
+        "posX": 33.0679626,
+        "posY": 3.02863479,
+        "posZ": 34.61875,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": true,
+      "MaterialIndex": -1,
+      "MeshIndex": 500,
+      "Number": 4,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "f4a3fc"
+    },
+    {
+      "Name": "ChipStack",
+      "Transform": {
+        "posX": 31.6125717,
+        "posY": 3.128635,
+        "posZ": 34.56249,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": true,
+      "MaterialIndex": -1,
+      "MeshIndex": 100,
+      "Number": 20,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "afa521"
+    },
+    {
+      "Name": "ChipStack",
+      "Transform": {
+        "posX": 30.1571827,
+        "posY": 3.228635,
+        "posZ": 34.5062256,
+        "rotX": 0.0,
+        "rotY": 0.0,
+        "rotZ": 0.0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "",
+      "Description": "",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": true,
+      "MaterialIndex": -1,
+      "MeshIndex": 1000,
+      "Number": 2,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "fd512d"
+    },
+    {
+      "Name": "Notecard",
+      "Transform": {
+        "posX": 0.4052353,
+        "posY": 4.469429,
+        "posZ": 6.47093153,
+        "rotX": 332.96048,
+        "rotY": 179.984024,
+        "rotZ": -0.000412869966,
+        "scaleX": 2.249999,
+        "scaleY": 2.249999,
+        "scaleZ": 2.249999
+      },
+      "Nickname": "Payout Manager",
+      "Description": "Test payout manager by typing \"pay me\" in the chat while seated in Red or White.",
+      "GMNotes": "",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": "",
+      "GUID": "bd48c8"
+    }
+  ],
+  "LuaScript": "local chipDenom = {\n    [1000] = { t = 'Chip_1000' },\n    [500] = { t = 'Chip_500' },\n    [100] = { t = 'Chip_100' },\n    [50] = { t = 'Chip_50' },\n    [10] = { t = 'Chip_10' },\n    [5] = { t = 'Chip_10'}\n}\nlocal puckPos = {\n    [0] = { pos = {-20.00, 2, 8.37} },\n    [4] = {pos = {-13.00, 2, 8.37}},\n    [5] = {pos = {-9.30, 2, 8.37}},\n    [6] = {pos = {-5.60, 2, 8.37}},\n    [8] = {pos = {-1.90, 2, 8.37}},\n    [9] = {pos = {2.00, 2, 8.37}},\n    [10] = {pos = {5.8, 2, 8.5}},\n}\nlocal dices = {}\nlocal diceSum = 0\nlocal point -- current point\nlocal puck -- the puck obj\n\nlocal bettingFor\nlocal numplayers = 0\nlocal players = { } -- the player obj\nlocal bettingZones = {}\n\n--------------------------- [[\n-- event handlers\n--------------------------- ]]\nfunction onObjectRandomize( obj, color )\n    if (obj.tag == 'Dice') and (not randomized) then\n        randomized = true\n        diceSum = 0\n        broadcastToAll(players[color].name .. ': dice is out!')\n        startLuaCoroutine(Global, 'diceRoll')\n    end\nend\n\nfunction onObjectEnterScriptingZone(zone, obj)\n    if not isChips(obj) then\n        return\n    end\n    bz = bettingZones[zone.getGUID()]\n    assignZoneBet(bz, obj, 'enter')\nend\n\nfunction onObjectLeaveScriptingZone(zone, obj)\n    if not isChips(obj) then\n        return\n    end\n    bz = bettingZones[zone.getGUID()]\n    assignZoneBet(bz, obj, 'leave')\nend\n\nfunction setVars ()\n  dices[1] = getObjectFromGUID('fb85e1')\n  dices[2] = getObjectFromGUID('04e437')\n  puck = getObjectFromGUID('e75309')\n  puck.setPositionSmooth(puckPos[0].pos, false, true)\nend\n\nfunction onLoad()\n    Wait.time(setVars,2)\n\n    -- initialize betting zones\n    initializeZones()\n\n    for i, ref in ipairs(Player.getPlayers()) do\n        players[ref.color] = {\n            color = ref.color,\n            name = ref.steam_name,\n            ref = ref,\n            index = i,\n            bettingSheet = {}\n        }\n        numplayers = numplayers + 1\n\n        -- remove all hand object\n        for _, obj in pairs(ref.getHandObjects()) do\n            if isChips(obj) then\n                obj.destruct()\n            end\n        end\n\n        spawnStartingChips(ref)\n    end\n\n    startLuaCoroutine(Global, 'addPlayerToBetSheet')\nend\n\nfunction addPlayerToBetSheet()\n    -- update player dropdown in betting sheet\n    xml = UI.getXmlTable()\n   dropdown = xml[1].children[1].children[2].children[1].children[1]\n    options = dropdown.children\n    for _, ref in ipairs(Player.getPlayers()) do\n        table.insert(options, {\n            tag = \"Option\",\n            value = ref.steam_name,\n        })\n    end\n    UI.setXmlTable(xml)\n\n    return 1\nend\n\n--------------------------- [[\n-- game logic\n--------------------------- ]]\n\nfunction diceRoll()\n    diceSum = 0;\n\n    while not dices[1].resting do\n        coroutine.yield(0)\n    end\n\n    while not dices[2].resting do\n        coroutine.yield(0)\n    end\n    log('dice stopped','diceRoll()')\n    diceSum = dices[1].getValue() + dices[2].getValue()\n    broadcastToAll('rolled: ' .. diceSum)\n\n    if (diceSum == 7) or (diceSum == 11) then\n        if point then\n            if (diceSum == 7) then\n                -- reset the point\n                broadcastToAll('sevened out!')\n                point = nil\n\n                puck.setPositionSmooth(puckPos[0].pos, false, true)\n\n                -- destroy all chips except comeLine\n                for key, zone in pairs(bettingZones) do\n                    if key == 'comeLine' then\n                        payZoneBets(bettingZones['comeLine'])\n                    elseif key == 'place' then\n                        for _, placeZone in pairs(zone) do\n                            destroyZoneBets(placeZone)\n                            resetBettingSheet()\n                            for _, p in pairs(players) do\n                                p.bettingSheet = {}\n                            end\n                        end\n                    else\n                        destroyZoneBets(zone)\n                    end\n                end\n            else\n                -- eleven was rolled\n                -- pay field\n                payZoneBets(bettingZones['field'])\n                -- pay comeline\n                payZoneBets(bettingZones['comeLine'])\n            end\n        else\n            broadcastToAll('front line winners!')\n\n            -- if no point established\n            -- pay come line\n            payZoneBets(bettingZones['comeLine'])\n\n            -- pay passline\n            payZoneBets(bettingZones['passLine'])\n\n            -- pay field if 11\n            if (diceSum == 11) then\n                payZoneBets(bettingZones['field'])\n            end\n        end\n    elseif (diceSum == 2) or (diceSum == 3) or (diceSum == 12) then\n        if not point then\n            -- lose pass line, lose come / pay field\n            destroyZoneBets(bettingZones['passLine'])\n        end\n        -- always pay field\n        payZoneBets(bettingZones['field'])\n    else\n      log('4,5,6,8,9,10','diceRoll()')\n        -- 4, 5, 6, 8, 9, 10\n        if not point then\n            broadcastToAll('point established')\n            log(diceSum,'diceRoll() diceSum')\n            log(puck,'diceRoll() puck')\n            log(puckPos,'diceRoll() puck position')\n            point = diceSum\n            puck.setPositionSmooth(puckPos[diceSum].pos, false, true)\n            log('Locking placeBets','diceRoll()')\n            log(bettingZones,'diceRoll(bettingZones)')\n            lockZoneChips(bettingZones['passLine'])\n            -- TODO: allow ON place bets\n        else\n            if (diceSum == point) then\n                broadcastToAll('point won! puck is OFF')\n                point = nil\n                puck.setPositionSmooth(puckPos[0].pos, false, true)\n\n                -- passline\n                payZoneBets(bettingZones['passLine'])\n                unlockZoneChips(bettingZones['passLine'])\n\n                -- passline odds\n                payZoneBets(bettingZones['passLineOdds'])\n            end\n\n            -- pay place bets\n            payPlaceZoneBets()\n            -- TODO: update come bets\n        end\n\n        -- pay field bets\n        if (diceSum == 4) or (diceSum == 9) or (diceSum == 10) then\n            payZoneBets(bettingZones['field'])\n        elseif (diceSum == 6) or (diceSum == 8) or (diceSum == 5) then\n            destroyZoneBets(bettingZones['field'])\n        end\n    end\n\n    randomized = false\n    coroutine.yield(1)\nend\n\n--------------------------- [[\n-- chip related functions\n--------------------------- ]]\nfunction isChips(obj)\n    return (obj.tag == 'Chip') or (obj.tag == 'ChipStack')\nend\n\n-- calculate the least amount of chips needed\n-- to the given value\nfunction chipDemonimator(value)\n    -- must be multiples of 10\n    if value % 10 != 0 then\n        return {}\n    end\n\n    chips = { 1000, 500, 100, 50, 10 }\n    ret = {}\n    i = 1\n\n    while not chipDenom[value] do\n        v = chips[i]\n        while value > v do\n            value = value - v\n            table.insert(ret, v)\n        end\n        i = i+1\n    end\n\n    if chipDenom[value] then\n        table.insert(ret, value)\n    end\n\n    return ret\nend\n\nfunction onSpawnedChip(obj, zone, player)\n    obj.setDescription('Owner ' .. player.name)\nend\n\nfunction spawnChip(value, zone, player)\n    pos = payZonePosition(zone, player.index)\n    chipV = chipDenom[value]\n    chip = spawnObject({\n        type = chipV.t,\n        position = pos,\n        callback_function = function(obj) onSpawnedChip(obj, zone, player) end\n    })\n    chip.use_hands = true\nend\n\nfunction spawnChipInHand(value, player)\n    t = player.ref.getHandTransform()\n    chipV = chipDenom[value]\n    chip = spawnObject({\n        type = chipV.t,\n        position = t.position,\n    })\n    chip.use_hands = true\nend\n\nfunction payZonePosition(zone, index)\n    scale = zone.ref.getScale()\n    zp = zone.ref.getPosition()\n    startx = zp.x - (scale.x / 2)\n    dx = (index-1) * (scale.x / math.max(numplayers, 1))\n    -- TODO: dy = 0\n    return { x = startx + dx, y = zp.y, z = zp.z }\nend\n\nfunction destroyZoneBets(zone)\n    for _, obj in pairs(zone.ref.getObjects()) do\n        if isChips(obj) then\n            obj.destroy()\n        end\n    end\n    zone.bets = {}\nend\n\nfunction payPlaceZoneBets()\n    zone = bettingZones['place'][diceSum]\n    log(bettingZones,'payPlaceZoneBets -bettingZones')\n    log(zone.bets,'payPlacezoneBets -zone.bets')\n    for color, bet in pairs(zone.bets) do\n        if bet.value then\n            hand_value = 0 -- value send to the hand\n            if (diceSum == 4) or (diceSum == 10) then\n                -- 9 to 5\n                hand_value = 9 * bet.value / 5\n            elseif (diceSum == 5) or (diceSum == 9) then\n                -- 7 to 5\n                hand_value = 7 * bet.value / 5\n            elseif (diceSum == 6) or (diceSum == 8) then\n                -- 7 to 6\n                hand_value = 7 * bet.value / 6\n            end\n            if hand_value > 0 then\n                print(string.format('give player %s: %d', color, hand_value))\n                -- TODO: is rounded up to nearest 10 due to chip value\n                for _, c in pairs(chipDemonimator(math.ceil(hand_value/10)*10)) do\n                    spawnChipInHand(c, player)\n                end\n            end\n        end\n    end\nend\n\nfunction payZoneBets(zone)\n    for _, ref in pairs(zone.ref.getObjects()) do\n        if isChips(ref) then\n            ref.destruct()\n        end\n    end\n\n    for color, value in pairs(zone.bets) do\n        player = players[color]\n        next_value = 0\n        print('player ' .. color .. ' amount  ' .. value .. ' in ' .. zone.zonetype)\n\n        if (value > 0) then\n            if zone.zonetype == 'passLine' then\n                -- pays 1 : 1\n                next_value = value + value\n            elseif zone.zonetype == 'comeLine' then\n                -- pays 1 : 1\n                next_value = value + value\n            elseif (zone.zonetype == 'field') then\n                if (diceSum == 2) then\n                    -- pays double, 2 to 1\n                    next_value = value * 3\n                elseif (diceSum == 12) then\n                    -- pays triple, 3 to 1\n                    next_value = value * 4\n                else\n                    -- pays 1 to 1\n                    next_value = value * 2\n                end\n            elseif (zone.zonetype == 'passLineOdds') then\n                if (diceSum == 4) or (diceSum == 10) then\n                    -- 2 to 1\n                    next_value = value * 3\n                elseif (diceSum == 5) or (diceSum == 9) then\n                    -- 3 to 2\n                    next_value = value + (value * 3 / 2)\n                elseif (diceSum == 6) or (diceSum == 8) then\n                    -- 6 to 5\n                    next_value = value + (6 * value / 5)\n                end\n            end\n        end\n\n        if next_value > 0 then\n            print('player ' .. color .. ' next  ' .. next_value .. ' in ' .. zone.zonetype)\n            for _, c in pairs(chipDemonimator(next_value)) do\n                spawnChip(c, zone, player)\n            end\n            zone.bets[player.color] = next_value\n        end\n    end\nend\n--------------------------- [[\n-- Player management\n--------------------------- ]]\n\nfunction groupHand(player)\n    group(player.getHandObjects())\nend\n\nfunction onPlayerConnect(player)\n    broadcastToAll(string.format('%s joined', player))\n    --spawStartingChips(player)\nend\n\nfunction spawnStartingChips(player)\n    t = player.getHandTransform()\n\n    for i=1,20 do\n        chip = spawnObject({\n            type = 'Chip_100',\n            position = t.position,\n        })\n        chip.use_hands = true\n    end\n\n    for i=1,4 do\n        chip = spawnObject({\n            type = 'Chip_500',\n            position = t.position,\n        })\n        chip.use_hands = true\n    end\n\n    for i=1,2 do\n        chip = spawnObject({\n            type = 'Chip_1000',\n            position = t.position,\n        })\n        chip.use_hands = true\n    end\n\n    Wait.frames(function() groupHand(player) end, 50)\nend\n\n--------------------------- [[\n-- Zone management\n--------------------------- ]]\nfunction assignZoneBet(zone, obj, bettype)\n    if not zone.bets then\n        zone.bets = {}\n    end\n\n    if not obj.held_by_color then\n        return\n    end\n\n    if not zone.bets[obj.held_by_color] then\n        zone.bets[obj.held_by_color] = 0\n    end\n\n    if zone.zonetype == 'place' then\n        -- place bets are managed by host\n        return\n    end\n\n    -- lastly, if we programatically spawned the chip. check if the object\n    -- is already in zoneas\n    if bettype == 'enter' then\n        for _, exist in pairs(zone.ref.getObjects()) do\n            if obj.getGUID() == exist.getGUID() then\n                return\n            end\n        end\n    end\n    --log(obj,'Chip Object')\n    --log(obj.getQuantity(),'Quantity')\n    --log(obj.getValue(),'Value')\n    --log(obj.value,'Value direct')\n\n    --modified ThDorito to work with custom Chips.\n    if(obj.getValue() ~= nil and obj.tag == 'Chip') then\n      value = obj.getValue() * math.max(obj.getQuantity(), 1)\n    elseif (obj.tag == \"Chip\") then\n      value = obj.value * math.max(obj.getQuantity(), 1)\n    end\n    if bettype == 'leave' then\n      value = value * -1\n    end\n\n    zone.bets[obj.held_by_color] = math.max(zone.bets[obj.held_by_color] + value, 0)\nend\n\nfunction initializeZones()\n    bettingZones['passLine'] = {\n        zoneid = '67c5ba',\n        zonetype = 'passLine',\n        ref = getObjectFromGUID('67c5ba'),\n        bets = {},\n    }\n    bettingZones['67c5ba'] = bettingZones['passLine']\n\n    bettingZones['passLineOdds'] = {\n        zoneid = '80b675',\n        zonetype = 'passLineOdds',\n        ref = getObjectFromGUID('80b675'),\n        bets = {},\n    }\n    bettingZones['80b675'] = bettingZones['passLineOdds']\n\n    bettingZones['comeLine'] = {\n        zoneid = '101bb3',\n        zonetype = 'comeLine',\n        ref = getObjectFromGUID('101bb3'),\n        bets = {},\n    }\n    bettingZones['101bb3'] = bettingZones['comeLine']\n\n    bettingZones['field'] = {\n        zoneid = '73ffbe',\n        zonetype = 'field',\n        ref = getObjectFromGUID('73ffbe'),\n        bets = {},\n    }\n    bettingZones['73ffbe'] = bettingZones['field']\n\n    bettingZones['place'] = {\n        [4] = {\n            zoneid = '8bd16e',\n            zonetype = 'place',\n            zonevalue = 4,\n            ref = getObjectFromGUID('8bd16e'),\n            bets = {},\n        },\n        [5] = {\n            zoneid = '97cdf1',\n            zonetype = 'place',\n            zonevalue = 5,\n            ref = getObjectFromGUID('97cdf1'),\n            bets = {},\n        },\n        [6] = {\n            zoneid = 'f7e456',\n            zonetype = 'place',\n            zonevalue = 6,\n            ref = getObjectFromGUID('f7e456'),\n            bets = {},\n        },\n        [8] = {\n            zoneid = '47145d',\n            zonetype = 'place',\n            zonevalue = 8,\n            ref = getObjectFromGUID('47145d'),\n            bets = {}\n        },\n        [9] = {\n            zoneid = '5861c8',\n            zonetype = 'place',\n            zonevalue = 9,\n            ref = getObjectFromGUID('5861c8'),\n            bets = {},\n        },\n        [10] = {\n            zoneid = 'b315b4',\n            zonetype = 'place',\n            zonevalue = 10,\n            ref = getObjectFromGUID('b315b4'),\n            bets = {},\n        },\n    }\n    bettingZones['8bd16e'] = bettingZones['place'][4]\n    bettingZones['97cdf1'] = bettingZones['place'][5]\n    bettingZones['f7e456'] = bettingZones['place'][6]\n    bettingZones['47145d'] = bettingZones['place'][8]\n    bettingZones['5861c8'] = bettingZones['place'][9]\n    bettingZones['b315b4'] = bettingZones['place'][10]\n\n    -- bettingZones[xxxx] = 'come4'\n    -- bettingZones[xxxx] = 'come5'\n    -- bettingZones[xxxx] = 'come6'\n    -- bettingZones[xxxx] = 'come8'\n    -- bettingZones[xxxx] = 'come9'\n    -- bettingZones[xxxx] = 'come10'\n    -- bettingZones[xxxx] = 'dontPassLine'\nend\n\nfunction lockZoneChips(zone)\n    for _, obj in pairs(zone.ref.getObjects()) do\n        if isChips(obj) then\n            obj.setLock(true)\n        end\n    end\nend\n\nfunction unlockZoneChips(zone)\n    for _, obj in pairs(zone.ref.getObjects()) do\n        if isChips(obj) then\n            obj.setLock(false)\n        end\n    end\nend\n\n--------------------------- [[\n-- UI management\n--------------------------- ]]\n\nfunction getBettingSheetUI()\n    -- update player dropdown in betting sheet\n    xml = UI.getXmlTable()\n    dropdown = xml[1].children[1].children[2].children[1].children[1]\n    placeBets = xml[1].children[1].children[3].children\n    placeBetValues = xml[1].children[1].children[4].children\n    return {\n        players = dropdown,\n        placeBets = placeBets,\n        placeBetValues = placeBetValues,\n    }\nend\n\nfunction resetBettingSheet()\n    UI.setAttribute('place_bet_4', 'isOn', false)\n    UI.setAttributes('place_bet_4_value', { text = 0, interactable = 'false'})\n    UI.setAttribute('place_bet_5', 'isOn', false)\n    UI.setAttributes('place_bet_5_value', { text = 0, interactable = 'false'})\n    UI.setAttribute('place_bet_6', 'isOn', false)\n    UI.setAttributes('place_bet_6_value', { text = 0, interactable = 'false'})\n    UI.setAttribute('place_bet_8', 'isOn', false)\n    UI.setAttributes('place_bet_8_value', { text = 0, interactable = 'false'})\n    UI.setAttribute('place_bet_9', 'isOn', false)\n    UI.setAttributes('place_bet_9_value', { text = 0, interactable = 'false'})\n    UI.setAttribute('place_bet_10', 'isOn', false)\n    UI.setAttributes('place_bet_10_value', { text = 0, interactable = 'false'})\nend\n\nfunction onSelectPlayer(_, value, id)\n    resetBettingSheet()\n    for color, p in pairs(players) do\n        if p.name == value then\n            bettingFor = color\n            for key, value in pairs(players[bettingFor].bettingSheet) do\n                UI.setAttribute(key, 'isOn', value.isOn)\n                UI.setAttribute(string.format('%s_value', key), 'text', value['amount'])\n                if (value.isOn) then\n                    UI.setAttribute(string.format('%s_value', key), 'interactable', 'true')\n                end\n            end\n        end\n    end\nend\n\nfunction onTogglePlaceBet(_, value, id)\n    if not players[bettingFor] then\n        return\n    end\n    players[bettingFor].bettingSheet[id] = {\n        isOn = value,\n        amount = 0,\n    }\n    valueID = string.format(\"%s_value\", id)\n    UI.setAttribute(valueID, 'interactable', value)\n    if value == 'False' then\n        UI.setAttribute(valueID, 'text', 0)\n    end\n\n    -- TODO: if there is zonebet for bettingFor,\n    -- return the value into players hand\nend\n\nfunction onPlaceBetValue(_, value, id)\n    betFor = UI.getAttribute(id, 'for')\n    bet = players[bettingFor].bettingSheet[betFor]\n    if value == nil or value == '' then\n        value = 0\n    end\n    if bet and bet.isOn then\n        bet['amount'] = tonumber(value)\n    end\nend\n\n-- only use for 'house' controlled place bets\nfunction onSubmitBets(_, value, id)\n    UI.setValue('place_bet_status', '-')\n    player = players[bettingFor]\n    for betField, bet in pairs(player.bettingSheet) do\n        zonetype = UI.getAttribute(betField, 'zonetype')\n        zonevalue = UI.getAttribute(betField, 'zonevalue')\n        if bet.isOn and bet['amount'] > 0 then\n            zone = bettingZones['place'][tonumber(zonevalue)]\n            if not zone['bets'][bettingFor] then\n                zone.bets[bettingFor] = {}\n            end\n            log(zone['bets'],'onSubmitBets - zone[bets]')\n            marker = zone['bets'][bettingFor].marker\n\n            if not marker then\n                position = payZonePosition(zone, player.index)\n                marker = spawnObject({\n                    type = 'Chip_100',\n                    position = position,\n                })\n                Wait.frames(function() marker.setLock(true) end, 50)\n            end\n            marker.setDescription(string.format('%s: %d on %s', player.name, bet['amount'], zonevalue))\n            marker.setLock(true)\n            zone.bets[bettingFor] = {\n                value = bet['amount'],\n                marker = marker\n            }\n            -- TODO remove value from player's hand\n            print(string.format('set bet %d on %s for %s', bet['amount'], betField, bettingFor))\n        else\n            print(string.format('removing bet %d from %s for %s', bet['amount'], betField, bettingFor))\n            zone.bets[bettingFor].marker.destruct()\n            zone.bets[bettingFor] = {}\n        end\n    end\nend",
+  "LuaScriptState": "",
+  "XmlUI": "<!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->\n\n<!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->\n<VerticalLayout\n    id=\"betting_sheet\"\n    rectAlignment=\"UpperRight\"\n    offsetXY=\"-200 -100\"\n    width=\"500\"\n    height=\"300\"\n    allowDragging=\"1\"\n    visibility=\"host\"\n    returnToOriginalPositionWhenReleased=\"0\">\n    <TableLayout rowBackgroundColor=\"#ffffff\" class=\"PlaceWindow\" >\n      <Row preferredHeight=\"50\">\n          <Cell columnSpan=\"6\"><Text>Place Bets</Text></Cell>\n      </Row>\n      <Row preferredHeight=\"50\">\n          <Cell columnSpan=\"6\">\n            <Dropdown id=\"place_bet_players\" onValueChanged=\"onSelectPlayer\">\n              <Option>select a player</Option>\n            </Dropdown>\n          </Cell>\n      </Row>\n      <Row>\n        <Cell><Toggle id=\"place_bet_4\" zonetype=\"place\" zonevalue=\"4\" onValueChanged=\"onTogglePlaceBet\">Place 4</Toggle></Cell>\n        <Cell><Toggle id=\"place_bet_5\" zonetype=\"place\" zonevalue=\"5\" onValueChanged=\"onTogglePlaceBet\">Place 5</Toggle></Cell>\n        <Cell><Toggle id=\"place_bet_6\" zonetype=\"place\" zonevalue=\"6\" onValueChanged=\"onTogglePlaceBet\">Place 6</Toggle></Cell>\n        <Cell><Toggle id=\"place_bet_8\" zonetype=\"place\" zonevalue=\"8\" onValueChanged=\"onTogglePlaceBet\">Place 8</Toggle></Cell>\n        <Cell><Toggle id=\"place_bet_9\" zonetype=\"place\" zonevalue=\"9\" onValueChanged=\"onTogglePlaceBet\">Place 9</Toggle></Cell>\n        <Cell><Toggle id=\"place_bet_10\" zonetype=\"place\" zonevalue=\"10\" onValueChanged=\"onTogglePlaceBet\">Place 10</Toggle></Cell>\n      </Row>\n      <Row>\n        <Cell>\n          <InputField\n            id=\"place_bet_4_value\"\n            for=\"place_bet_4\"\n            interactable=\"false\"\n            onValueChanged=\"onPlaceBetValue\"\n            characterValidation=\"Integer\"\n            placeholder=\"0\" />\n        </Cell>\n        <Cell>\n          <InputField\n            id=\"place_bet_5_value\"\n            for=\"place_bet_5\"\n            interactable=\"false\"\n            onValueChanged=\"onPlaceBetValue\"\n            characterValidation=\"Integer\"\n            placeholder=\"0\" />\n        </Cell>\n        <Cell>\n          <InputField\n            id=\"place_bet_6_value\"\n            for=\"place_bet_6\"\n            interactable=\"false\"\n            onValueChanged=\"onPlaceBetValue\"\n            characterValidation=\"Integer\"\n            placeholder=\"0\" />\n        </Cell>\n        <Cell>\n          <InputField\n            id=\"place_bet_8_value\"\n            for=\"place_bet_8\"\n            interactable=\"false\"\n            onValueChanged=\"onPlaceBetValue\"\n            characterValidation=\"Integer\"\n            placeholder=\"0\" />\n        </Cell>\n        <Cell>\n          <InputField\n            id=\"place_bet_9_value\"\n            for=\"place_bet_9\"\n            interactable=\"false\"\n            onValueChanged=\"onPlaceBetValue\"\n            characterValidation=\"Integer\"\n            placeholder=\"0\" />\n        </Cell>\n        <Cell>\n          <InputField\n            id=\"place_bet_10_value\"\n            for=\"place_bet_10\"\n            interactable=\"false\"\n            onValueChanged=\"onPlaceBetValue\"\n            characterValidation=\"Integer\"\n            placeholder=\"0\" />\n        </Cell>\n\n      </Row>\n      <Row>\n        <Cell columnSpan=\"6\"><Text id=\"place_bet_status\" /></Cell>\n      </Row>\n      <Row>\n        <Cell columnSpan=\"6\"><Button onClick=\"onSubmitBets\">Submit Bets</Button></Cell>\n      </Row>\n\n  </TableLayout>\n\n</VerticalLayout>",
+  "VersionNumber": "v12.4.2"
+}

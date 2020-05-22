@@ -1,0 +1,137 @@
+
+
+registeredPlayer = {
+}
+
+chipBankBagGUID = {
+  [1] = '14ec8d',
+  [5] = '68a5fd',
+  [10] = 'b86727',
+  [25] = 'cff43a',
+  [100] = '3454fd',
+  [500] = '722c6c'
+}
+
+payoutBag = {
+  Red = '0d754b',
+  White = '765aaf'
+}
+
+chipDenoms = {1,5,10,25,100,500}
+
+maxAllowedLoops = 100 -- maximum number of while loop iterations
+
+function onLoad()
+  Global.setVar("PayoutManager", self)
+  ply = getSeatedPlayers()
+  for _,v in pairs(ply) do
+    if (payoutBag[v] ~= nil) then
+      getObjectFromGUID(payoutBag[v]).setDescription("Owner "..Player[v].steam_name)
+    end
+  end
+end
+
+function onChat(message, player)
+    if (message == 'pay me') then
+      payment = 5426
+      payPlayerByColor (player.color, payment)
+    end
+end
+
+function onPlayerChangeColor(color)
+    if(payoutBag[color] ~= nil) then
+      registerPlayer(Player[color].steam_name, payoutBag[color] )
+    end
+end
+
+function registerPlayer (playerSteamName, bagGUID)
+  if (getObjectFromGUID(bagGUID) ~= nil and getObjectFromGUID(bagGUID).tag == "Bag") then
+    registeredPlayer[playerSteamName] = bagGUID
+  else
+    print ('Could not register player.  Provided player bag could not be found.')
+  end
+end
+
+function payPlayerBySteamName (playerSteamName, amt)
+  local bag = registeredPlayer[playerSteamName]
+  if(bag) then
+    return payPlayerBag(getObjectFromGUID(bag), amt)
+  else
+    print ("Could not pay player.   Could not located registered pay location for steam name "..playerSteamName)
+  end
+end
+
+function payPlayerByColor (playerColor, amt)
+  local bag = payoutBag[playerColor]
+  if(bag) then
+    return payPlayerBag(getObjectFromGUID(bag), amt)
+  else
+    print ("Could not pay player.   Could not locate pay location for color "..playerColor)
+  end
+end
+
+function payPlayerBag (playerBag, amt)
+  log(playerBag,"player bag")
+  local payLoc = playerBag.getPosition()
+  local yIncrement = 2
+  local yValue = 5
+
+  if (playerBag ~= nil and amt > 0) then
+    -- determine what chips are needed to pay the players
+    denom = getNextDenom()
+    remainingUnpaidAmt = amt
+    loopCount1= 0
+
+    while (remainingUnpaidAmt > 0 and loopCount1 < maxAllowedLoops) do
+      loopCount2= 0
+      --print("Denom:"..denom)
+      print(remaining )
+      while (remainingUnpaidAmt < denom and denom ~= 0 and loopCount2 < maxAllowedLoops) do
+        --print("Denom:"..denom)
+        --print ('Getting next denom from '..denom)
+        denom = getNextDenom(denom)
+        --print ('next denom is'..denom)
+        loopCount2 = loopCount2 + 1
+      end
+      payCount = math.floor(remainingUnpaidAmt/denom)
+      --log ('Pay count '..payCount..'in denom '..denom)
+      remainingUnpaidAmt = remainingUnpaidAmt - (denom*payCount)
+      for i=1, payCount ,1 do
+        getObjectFromGUID(chipBankBagGUID[denom]).takeObject({
+          position          = {payLoc.x, payLoc.y + yValue, payLoc.z},
+          smooth            = false
+        })
+        yValue = yValue + yIncrement
+      end
+      loopCount1 = loopCount1 + 1
+    end
+    if (loopCount2 == maxAllowedLoops or loopCount1 == maxAllowedLoops) then
+      print ('While loop timed out')
+    end
+    broadcastToAll("Paid player "..amt)
+    return true
+  else
+    print ('Unable to pay player by color.  Could not locate a payout bag for player or amount was zero: '..playerBag..':'..amt)
+    return false
+  end
+end
+
+
+
+function getNextDenom (denom)
+  if denom == nil then
+    for _,v in ipairs(chipDenoms) do
+        newDenom = v
+    end
+  else
+    newDenom = 0
+    if (denom > 0) then
+      for _,v in ipairs(chipDenoms) do
+        if (v < denom) then
+          newDenom = v
+        end
+      end
+    end
+  end
+  return newDenom
+end

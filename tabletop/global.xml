@@ -1,12 +1,16 @@
 <!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->
+
+<!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->
 <VerticalLayout
     id="betting_sheet"
+    rectAlignment="UpperRight"
+    offsetXY="-200 -100"
     width="500"
     height="300"
     allowDragging="1"
     visibility="host"
     returnToOriginalPositionWhenReleased="0">
-    <TableLayout rowBackgroundColor="#ffffff">
+    <TableLayout rowBackgroundColor="#ffffff" class="PlaceWindow" >
       <Row preferredHeight="50">
           <Cell columnSpan="6"><Text>Place Bets</Text></Cell>
       </Row>

@@ -4,6 +4,7 @@ local chipDenom = {
     [100] = { t = 'Chip_100' },
     [50] = { t = 'Chip_50' },
     [10] = { t = 'Chip_10' },
+    [5] = { t = 'Chip_10'}
 }
 local puckPos = {
     [0] = { pos = {-20.00, 2, 8.37} },
@@ -52,11 +53,15 @@ function onObjectLeaveScriptingZone(zone, obj)
     assignZoneBet(bz, obj, 'leave')
 end
 
+function setVars ()
+  dices[1] = getObjectFromGUID('fb85e1')
+  dices[2] = getObjectFromGUID('04e437')
+  puck = getObjectFromGUID('e75309')
+  puck.setPositionSmooth(puckPos[0].pos, false, true)
+end
+
 function onLoad()
-    dices[1] = getObjectFromGUID('3c34ef')
-    dices[2] = getObjectFromGUID('9859b7')
-    puck = getObjectFromGUID('916652')
-    puck.setPositionSmooth(puckPos[0].pos, false, true)
+    Wait.time(setVars,2)
 
     -- initialize betting zones
     initializeZones()
@@ -87,7 +92,7 @@ end
 function addPlayerToBetSheet()
     -- update player dropdown in betting sheet
     xml = UI.getXmlTable()
-    dropdown = xml[1].children[1].children[2].children[1].children[1]
+   dropdown = xml[1].children[1].children[2].children[1].children[1]
     options = dropdown.children
     for _, ref in ipairs(Player.getPlayers()) do
         table.insert(options, {
@@ -114,7 +119,7 @@ function diceRoll()
     while not dices[2].resting do
         coroutine.yield(0)
     end
-
+    log('dice stopped','diceRoll()')
     diceSum = dices[1].getValue() + dices[2].getValue()
     broadcastToAll('rolled: ' .. diceSum)
 
@@ -126,6 +131,7 @@ function diceRoll()
                 point = nil
 
                 puck.setPositionSmooth(puckPos[0].pos, false, true)
+
                 -- destroy all chips except comeLine
                 for key, zone in pairs(bettingZones) do
                     if key == 'comeLine' then
@@ -172,13 +178,17 @@ function diceRoll()
         -- always pay field
         payZoneBets(bettingZones['field'])
     else
+      log('4,5,6,8,9,10','diceRoll()')
         -- 4, 5, 6, 8, 9, 10
         if not point then
             broadcastToAll('point established')
-
+            log(diceSum,'diceRoll() diceSum')
+            log(puck,'diceRoll() puck')
+            log(puckPos,'diceRoll() puck position')
             point = diceSum
             puck.setPositionSmooth(puckPos[diceSum].pos, false, true)
-
+            log('Locking placeBets','diceRoll()')
+            log(bettingZones,'diceRoll(bettingZones)')
             lockZoneChips(bettingZones['passLine'])
             -- TODO: allow ON place bets
         else
@@ -292,6 +302,8 @@ end
 
 function payPlaceZoneBets()
     zone = bettingZones['place'][diceSum]
+    log(bettingZones,'payPlaceZoneBets -bettingZones')
+    log(zone.bets,'payPlacezoneBets -zone.bets')
     for color, bet in pairs(zone.bets) do
         if bet.value then
             hand_value = 0 -- value send to the hand
@@ -434,7 +446,7 @@ function assignZoneBet(zone, obj, bettype)
     end
 
     -- lastly, if we programatically spawned the chip. check if the object
-    -- is already in zone
+    -- is already in zoneas
     if bettype == 'enter' then
         for _, exist in pairs(zone.ref.getObjects()) do
             if obj.getGUID() == exist.getGUID() then
@@ -442,8 +454,17 @@ function assignZoneBet(zone, obj, bettype)
             end
         end
     end
+    --log(obj,'Chip Object')
+    --log(obj.getQuantity(),'Quantity')
+    --log(obj.getValue(),'Value')
+    --log(obj.value,'Value direct')
 
-    value = obj.getValue() * math.max(obj.getQuantity(), 1)
+    --modified ThDorito to work with custom Chips.
+    if(obj.getValue() ~= nil and obj.tag == 'Chip') then
+      value = obj.getValue() * math.max(obj.getQuantity(), 1)
+    elseif (obj.tag == "Chip") then
+      value = obj.value * math.max(obj.getQuantity(), 1)
+    end
     if bettype == 'leave' then
       value = value * -1
     end
@@ -453,87 +474,87 @@ end
 
 function initializeZones()
     bettingZones['passLine'] = {
-        zoneid = 'f60857',
+        zoneid = '67c5ba',
         zonetype = 'passLine',
-        ref = getObjectFromGUID('f60857'),
+        ref = getObjectFromGUID('67c5ba'),
         bets = {},
     }
-    bettingZones['f60857'] = bettingZones['passLine']
+    bettingZones['67c5ba'] = bettingZones['passLine']
 
     bettingZones['passLineOdds'] = {
-        zoneid = '9713cf',
+        zoneid = '80b675',
         zonetype = 'passLineOdds',
-        ref = getObjectFromGUID('9713cf'),
+        ref = getObjectFromGUID('80b675'),
         bets = {},
     }
-    bettingZones['9713cf'] = bettingZones['passLineOdds']
+    bettingZones['80b675'] = bettingZones['passLineOdds']
 
     bettingZones['comeLine'] = {
-        zoneid = '21d30a',
+        zoneid = '101bb3',
         zonetype = 'comeLine',
-        ref = getObjectFromGUID('21d30a'),
+        ref = getObjectFromGUID('101bb3'),
         bets = {},
     }
-    bettingZones['21d30a'] = bettingZones['comeLine']
+    bettingZones['101bb3'] = bettingZones['comeLine']
 
     bettingZones['field'] = {
-        zoneid = 'a9a479',
+        zoneid = '73ffbe',
         zonetype = 'field',
-        ref = getObjectFromGUID('a9a479'),
+        ref = getObjectFromGUID('73ffbe'),
         bets = {},
     }
-    bettingZones['a9a479'] = bettingZones['field']
+    bettingZones['73ffbe'] = bettingZones['field']
 
     bettingZones['place'] = {
         [4] = {
-            zoneid = '38214d',
+            zoneid = '8bd16e',
             zonetype = 'place',
             zonevalue = 4,
-            ref = getObjectFromGUID('38214d'),
+            ref = getObjectFromGUID('8bd16e'),
             bets = {},
         },
         [5] = {
-            zoneid = '932f69',
+            zoneid = '97cdf1',
             zonetype = 'place',
             zonevalue = 5,
-            ref = getObjectFromGUID('932f69'),
+            ref = getObjectFromGUID('97cdf1'),
             bets = {},
         },
         [6] = {
-            zoneid = '0895d2',
+            zoneid = 'f7e456',
             zonetype = 'place',
             zonevalue = 6,
-            ref = getObjectFromGUID('0895d2'),
+            ref = getObjectFromGUID('f7e456'),
             bets = {},
         },
         [8] = {
-            zoneid = '5ef559',
+            zoneid = '47145d',
             zonetype = 'place',
             zonevalue = 8,
-            ref = getObjectFromGUID('5ef559'),
+            ref = getObjectFromGUID('47145d'),
             bets = {}
         },
         [9] = {
-            zoneid = 'bd98a8',
+            zoneid = '5861c8',
             zonetype = 'place',
             zonevalue = 9,
-            ref = getObjectFromGUID('bd98a8'),
+            ref = getObjectFromGUID('5861c8'),
             bets = {},
         },
         [10] = {
-            zoneid = '5074bc',
+            zoneid = 'b315b4',
             zonetype = 'place',
             zonevalue = 10,
-            ref = getObjectFromGUID('5074bc'),
+            ref = getObjectFromGUID('b315b4'),
             bets = {},
         },
     }
-    bettingZones['38214d'] = bettingZones['place'][4]
-    bettingZones['932f69'] = bettingZones['place'][5]
-    bettingZones['0895d2'] = bettingZones['place'][6]
-    bettingZones['5ef559'] = bettingZones['place'][8]
-    bettingZones['bd98a8'] = bettingZones['place'][9]
-    bettingZones['5074bc'] = bettingZones['place'][10]
+    bettingZones['8bd16e'] = bettingZones['place'][4]
+    bettingZones['97cdf1'] = bettingZones['place'][5]
+    bettingZones['f7e456'] = bettingZones['place'][6]
+    bettingZones['47145d'] = bettingZones['place'][8]
+    bettingZones['5861c8'] = bettingZones['place'][9]
+    bettingZones['b315b4'] = bettingZones['place'][10]
 
     -- bettingZones[xxxx] = 'come4'
     -- bettingZones[xxxx] = 'come5'
@@ -649,7 +670,7 @@ function onSubmitBets(_, value, id)
             if not zone['bets'][bettingFor] then
                 zone.bets[bettingFor] = {}
             end
-
+            log(zone['bets'],'onSubmitBets - zone[bets]')
             marker = zone['bets'][bettingFor].marker
 
             if not marker then

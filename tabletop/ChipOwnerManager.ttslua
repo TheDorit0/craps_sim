@@ -1,0 +1,131 @@
+
+
+--todo - doesn't currently handle correclty if you drop a whole stack of chips onto someone else's chips.  It'll just remove one chip.
+chipColor = nil
+payoutBagGUIDS = {Red = '0d754b',
+                  White = '765aaf'}
+
+
+function filterObjectEnterContainer(container, enter_object)
+    --this event doesn't seem to fire on chip containers so this doesn't work for anything other than bags.
+    --I posted a suggestion to Bezerk to make this event fire for chip containers
+    if (container.getDescription() ~= "" and container.getDescription() ~= nil) then
+      if(enter_object.getDescription() ~= container.getDescription()) then
+        print("Cannot put an item into another player's bag.")
+        return false
+      end
+    end
+    return true -- Allows object to enter.
+end
+
+function onPlayerChangeColor(color)
+    if(color == "White" or color == "Red") then
+      getObjectFromGUID(payoutBagGUIDS[color]).setDescription('Owner '..Player[color].steam_name)
+    end
+end
+
+function onObjectEnterContainer(container, enter_object)
+  if enter_object.tag == "Chip" then
+  end
+
+  if (container.tag == "Chip" and container.getDescription() ~= "" and container.getDescription() ~= nil) then
+    if(enter_object.getDescription() ~= container.getDescription() and enter_object.getDescription() ~= "" and enter_object.getDescription() ~= nil) then
+      newChip = container.takeObject({
+        position          = {container.getPosition().x + 5,container.getPosition().y + 5,container.getPosition().z + 5},
+        smooth            = false
+      })
+      Wait.time(function() deposit(newChip,enter_object.getDescription()) end,1)
+
+      --  newChip = container.deal(1,enter_object.getDescription())
+        --log(newChip,"newChip")
+      end
+    end
+end
+
+function deposit(obj,player_color)
+  getObjectFromGUID(payoutBagGUIDS[player_color]).putObject(obj)
+end
+
+
+function resetChipOwner(obj,player_color)
+    obj.setDescription('Owner ' .. Player[player_color].steam_name)
+end
+
+function onObjectLeaveContainer(bag, obj)
+  log(bag, 'Container')
+  log(obj, 'Object leaving')
+  log(bag.getDescription(), 'Bag desc')
+  log(obj.getDescription(), 'Obj desc')
+    if((bag.tag == "Chip") and bag.getDescription() ~= nil and bag.getDescription() ~= "") then
+      --they are taking a chip off a stack.
+      if(obj.spawning) then
+      Wait.condition(function () assignChipToPlayer(obj,bag.getDescription(),bag) end, function() return not obj.spawning end)
+      else
+        assignChipToPlayer(obj,bag.getDescription(),bag)
+      end
+    elseif
+      (bag.tag == "Bag" and bag.getName() == "Payouts") then
+        if(obj.spawning) then
+        Wait.condition(function () obj.setDescription(bag.getDescription()) end, function() return not obj.spawning end)
+        else
+
+        end
+    else
+      if(obj.tag == 'Chip' or obj.tag == "Generic") then
+        if(obj.spawning) then
+        Wait.condition(function () assignChipToPlayer(obj) end, function() return not obj.spawning end)
+        else
+        assignChipToPlayer(obj)
+        end
+      end
+    end
+end
+
+function assignChipToPlayer (obj,color,stack)
+  if(color) then
+    if(obj.held_by_color ~= nil and (obj.held_by_color ~= color and 'Owner '..Player[obj.held_by_color].steam_name ~= color )) then
+      print('Dropping object held by ' .. obj.held_by_color .. 'and owned by '..color)
+        obj.setDescription(color)
+        obj.drop()
+        if(stack) then
+          stack.putObject(obj)
+        end
+      end
+  else
+    if(obj.held_by_color ~= nil) then
+      obj.setDescription('Owner ' .. Player[obj.held_by_color].steam_name)
+    end
+
+  end
+end
+
+function onObjectPickUp(colorName, obj)
+  if(obj.spawning) then
+  else
+
+  if(obj.tag == "Chip" or obj.tag == "Generic") then
+    if((obj.getDescription() ~= nil and obj.getDescription() ~= "") and obj.getDescription() ~= ('Owner ' .. Player[colorName].steam_name)) then
+      obj.lock()
+      obj.drop()
+      broadcastToColor('That is not your chip',colorName)
+      Wait.frames(function() unlockObj(obj) end,1)
+      --obj.drop()
+    elseif (obj.getDescription() == nil or obj.getDescription() == "") then
+      log(colorName,'colorname for setDescription')
+      obj.setDescription('Owner ' .. Player[colorName].steam_name)
+    end
+    log(obj,'chip object to set value')
+    log(obj.getValue(),'getValue')
+    log(obj.value, 'value')
+    if(obj.getValue() == nil and obj.value ~= nil) then
+      obj.setValue(obj.value)
+    end
+  end
+end
+end
+
+function unlockObj (obj)
+  obj.unlock()
+end
+
+-- (or however you obtain a "tile" object)

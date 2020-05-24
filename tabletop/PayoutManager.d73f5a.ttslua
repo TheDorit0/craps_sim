@@ -9,7 +9,9 @@ chipBankBagGUID = {
   [10] = 'b86727',
   [25] = 'cff43a',
   [100] = '3454fd',
-  [500] = '722c6c'
+  [500] = '722c6c',
+  [1000] = '67049a',
+  [100000] = '23c20b'
 }
 
 payoutBag = {
@@ -17,7 +19,7 @@ payoutBag = {
   White = '765aaf'
 }
 
-chipDenoms = {1,5,10,25,100,500}
+chipDenoms = {1,5,10,25,100,500,1000,100000}
 
 maxAllowedLoops = 100 -- maximum number of while loop iterations
 
@@ -52,10 +54,18 @@ function registerPlayer (playerSteamName, bagGUID)
   end
 end
 
+function pay(params)
+  if(params.steam_name ~= nil and params.amt ~= nil and params.amt > 0) then
+    payPlayerBySteamName(params.steam_name, amt)
+  elseif (params.color ~= nil and params.amt ~= nil and params.amt > 0) then
+    payPlayerByColor (params.color, params.amt)
+  end
+end
+
 function payPlayerBySteamName (playerSteamName, amt)
   local bag = registeredPlayer[playerSteamName]
   if(bag) then
-    return payPlayerBag(getObjectFromGUID(bag), amt)
+     Wait.time(function () payPlayerBag(getObjectFromGUID(bag), amt) end,0)
   else
     print ("Could not pay player.   Could not located registered pay location for steam name "..playerSteamName)
   end
@@ -64,7 +74,7 @@ end
 function payPlayerByColor (playerColor, amt)
   local bag = payoutBag[playerColor]
   if(bag) then
-    return payPlayerBag(getObjectFromGUID(bag), amt)
+    Wait.time(function () payPlayerBag(getObjectFromGUID(bag), amt) end,0)
   else
     print ("Could not pay player.   Could not locate pay location for color "..playerColor)
   end
@@ -81,11 +91,12 @@ function payPlayerBag (playerBag, amt)
     denom = getNextDenom()
     remainingUnpaidAmt = amt
     loopCount1= 0
+    local spawnedChips = {}
 
     while (remainingUnpaidAmt > 0 and loopCount1 < maxAllowedLoops) do
       loopCount2= 0
       --print("Denom:"..denom)
-      print(remaining )
+      --print(remaining )
       while (remainingUnpaidAmt < denom and denom ~= 0 and loopCount2 < maxAllowedLoops) do
         --print("Denom:"..denom)
         --print ('Getting next denom from '..denom)
@@ -97,13 +108,17 @@ function payPlayerBag (playerBag, amt)
       --log ('Pay count '..payCount..'in denom '..denom)
       remainingUnpaidAmt = remainingUnpaidAmt - (denom*payCount)
       for i=1, payCount ,1 do
-        getObjectFromGUID(chipBankBagGUID[denom]).takeObject({
+        table.insert(spawnedChips,getObjectFromGUID(chipBankBagGUID[denom]).takeObject({
           position          = {payLoc.x, payLoc.y + yValue, payLoc.z},
-          smooth            = false
-        })
+          smooth            = false,
+          callback_function = function (obj) lockSelf(obj) end
+        }))
         yValue = yValue + yIncrement
       end
       loopCount1 = loopCount1 + 1
+      if (payCount > 1) then
+        Wait.Time(function () groupAndUnlockSpawnedChips (spawnedChips) end,2 )
+      end
     end
     if (loopCount2 == maxAllowedLoops or loopCount1 == maxAllowedLoops) then
       print ('While loop timed out')
@@ -116,6 +131,16 @@ function payPlayerBag (playerBag, amt)
   end
 end
 
+function lockSelf(obj)
+  obj.setLock(true)
+end
+
+function groupAndUnlockSpawnedChips (chips)
+  for _,v in pairs(chips) do
+    v.setLock(false)
+  end
+  group(chips)
+end
 
 
 function getNextDenom (denom)

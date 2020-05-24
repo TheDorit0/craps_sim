@@ -7,13 +7,13 @@ local chipDenom = {
     [5] = { t = 'Chip_10'}
 }
 local puckPos = {
-    [0] = { pos = {-20.00, 2, 8.37} },
-    [4] = {pos = {-13.00, 2, 8.37}},
-    [5] = {pos = {-9.30, 2, 8.37}},
-    [6] = {pos = {-5.60, 2, 8.37}},
-    [8] = {pos = {-1.90, 2, 8.37}},
-    [9] = {pos = {2.00, 2, 8.37}},
-    [10] = {pos = {5.8, 2, 8.5}},
+    [0] = {pos = {50.91, 2.44, -16.45}},
+    [4] = {pos = {41.04, 2.44, -16.45}},
+    [5] = {pos = {35.21, 2.44, -16.45}},
+    [6] = {pos = {29.72, 2.44, -16.45}},
+    [8] = {pos = {24.04, 2.44, -16.45}},
+    [9] = {pos = {18.39, 2.44, -16.45}},
+    [10] = {pos = {12.49, 2.44, -16.45}}
 }
 local dices = {}
 local diceSum = 0
@@ -56,7 +56,7 @@ end
 function setVars ()
   dices[1] = getObjectFromGUID('fb85e1')
   dices[2] = getObjectFromGUID('04e437')
-  puck = getObjectFromGUID('e75309')
+  puck = getObjectFromGUID('8487a4')
   puck.setPositionSmooth(puckPos[0].pos, false, true)
 end
 
@@ -226,7 +226,8 @@ end
 -- chip related functions
 --------------------------- ]]
 function isChips(obj)
-    return (obj.tag == 'Chip') or (obj.tag == 'ChipStack')
+    --print('obj is '..obj.tag)
+    return (obj.tag == 'Chip') or (obj.tag == 'ChipStack') or (obj.tag == "Generic")
 end
 
 -- calculate the least amount of chips needed
@@ -305,7 +306,7 @@ function payPlaceZoneBets()
     log(bettingZones,'payPlaceZoneBets -bettingZones')
     log(zone.bets,'payPlacezoneBets -zone.bets')
     for color, bet in pairs(zone.bets) do
-        if bet.value then
+        if bet['value'] then
             hand_value = 0 -- value send to the hand
             if (diceSum == 4) or (diceSum == 10) then
                 -- 9 to 5
@@ -318,19 +319,27 @@ function payPlaceZoneBets()
                 hand_value = 7 * bet.value / 6
             end
             if hand_value > 0 then
+              if(PayoutManager ~= nil) then
+                PayoutManager.call('pay',{color = player.color, amt = hand_value})
+                --zone.bets[player.color] = 0
+              else
                 print(string.format('give player %s: %d', color, hand_value))
-                -- TODO: is rounded up to nearest 10 due to chip value
+                --TODO: is rounded up to nearest 10 due to chip value
                 for _, c in pairs(chipDemonimator(math.ceil(hand_value/10)*10)) do
                     spawnChipInHand(c, player)
                 end
+              end
             end
         end
     end
 end
 
 function payZoneBets(zone)
+  log (zone.ref,'zone.ref')
     for _, ref in pairs(zone.ref.getObjects()) do
+      --print('obj is '..ref.tag)
         if isChips(ref) then
+          --print('destructing chip'..ref.getGUID() )
             ref.destruct()
         end
     end
@@ -373,11 +382,17 @@ function payZoneBets(zone)
         end
 
         if next_value > 0 then
-            print('player ' .. color .. ' next  ' .. next_value .. ' in ' .. zone.zonetype)
-            for _, c in pairs(chipDemonimator(next_value)) do
-                spawnChip(c, zone, player)
-            end
-            zone.bets[player.color] = next_value
+          print('player ' .. color .. ' next  ' .. next_value .. ' in ' .. zone.zonetype)
+          --TheDorito use the payout manager to pay
+          if(PayoutManager ~= nil) then
+            PayoutManager.call('pay',{color = player.color, amt = next_value})
+            zone.bets[player.color] = 0
+          else
+              for _, c in pairs(chipDemonimator(next_value)) do
+                  spawnChip(c, zone, player)
+              end
+              zone.bets[player.color] = next_value
+          end
         end
     end
 end
@@ -389,39 +404,17 @@ function groupHand(player)
     group(player.getHandObjects())
 end
 
-function onPlayerConnect(player)
-    broadcastToAll(string.format('%s joined', player))
-    --spawStartingChips(player)
+function onPlayerChangeColor(player)
+    spawnStartingChips(Player[player])
 end
 
 function spawnStartingChips(player)
-    t = player.getHandTransform()
-
-    for i=1,20 do
-        chip = spawnObject({
-            type = 'Chip_100',
-            position = t.position,
-        })
-        chip.use_hands = true
+    print('Spawning starting chips')
+    if(PayoutManager ~= nil) then
+      PayoutManager.call('pay',{color = player.color, amt = 5000})
+    else
+      Wait.condition(function () PayoutManager.call('pay',{color = player.color, amt = 5000}) end,function () return PayoutManager ~= nil end)
     end
-
-    for i=1,4 do
-        chip = spawnObject({
-            type = 'Chip_500',
-            position = t.position,
-        })
-        chip.use_hands = true
-    end
-
-    for i=1,2 do
-        chip = spawnObject({
-            type = 'Chip_1000',
-            position = t.position,
-        })
-        chip.use_hands = true
-    end
-
-    Wait.frames(function() groupHand(player) end, 50)
 end
 
 --------------------------- [[
@@ -454,10 +447,7 @@ function assignZoneBet(zone, obj, bettype)
             end
         end
     end
-    --log(obj,'Chip Object')
-    --log(obj.getQuantity(),'Quantity')
-    --log(obj.getValue(),'Value')
-    --log(obj.value,'Value direct')
+
 
     --modified ThDorito to work with custom Chips.
     if(obj.getValue() ~= nil and obj.tag == 'Chip') then

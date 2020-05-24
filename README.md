@@ -1,5 +1,6 @@
 ## craps
-
+Latest save file for this fork is generally available from this workshop link before it is in this repository:
+https://steamcommunity.com/sharedfiles/filedetails/?id=2104569835
 
 ### dice rolls
  2 -> 1

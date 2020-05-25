@@ -42,7 +42,9 @@ function onObjectEnterScriptingZone(zone, obj)
         return
     end
     bz = bettingZones[zone.getGUID()]
+    if(bz) then -- so that it won't error for other non-bet scripting zones
     assignZoneBet(bz, obj, 'enter')
+  end
 end
 
 function onObjectLeaveScriptingZone(zone, obj)
@@ -50,7 +52,9 @@ function onObjectLeaveScriptingZone(zone, obj)
         return
     end
     bz = bettingZones[zone.getGUID()]
+    if(bz) then -- so that it won't error for other non-bet scripting zones
     assignZoneBet(bz, obj, 'leave')
+    end
 end
 
 function setVars ()
@@ -685,4 +689,68 @@ function onSubmitBets(_, value, id)
             zone.bets[bettingFor] = {}
         end
     end
+end
+
+function playerPlaceBet (params)
+    log(params,"Global- playerPlaceBet - params")
+    player = players[params.player.color]
+    bettingFor = params.player.color
+    placeNumber = params.placeNumber
+    removeFlag = params.removeFlag -- I envision this being used for player to take down their bet
+    bet = {}
+    bet.isOn = not removeFlag
+    bet['amount'] = params.amt
+    log(nil,'Global- playerPlaceBet - variables set')
+    if bet.isOn and bet['amount'] > 0 then
+      print('bet is on and amount is less than zero')
+        zone = bettingZones['place'][tonumber(placeNumber)]
+        print ('zone is set')
+        if not zone['bets'][bettingFor] then
+          print ('bettingFor not set')
+            zone.bets[bettingFor] = {}
+            print ('intializing bettingFor')
+        end
+        log(zone['bets'],'playerPlaceBet - zone[bets]')
+        log(nil,'Global- playerPlaceBet - setting marker')
+        marker = zone['bets'][bettingFor].marker
+        log(nil,'Found marker')
+        if not marker then
+            position = payZonePosition(zone, player.index)
+            log(nil,'Spawning Chip')
+            marker = spawnObject({
+                type = 'Chip_100',
+                position = position,
+            })
+            Wait.frames(function() marker.setLock(true) end, 50)
+        end
+        log(nil,'aboutToSetMarkerDescription')
+        marker.setDescription(string.format('%s: %d on %s', player.name, bet['amount'], placeNumber))
+        marker.setLock(true)
+        zone.bets[bettingFor] = {
+            value = bet['amount'],
+            marker = marker
+        }
+        log(nil,'doneSettingMarkerDescription')
+        -- TODO remove value from player's hand
+        --print(string.format('set bet %d on %s for %s', bet['amount'], betField, bettingFor))
+    else
+      log(nil,'destroyingZoneBets')
+        --print(string.format('removing bet %d from %s for %s', bet['amount'], betField, bettingFor))
+        zone.bets[bettingFor].marker.destruct()
+        zone.bets[bettingFor] = {}
+    end
+end
+
+function getPlaceBets (params)
+  -- player
+  -- placeNumber
+  local value = 0
+  plr = params.player
+  zone = bettingZones['place'][tonumber(params.placeNumber)]
+  if(zone.bets[plr.color]) then
+    if (zone.bets[plr.color].value) then
+      value = zone.bets[plr.color].value
+    end
+  end
+  return value
 end

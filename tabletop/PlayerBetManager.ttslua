@@ -1,0 +1,225 @@
+
+betZone = {guid = '4a68e8'} --betZone.obj set by onLoad
+spawnedButtonCount = 0
+placeButtonColorSelected = "White"
+buttonScale = 1
+placeButtonColor = {0,0,0,0}
+buttonFontColor = "Black"
+placeButtonLocy = 0.6
+
+defaultButtonData = {
+  placeButton = {
+    --claim
+    {pos   = {-4.2,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place4', placeNumber = "4", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {-2.35,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place5', placeNumber = "5", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {-0.55,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place6', placeNumber = "6", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {1.25,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place8', placeNumber = "8", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {3.05,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place9', placeNumber = "9", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {4.85,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place10', placeNumber = "10", buttonNumber = 0, labelColor="Black", fontColor = "Black"}
+},
+
+  placeDisplay = {
+    {pos   = {-4.2,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display4', buttonNumber = 0,placeNumber = "4", labelColor={0,0,0,1}, fontColor = "White"},
+    {pos   = {-2.35,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display5', buttonNumber = 0,placeNumber = "5", labelColor={0,0,0,1}, fontColor = "White"},
+    {pos   = {-0.55,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display6', buttonNumber = 0,placeNumber = "6", labelColor={0,0,0,1}, fontColor = "White"},
+    {pos   = {1.25,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display8', buttonNumber = 0,placeNumber = "8", labelColor={0,0,0,1}, fontColor = "White"},
+    {pos   = {3.05,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display9', buttonNumber = 0,placeNumber = "9", labelColor={0,0,0,1}, fontColor = "White"},
+    {pos   = {4.85,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display10', buttonNumber = 0,placeNumber = "10", labelColor={0,0,0,1}, fontColor = "White"}
+  },
+  removeButton= {
+    {pos   = {-4.15,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove4', buttonNumber = 0,placeNumber = "4", labelColor={0,0,0,0}, fontColor = "White"},
+    {pos   = {-2.35,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove5', buttonNumber = 0,placeNumber = "5", labelColor={0,0,0,0}, fontColor = "White"},
+    {pos   = {-0.55,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove6', buttonNumber = 0,placeNumber = "6", labelColor={0,0,0,0}, fontColor = "White"},
+    {pos   = {1.25,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove8', buttonNumber = 0,placeNumber = "8", labelColor={0,0,0,0}, fontColor = "White"},
+    {pos   = {3.05,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove9', buttonNumber = 0,placeNumber = "9", labelColor={0,0,0,0},fontColor = "White"},
+    {pos   = {4.85,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove10', buttonNumber = 0,placeNumber = "10", labelColor={0,0,0,0}, fontColor = "White"}
+  }}
+
+function onLoad ()
+  ref_buttonData = defaultButtonData
+  createPlaceButtons()
+  createCurrentAmtButtons()
+  createRemoveButtons()
+  betZone['obj'] = getObjectFromGUID(betZone.guid)
+end
+
+function getBetAmt ()
+  print('getting bet amount')
+  amount = 0
+  local ChipsInZone = betZone.obj.getObjects()
+  for _,v in pairs(ChipsInZone) do
+    log(v.tag,'getBetAmt - v.tag')
+    if v.tag == "Chip" or v.tag == "Generic" then
+        if (v.value ~= nil) then
+          -- must be a custom chip using the chip value manager
+          amount = amount + v.value
+        else
+          --TODO add handling for standard TTS poker ChipStack
+          print('Unsupported Chip.  Could not compute value.')
+        end
+    end
+  end
+  return amount
+end
+
+function destroyBetZoneChips ()
+  local ChipsInZone = betZone.obj.getObjects()
+  for _,v in pairs(ChipsInZone) do
+    if(v.tag == "Chip" ) then
+    v.destruct()
+  end
+  end
+end
+
+function isStack(obj)
+  if obj.getQuantity() > -1 then
+    return true
+  else
+    return false
+  end
+end
+
+function click_place(tableIndex,buttonIndex)
+  print('Place')
+  params = {}
+  params.player = Player[self.getDescription()]
+  params.placeNumber = ref_buttonData.placeButton[tableIndex].placeNumber
+  params.removeFlag = false
+  params.amt = getBetAmt ()--todo replace with amt in the betting zone
+
+  if (params.amt == 0) then
+    print ('No bet found.')
+  else
+    log(params,'click_place--Params')
+
+    Global.call('playerPlaceBet',params)
+    Wait.time(updateBetAmountsDisplay,1)
+    destroyBetZoneChips ()
+  end
+end
+
+function click_remove(tableIndex,buttonIndex)
+  print('Remove')
+  local param = {}
+  param.removeFlag = true
+  param.amt = 0
+  param.player = Player[self.getDescription()]
+  param.placeNumber = ref_buttonData.removeButton[tableIndex].placeNumber
+
+  local currentBet = getPlaceBets (param.placeNumber)
+  log(param, 'click_remove params')
+  if (currentBet ~= nil and currentBet > 0) then
+    Global.call('playerPlaceBet',param)
+  payPlayer(currentBet)
+  end
+
+  Wait.time(updateBetAmountsDisplay,1)
+end
+
+function updateBetAmountsDisplay ()
+ for _,v in pairs(ref_buttonData.placeDisplay) do
+   -- get the place position of the buttonNumber
+
+   -- get the bet amounts
+   local betAmt = getPlaceBets(v.placeNumber)
+   -- updated button with the bet amount
+   if(betAmt == nil) then
+     betAmt = 0
+   end
+   self.editButton({index = v.buttonNumber, label=tostring(betAmt)})
+ end
+end
+
+function createPlaceButtons()
+
+    for i, data in ipairs(ref_buttonData.placeButton) do
+        --Sets up reference function
+        local buttonNumber = spawnedButtonCount
+        local funcName = "place"..i
+        local func = function() click_place(i, buttonNumber) end
+        self.setVar(funcName, func)
+        --Sets up label
+        local label = ""
+        --Creates button and counts it
+        self.createButton({
+            label=label, click_function=funcName, function_owner=self,
+            position=data.pos, height=data.height, width=data.width,
+            font_size=data.size,
+            --scale=buttonScale,
+            press_color = placeButtonColorSelected,
+            color=placeButtonColor, font_color=buttonFontColor
+        })
+        spawnedButtonCount = spawnedButtonCount + 1
+        data.buttonNumber = buttonNumber
+      end
+end
+
+function createRemoveButtons()
+
+    for i, data in ipairs(ref_buttonData.removeButton) do
+        --Sets up reference function
+        local buttonNumber = spawnedButtonCount
+        local funcName = "remove"..i
+        local func = function() click_remove(i, buttonNumber) end
+        self.setVar(funcName, func)
+        --Sets up label
+        local label = ""
+        --Creates button and counts it
+        self.createButton({
+            label=label, click_function=funcName, function_owner=self,
+            position=data.pos, height=data.height, width=data.width,
+            font_size=data.size,
+            --scale=buttonScale,
+            press_color = placeButtonColorSelected,
+            color=data.labelColor, font_color=data.fontColor
+        })
+        spawnedButtonCount = spawnedButtonCount + 1
+        data.buttonNumber = buttonNumber
+      end
+end
+
+function none()
+end
+
+function createCurrentAmtButtons()
+
+    for i, data in ipairs(ref_buttonData.placeDisplay) do
+        --Sets up reference function
+        local buttonNumber = spawnedButtonCount
+        local funcName = "placeDisplay"..i
+        local func = function() none() end
+        self.setVar(funcName, func)
+        --Sets up label
+        local label = ""
+        if data.state==3 then label="" end
+        --Creates button and counts it
+        self.createButton({
+            label=label, click_function=funcName, function_owner=self,
+            position=data.pos, height=data.height, width=data.width,
+            font_size=data.size,
+            --scale=buttonScale,
+            press_color = placeButtonColorSelected,
+            color=data.labelColor, font_color=data.fontColor
+        })
+        spawnedButtonCount = spawnedButtonCount + 1
+        data.buttonNumber = buttonNumber
+      end
+end
+
+function getPlaceBets (placeNum)
+  print('attempting to get place bets')
+  params = {player = Player[self.getDescription()], placeNumber = placeNum }
+  -- player
+  -- placeNumber
+  print('calling global getPlaceBets')
+  return Global.call('getPlaceBets',params)
+end
+
+function payPlayer(amount)
+  PM = Global.getVar('PayoutManager')
+  if (PM and amount ~= nil and amount > 0)
+   then
+     local params = {color = Player[self.getDescription()].color, amt = amount }
+     PM.call('pay',params)
+   end
+end

@@ -4,15 +4,16 @@ local chipDenom = {
     [100] = { t = 'Chip_100' },
     [50] = { t = 'Chip_50' },
     [10] = { t = 'Chip_10' },
+    [5] = { t = 'Chip_10'}
 }
 local puckPos = {
-    [0] = { pos = {-20.00, 2, 8.37} },
-    [4] = {pos = {-13.00, 2, 8.37}},
-    [5] = {pos = {-9.30, 2, 8.37}},
-    [6] = {pos = {-5.60, 2, 8.37}},
-    [8] = {pos = {-1.90, 2, 8.37}},
-    [9] = {pos = {2.00, 2, 8.37}},
-    [10] = {pos = {5.8, 2, 8.5}},
+    [0] = {pos = {50.91, 2.44, -16.45}},
+    [4] = {pos = {41.04, 2.44, -16.45}},
+    [5] = {pos = {35.21, 2.44, -16.45}},
+    [6] = {pos = {29.72, 2.44, -16.45}},
+    [8] = {pos = {24.04, 2.44, -16.45}},
+    [9] = {pos = {18.39, 2.44, -16.45}},
+    [10] = {pos = {12.49, 2.44, -16.45}}
 }
 local dices = {}
 local diceSum = 0
@@ -41,7 +42,9 @@ function onObjectEnterScriptingZone(zone, obj)
         return
     end
     bz = bettingZones[zone.getGUID()]
+    if(bz) then -- so that it won't error for other non-bet scripting zones
     assignZoneBet(bz, obj, 'enter')
+  end
 end
 
 function onObjectLeaveScriptingZone(zone, obj)
@@ -49,14 +52,20 @@ function onObjectLeaveScriptingZone(zone, obj)
         return
     end
     bz = bettingZones[zone.getGUID()]
+    if(bz) then -- so that it won't error for other non-bet scripting zones
     assignZoneBet(bz, obj, 'leave')
+    end
+end
+
+function setVars ()
+  dices[1] = getObjectFromGUID('fb85e1')
+  dices[2] = getObjectFromGUID('04e437')
+  puck = getObjectFromGUID('8487a4')
+  puck.setPositionSmooth(puckPos[0].pos, false, true)
 end
 
 function onLoad()
-    dices[1] = getObjectFromGUID('3c34ef')
-    dices[2] = getObjectFromGUID('9859b7')
-    puck = getObjectFromGUID('916652')
-    puck.setPositionSmooth(puckPos[0].pos, false, true)
+    Wait.time(setVars,2)
 
     -- initialize betting zones
     initializeZones()
@@ -87,7 +96,7 @@ end
 function addPlayerToBetSheet()
     -- update player dropdown in betting sheet
     xml = UI.getXmlTable()
-    dropdown = xml[1].children[1].children[2].children[1].children[1]
+   dropdown = xml[1].children[1].children[2].children[1].children[1]
     options = dropdown.children
     for _, ref in ipairs(Player.getPlayers()) do
         table.insert(options, {
@@ -114,7 +123,7 @@ function diceRoll()
     while not dices[2].resting do
         coroutine.yield(0)
     end
-
+    log('dice stopped','diceRoll()')
     diceSum = dices[1].getValue() + dices[2].getValue()
     broadcastToAll('rolled: ' .. diceSum)
 
@@ -126,6 +135,7 @@ function diceRoll()
                 point = nil
 
                 puck.setPositionSmooth(puckPos[0].pos, false, true)
+
                 -- destroy all chips except comeLine
                 for key, zone in pairs(bettingZones) do
                     if key == 'comeLine' then
@@ -142,6 +152,10 @@ function diceRoll()
                         destroyZoneBets(zone)
                     end
                 end
+                -- added by TheDorito
+                triggerCustomEvent({eventName = "pointOff"})
+                triggerCustomEvent({eventName = "sevenOut"})
+                ----------------------
             else
                 -- eleven was rolled
                 -- pay field
@@ -172,13 +186,17 @@ function diceRoll()
         -- always pay field
         payZoneBets(bettingZones['field'])
     else
+      log('4,5,6,8,9,10','diceRoll()')
         -- 4, 5, 6, 8, 9, 10
         if not point then
             broadcastToAll('point established')
-
+            log(diceSum,'diceRoll() diceSum')
+            log(puck,'diceRoll() puck')
+            log(puckPos,'diceRoll() puck position')
             point = diceSum
             puck.setPositionSmooth(puckPos[diceSum].pos, false, true)
-
+            log('Locking placeBets','diceRoll()')
+            log(bettingZones,'diceRoll(bettingZones)')
             lockZoneChips(bettingZones['passLine'])
             -- TODO: allow ON place bets
         else
@@ -216,7 +234,8 @@ end
 -- chip related functions
 --------------------------- ]]
 function isChips(obj)
-    return (obj.tag == 'Chip') or (obj.tag == 'ChipStack')
+    --print('obj is '..obj.tag)
+    return (obj.tag == 'Chip') or (obj.tag == 'ChipStack') or (obj.tag == "Generic")
 end
 
 -- calculate the least amount of chips needed
@@ -292,8 +311,10 @@ end
 
 function payPlaceZoneBets()
     zone = bettingZones['place'][diceSum]
+    log(bettingZones,'payPlaceZoneBets -bettingZones')
+    log(zone.bets,'payPlacezoneBets -zone.bets')
     for color, bet in pairs(zone.bets) do
-        if bet.value then
+        if bet['value'] then
             hand_value = 0 -- value send to the hand
             if (diceSum == 4) or (diceSum == 10) then
                 -- 9 to 5
@@ -306,19 +327,27 @@ function payPlaceZoneBets()
                 hand_value = 7 * bet.value / 6
             end
             if hand_value > 0 then
+              if(PayoutManager ~= nil) then
+                PayoutManager.call('pay',{color = player.color, amt = hand_value})
+                --zone.bets[player.color] = 0
+              else
                 print(string.format('give player %s: %d', color, hand_value))
-                -- TODO: is rounded up to nearest 10 due to chip value
+                --TODO: is rounded up to nearest 10 due to chip value
                 for _, c in pairs(chipDemonimator(math.ceil(hand_value/10)*10)) do
                     spawnChipInHand(c, player)
                 end
+              end
             end
         end
     end
 end
 
 function payZoneBets(zone)
+  log (zone.ref,'zone.ref')
     for _, ref in pairs(zone.ref.getObjects()) do
+      --print('obj is '..ref.tag)
         if isChips(ref) then
+          --print('destructing chip'..ref.getGUID() )
             ref.destruct()
         end
     end
@@ -361,11 +390,17 @@ function payZoneBets(zone)
         end
 
         if next_value > 0 then
-            print('player ' .. color .. ' next  ' .. next_value .. ' in ' .. zone.zonetype)
-            for _, c in pairs(chipDemonimator(next_value)) do
-                spawnChip(c, zone, player)
-            end
-            zone.bets[player.color] = next_value
+          print('player ' .. color .. ' next  ' .. next_value .. ' in ' .. zone.zonetype)
+          --TheDorito use the payout manager to pay
+          if(PayoutManager ~= nil) then
+            PayoutManager.call('pay',{color = player.color, amt = next_value})
+            zone.bets[player.color] = 0
+          else
+              for _, c in pairs(chipDemonimator(next_value)) do
+                  spawnChip(c, zone, player)
+              end
+              zone.bets[player.color] = next_value
+          end
         end
     end
 end
@@ -377,39 +412,27 @@ function groupHand(player)
     group(player.getHandObjects())
 end
 
-function onPlayerConnect(player)
-    broadcastToAll(string.format('%s joined', player))
-    --spawStartingChips(player)
+function onPlayerChangeColor(player)
+    spawnStartingChips(Player[player])
 end
 
 function spawnStartingChips(player)
-    t = player.getHandTransform()
-
-    for i=1,20 do
-        chip = spawnObject({
-            type = 'Chip_100',
-            position = t.position,
-        })
-        chip.use_hands = true
+  -- modified by TheDorito --------------
+  if (player.color ~= 'Grey' and player.color ~= 'Black') then
+    print('Spawning starting chips')
+    local payParams = {color = player.color, payout = {
+        {amt = 100, denom = 5},
+        {amt = 500, denom = 25},
+        {amt = 1400, denom = 100},
+        {amt = 1000, denom = 1000}
+      }}
+    if(PayoutManager ~= nil) then
+      PayoutManager.call('pay',payParams)
+    else
+      Wait.condition(function () PayoutManager.call('pay',payParams) end,function () return PayoutManager ~= nil end)
     end
-
-    for i=1,4 do
-        chip = spawnObject({
-            type = 'Chip_500',
-            position = t.position,
-        })
-        chip.use_hands = true
-    end
-
-    for i=1,2 do
-        chip = spawnObject({
-            type = 'Chip_1000',
-            position = t.position,
-        })
-        chip.use_hands = true
-    end
-
-    Wait.frames(function() groupHand(player) end, 50)
+  end
+  -----------------------------
 end
 
 --------------------------- [[
@@ -434,7 +457,7 @@ function assignZoneBet(zone, obj, bettype)
     end
 
     -- lastly, if we programatically spawned the chip. check if the object
-    -- is already in zone
+    -- is already in zoneas
     if bettype == 'enter' then
         for _, exist in pairs(zone.ref.getObjects()) do
             if obj.getGUID() == exist.getGUID() then
@@ -443,7 +466,13 @@ function assignZoneBet(zone, obj, bettype)
         end
     end
 
-    value = obj.getValue() * math.max(obj.getQuantity(), 1)
+
+    --modified ThDorito to work with custom Chips.
+    if(obj.getValue() ~= nil and obj.tag == 'Chip') then
+      value = obj.getValue() * math.max(obj.getQuantity(), 1)
+    elseif (obj.tag == "Chip") then
+      value = obj.value * math.max(obj.getQuantity(), 1)
+    end
     if bettype == 'leave' then
       value = value * -1
     end
@@ -453,87 +482,87 @@ end
 
 function initializeZones()
     bettingZones['passLine'] = {
-        zoneid = 'f60857',
+        zoneid = '67c5ba',
         zonetype = 'passLine',
-        ref = getObjectFromGUID('f60857'),
+        ref = getObjectFromGUID('67c5ba'),
         bets = {},
     }
-    bettingZones['f60857'] = bettingZones['passLine']
+    bettingZones['67c5ba'] = bettingZones['passLine']
 
     bettingZones['passLineOdds'] = {
-        zoneid = '9713cf',
+        zoneid = '80b675',
         zonetype = 'passLineOdds',
-        ref = getObjectFromGUID('9713cf'),
+        ref = getObjectFromGUID('80b675'),
         bets = {},
     }
-    bettingZones['9713cf'] = bettingZones['passLineOdds']
+    bettingZones['80b675'] = bettingZones['passLineOdds']
 
     bettingZones['comeLine'] = {
-        zoneid = '21d30a',
+        zoneid = '101bb3',
         zonetype = 'comeLine',
-        ref = getObjectFromGUID('21d30a'),
+        ref = getObjectFromGUID('101bb3'),
         bets = {},
     }
-    bettingZones['21d30a'] = bettingZones['comeLine']
+    bettingZones['101bb3'] = bettingZones['comeLine']
 
     bettingZones['field'] = {
-        zoneid = 'a9a479',
+        zoneid = '73ffbe',
         zonetype = 'field',
-        ref = getObjectFromGUID('a9a479'),
+        ref = getObjectFromGUID('73ffbe'),
         bets = {},
     }
-    bettingZones['a9a479'] = bettingZones['field']
+    bettingZones['73ffbe'] = bettingZones['field']
 
     bettingZones['place'] = {
         [4] = {
-            zoneid = '38214d',
+            zoneid = '8bd16e',
             zonetype = 'place',
             zonevalue = 4,
-            ref = getObjectFromGUID('38214d'),
+            ref = getObjectFromGUID('8bd16e'),
             bets = {},
         },
         [5] = {
-            zoneid = '932f69',
+            zoneid = '97cdf1',
             zonetype = 'place',
             zonevalue = 5,
-            ref = getObjectFromGUID('932f69'),
+            ref = getObjectFromGUID('97cdf1'),
             bets = {},
         },
         [6] = {
-            zoneid = '0895d2',
+            zoneid = 'f7e456',
             zonetype = 'place',
             zonevalue = 6,
-            ref = getObjectFromGUID('0895d2'),
+            ref = getObjectFromGUID('f7e456'),
             bets = {},
         },
         [8] = {
-            zoneid = '5ef559',
+            zoneid = '47145d',
             zonetype = 'place',
             zonevalue = 8,
-            ref = getObjectFromGUID('5ef559'),
+            ref = getObjectFromGUID('47145d'),
             bets = {}
         },
         [9] = {
-            zoneid = 'bd98a8',
+            zoneid = '5861c8',
             zonetype = 'place',
             zonevalue = 9,
-            ref = getObjectFromGUID('bd98a8'),
+            ref = getObjectFromGUID('5861c8'),
             bets = {},
         },
         [10] = {
-            zoneid = '5074bc',
+            zoneid = 'b315b4',
             zonetype = 'place',
             zonevalue = 10,
-            ref = getObjectFromGUID('5074bc'),
+            ref = getObjectFromGUID('b315b4'),
             bets = {},
         },
     }
-    bettingZones['38214d'] = bettingZones['place'][4]
-    bettingZones['932f69'] = bettingZones['place'][5]
-    bettingZones['0895d2'] = bettingZones['place'][6]
-    bettingZones['5ef559'] = bettingZones['place'][8]
-    bettingZones['bd98a8'] = bettingZones['place'][9]
-    bettingZones['5074bc'] = bettingZones['place'][10]
+    bettingZones['8bd16e'] = bettingZones['place'][4]
+    bettingZones['97cdf1'] = bettingZones['place'][5]
+    bettingZones['f7e456'] = bettingZones['place'][6]
+    bettingZones['47145d'] = bettingZones['place'][8]
+    bettingZones['5861c8'] = bettingZones['place'][9]
+    bettingZones['b315b4'] = bettingZones['place'][10]
 
     -- bettingZones[xxxx] = 'come4'
     -- bettingZones[xxxx] = 'come5'
@@ -649,7 +678,7 @@ function onSubmitBets(_, value, id)
             if not zone['bets'][bettingFor] then
                 zone.bets[bettingFor] = {}
             end
-
+            log(zone['bets'],'onSubmitBets - zone[bets]')
             marker = zone['bets'][bettingFor].marker
 
             if not marker then
@@ -674,4 +703,144 @@ function onSubmitBets(_, value, id)
             zone.bets[bettingFor] = {}
         end
     end
+
+    --- added by TheDorito
+    triggerCustomEvent({eventName = 'hostBetPlaced',eventData={player = player}})
+    ----------------------
+end
+
+
+
+function playerPlaceBet (paramz)
+  log(paramz, 'Global - playerPlaceBet')
+
+    player = players[paramz.player.color]
+    bettingFor = paramz.player.color
+    placeNumber = paramz.placeNumber
+    removeFlag = paramz.removeFlag -- I envision this being used for player to take down their bet
+    local theBet = {}
+
+    theBet.isOn = not removeFlag
+    theBet['amount'] = tonumber(paramz.amt)
+
+    local PPBzone = bettingZones['place'][tonumber(placeNumber)]
+
+    --log(PPBzone['bets'],'playerPlaceBet - PPBzone[bets]')
+
+    if theBet.isOn and theBet['amount'] > 0 then
+
+
+
+
+        if not PPBzone['bets'][bettingFor] then
+
+            PPBzone.bets[bettingFor] = {}
+
+        elseif (PPBzone['bets'][bettingFor] == 0) then
+
+            PPBzone.bets[bettingFor] = {}
+
+        end
+    --end
+
+        if(PPBzone['bets'][bettingFor].marker) then
+              marker = PPBzone['bets'][bettingFor].marker
+              log(nil,'Found marker')
+        else
+            position = payZonePosition(PPBzone, player.index)
+            marker = spawnObject({
+                type = 'Chip_100',
+                position = position,
+            })
+            Wait.frames(function() marker.setLock(true) end, 50)
+        end
+
+        if(not marker.spawning) then
+          marker.setDescription(string.format('%s: %d on %s', player.name, theBet['amount'], placeNumber))
+          marker.setLock(true)
+          PPBzone.bets[bettingFor] = {
+              value = theBet['amount'],
+              marker = marker}
+        else
+          PPBzone.bets[bettingFor] = {
+              value = theBet['amount']}
+          Wait.condition(function () setMarker_callback (marker,PPBzone,player, theBet, placeNumber) end, function () return not marker.spawning end  )
+
+        end
+
+
+        -- TODO remove value from player's hand
+        --print(string.format('set bet %d on %s for %s', bet['amount'], betField, bettingFor))
+    else
+        --print(string.format('removing bet %d from %s for %s', bet['amount'], betField, bettingFor))
+        PPBzone.bets[bettingFor].marker.destruct()
+        PPBzone.bets[bettingFor] = {}
+    end
+end
+
+function setMarker_callback (theMarker,theMarkerZone,thePLR, theBet, placeNum)
+  theMarker.setDescription(string.format('%s: %d on %s', thePLR.name, theBet['amount'], placeNum))
+  theMarker.setLock(true)
+  theMarkerZone.bets[bettingFor] = {
+      value = theBet['amount'],
+      marker = marker}
+end
+
+function getPlaceBets (GPBparams)
+  -- player
+  -- placeNumber
+
+  local thevalue = 0
+  plr = GPBparams.player
+
+  local theZone = bettingZones['place'][tonumber(GPBparams.placeNumber)]
+  if(theZone.bets[plr.color] and theZone.bets[plr.color] ~= 0) then
+    if (theZone.bets[plr.color].value) then
+      thevalue = theZone.bets[plr.color].value
+    end
+  end
+  return thevalue
+end
+
+---------------------        Custom Event  Management  --------------------------------------
+-- added by TheDorito
+
+customEvents = {}
+
+function subscribeCustomEvent (eventParams)
+  -- eventName
+  -- subscribingObject
+  if (eventParams.eventName and eventParams.subscribingObject) then
+   if (customEvents[eventParams.eventName]) then
+     -- event already exits
+     if (customEvents[eventParams.eventName][subscribers][eventParams.subscribingObject.guid]) then
+       --already subscribed to this event
+     else
+       --subscribe to the event
+       customEvents[eventParams.eventName][subscribers][eventParams.subscribingObject.guid] = eventParams.subscribingObject
+     end
+   else
+     -- create a new event and subscribe to it
+     customEvents[eventParams.eventName] = {subscribers = {[eventParams.subscribingObject.guid] = eventParams.subscribingObject}}
+   end
+  end
+end
+
+function triggerCustomEvent (eventParams)
+  -- eventName -- string
+  -- eventData -- table (optional)
+  local evd = nil
+  if eventParams.eventData then
+    evd = eventParams.eventData
+  end
+
+  if (eventParams.eventName) then
+    if (customEvents[eventParams.eventName]) then
+      for k,v in pairs(customEvents[eventParams.eventName].subscribers) do
+        v.call('onCustomEvent',{eventName = eventParams.eventName, eventData = evd})
+      end
+    else
+      log (eventParams,'Unsubscribed event triggered')
+    end
+  end
 end

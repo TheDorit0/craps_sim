@@ -6,6 +6,7 @@ buttonScale = 1
 placeButtonColor = {0,0,0,0}
 buttonFontColor = "Black"
 placeButtonLocy = 0.6
+PayoutManager = nil
 
 defaultButtonData = {
   placeButton = {
@@ -41,14 +42,68 @@ function onLoad ()
   createCurrentAmtButtons()
   createRemoveButtons()
   betZone['obj'] = getObjectFromGUID(betZone.guid)
+  getPayoutManager ()
+  Global.call('subscribeCustomEvent', {eventName = 'pointOff', subscribingObject = self})
+  Global.call('subscribeCustomEvent', {eventName = 'hostBetPlaced', subscribingObject = self})
+
+end
+
+function onCollisionEnter(collision_info)
+  -- collision_info table:
+  --   collision_object    Object
+  --   contact_points      Table     {Vector, ...}
+  --   relative_velocity   Vector
+  --log(collision_info.contact_points,'Collision INfo')
+  --print('Collision points '..collision_info.contact_points.x..','..collision_info.contact_points.y..','..collision_info.contact_points.z)
+  if(collision_info.contact_points[1][1] > 52 and collision_info.contact_points[3][1] < 55 and collision_info.contact_points[2][3] > 44 and collision_info.collision_object.tag == 'Chip') then
+    -- it's in the change corner
+    if(PayoutManager) then
+      Wait.time(function () PayoutManager.call('makeChange',{color = self.getDescription(), chip = collision_info.collision_object}) end,0)
+
+    end
+  end
+end
+
+function onCustomEvent (eventParams)
+  print ('Custom event received in PlayerBetManager')
+  Wait.time(function () updateBetAmountsDisplay () end, 1)
+end
+
+function getBetZone()
+  if(betZone.obj) then
+    return betZone.obj
+  else
+    print('Could not get betZone object for '..self.getDescription())
+    return nil
+  end
+end
+
+function getPayoutManager (i)
+  if (not i) then
+    i = 0
+  end
+  if (Global.getVar('PayoutManager')) then
+    PayoutManager = Global.getVar('PayoutManager')
+    registerWithPayoutManager()
+  elseif (i < 10) then
+    i = i + 1
+    Wait(function () getPayoutManager(i) end,2)
+  else
+    print('Could not register PlayerBetManager '..self.getName()..' with PayoutManager')
+  end
+end
+
+function registerWithPayoutManager ()
+  local p = {color = self.getDescription(), guid = self.guid}
+  PayoutManager.call('registerBetManager',p)
 end
 
 function getBetAmt ()
-  print('getting bet amount')
+  --print('getting bet amount')
   amount = 0
   local ChipsInZone = betZone.obj.getObjects()
   for _,v in pairs(ChipsInZone) do
-    log(v.tag,'getBetAmt - v.tag')
+
     if v.tag == "Chip" or v.tag == "Generic" then
         if (v.value ~= nil) then
           -- must be a custom chip using the chip value manager
@@ -80,26 +135,31 @@ function isStack(obj)
 end
 
 function click_place(tableIndex,buttonIndex)
-  print('Place')
-  params = {}
-  params.player = Player[self.getDescription()]
-  params.placeNumber = ref_buttonData.placeButton[tableIndex].placeNumber
-  params.removeFlag = false
-  params.amt = getBetAmt ()--todo replace with amt in the betting zone
+  --print('Place')
+  local CPparams = {}
+  CPparams.player = Player[self.getDescription()]
+  CPparams.placeNumber = ref_buttonData.placeButton[tableIndex].placeNumber
+  CPparams.removeFlag = false
+  CPparams.amt = getBetAmt ()
 
-  if (params.amt == 0) then
+  if (CPparams.amt == 0) then
     print ('No bet found.')
   else
-    log(params,'click_place--Params')
+    --log(CPparams,'click_place--CPparams')
+    local currentBet = getPlaceBets (CPparams.placeNumber)
+    --log(param, 'click_remove params')
+    if (currentBet ~= nil and currentBet > 0) then
+      CPparams.amt = CPparams.amt + currentBet
+    end
 
-    Global.call('playerPlaceBet',params)
+    Global.call('playerPlaceBet',CPparams)
     Wait.time(updateBetAmountsDisplay,1)
     destroyBetZoneChips ()
   end
 end
 
 function click_remove(tableIndex,buttonIndex)
-  print('Remove')
+  --print('Remove')
   local param = {}
   param.removeFlag = true
   param.amt = 0
@@ -107,7 +167,7 @@ function click_remove(tableIndex,buttonIndex)
   param.placeNumber = ref_buttonData.removeButton[tableIndex].placeNumber
 
   local currentBet = getPlaceBets (param.placeNumber)
-  log(param, 'click_remove params')
+  --log(param, 'click_remove params')
   if (currentBet ~= nil and currentBet > 0) then
     Global.call('playerPlaceBet',param)
   payPlayer(currentBet)
@@ -207,19 +267,17 @@ function createCurrentAmtButtons()
 end
 
 function getPlaceBets (placeNum)
-  print('attempting to get place bets')
-  params = {player = Player[self.getDescription()], placeNumber = placeNum }
+  local PBparams = {player = Player[self.getDescription()], placeNumber = placeNum }
   -- player
   -- placeNumber
-  print('calling global getPlaceBets')
-  return Global.call('getPlaceBets',params)
+  return Global.call('getPlaceBets',PBparams)
 end
 
 function payPlayer(amount)
   PM = Global.getVar('PayoutManager')
   if (PM and amount ~= nil and amount > 0)
    then
-     local params = {color = Player[self.getDescription()].color, amt = amount }
-     PM.call('pay',params)
+     local PPparams = {color = Player[self.getDescription()].color, amt = amount }
+     PM.call('pay',PPparams)
    end
 end

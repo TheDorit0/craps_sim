@@ -3,6 +3,8 @@
 registeredPlayer = {
 }
 
+PlayerBetManager = {}
+
 chipBankBagGUID = {
   [1] = '14ec8d',
   [5] = '68a5fd',
@@ -14,10 +16,13 @@ chipBankBagGUID = {
   [100000] = '23c20b'
 }
 
-payoutBag = {
-  Red = '0d754b',
-  White = '765aaf'
-}
+payoutBag = {Red = '0d754b',
+                    White = '765aaf',
+                    Pink = 'b36432',
+                    Purple = 'a9e85a',
+                    Green = '076330',
+                    Blue = 'c1116b'
+                  }
 
 chipDenoms = {1,5,10,25,100,500,1000,100000}
 
@@ -31,6 +36,8 @@ function onLoad()
       getObjectFromGUID(payoutBag[v]).setDescription("Owner "..Player[v].steam_name)
     end
   end
+  ref_buttonData = payoutBagDefaultButtonData
+  createButtonsForPayoutBags ()
 end
 
 function onChat(message, player)
@@ -46,6 +53,17 @@ function onPlayerChangeColor(color)
     end
 end
 
+function registerBetManager (p)
+  --color -- the player color of the board.
+  --guid -- the guid of the board.
+  if(p.color and p.guid) then
+  PlayerBetManager[p.color] = getObjectFromGUID(p.guid)
+  print('Registerd bet manager for '..p.color)
+  else
+    print('PayoutManager: Could not register PlayerBetManager.  Missing color or guid.')
+  end
+end
+
 function registerPlayer (playerSteamName, bagGUID)
   if (getObjectFromGUID(bagGUID) ~= nil and getObjectFromGUID(bagGUID).tag == "Bag") then
     registeredPlayer[playerSteamName] = bagGUID
@@ -54,44 +72,89 @@ function registerPlayer (playerSteamName, bagGUID)
   end
 end
 
-function pay(params)
-  if(params.steam_name ~= nil and params.amt ~= nil and params.amt > 0) then
-    payPlayerBySteamName(params.steam_name, amt)
-  elseif (params.color ~= nil and params.amt ~= nil and params.amt > 0) then
-    payPlayerByColor (params.color, params.amt)
+function pay(p)
+  local params = p
+  local payout = params.payout
+  local timer = 3
+  if(params.timer) then
+   timer = params.timer + 3
+   params.timer = timer
+ else
+   params.timer = timer
+  end
+  if(payout) then
+      v = payout[#payout]
+      payout[#payout] = nil
+      params.payout = payout
+      if(params.steam_name ~= nil and v.amt ~= nil and v.amt > 0) then
+        payPlayerBySteamName(params.steam_name, v.amt, v.denom)
+        if (#payout > 0) then
+        Wait.time(function () pay(params) end,timer)
+      end
+      elseif (params.color ~= nil and v.amt ~= nil and v.amt > 0) then
+        payPlayerByColor (params.color, v.amt, v.denom)
+        if (#payout > 0) then
+        Wait.time(function () pay(params) end,timer)
+        end
+      end
+  else
+    if(params.steam_name ~= nil and params.amt ~= nil and params.amt > 0) then
+      payPlayerBySteamName(params.steam_name, amt)
+    elseif (params.color ~= nil and params.amt ~= nil and params.amt > 0) then
+      payPlayerByColor (params.color, params.amt)
+    end
   end
 end
 
-function payPlayerBySteamName (playerSteamName, amt)
+function payPlayerBySteamName (playerSteamName, amt, forceDenom)
   local bag = registeredPlayer[playerSteamName]
   if(bag) then
-     Wait.time(function () payPlayerBag(getObjectFromGUID(bag), amt) end,0)
+     Wait.time(function () payPlayerBag(getObjectFromGUID(bag), amt, forceDenom) end,0)
   else
     print ("Could not pay player.   Could not located registered pay location for steam name "..playerSteamName)
   end
 end
 
-function payPlayerByColor (playerColor, amt)
+function payPlayerByColor (playerColor, amt, forceDenom)
   local bag = payoutBag[playerColor]
   if(bag) then
-    Wait.time(function () payPlayerBag(getObjectFromGUID(bag), amt) end,0)
+    Wait.time(function () payPlayerBag(getObjectFromGUID(bag), amt, forceDenom) end,0)
   else
     print ("Could not pay player.   Could not locate pay location for color "..playerColor)
   end
 end
 
-function payPlayerBag (playerBag, amt)
-  log(playerBag,"player bag")
+function payPlayerBag (playerBag, amt, forceDenom)
   local payLoc = playerBag.getPosition()
-  local yIncrement = 2
+  local yIncrement = 1
   local yValue = 5
 
   if (playerBag ~= nil and amt > 0) then
-    -- determine what chips are needed to pay the players
     denom = getNextDenom()
-    remainingUnpaidAmt = amt
+    remainingUnpaidAmt = math.floor(amt)
     loopCount1= 0
     local spawnedChips = {}
+    if(forceDenom) then
+      -- no need to sort out denominations.  Pay it all in forced denom.
+        payCount = math.floor(remainingUnpaidAmt/forceDenom)
+        remainingUnpaidAmt = remainingUnpaidAmt - (forceDenom*payCount)
+        for i=1, payCount ,1 do
+          table.insert(spawnedChips,getObjectFromGUID(chipBankBagGUID[forceDenom]).takeObject({
+            position          = {payLoc.x, payLoc.y + yValue, payLoc.z},
+            smooth            = false,
+            callback_function = function (obj) lockSelf(obj) end
+          }))
+          yValue = yValue + yIncrement
+        end
+        if (payCount > 0) then
+          Wait.Time(function () groupAndUnlockSpawnedChips (spawnedChips) end,2 )
+        end
+        if(remainingUnpaidAmt > 0) then
+          payPlayerBag(playerBag,remainingUnpaidAmt) -- anything leftover, pay per normal logic
+        end
+    else
+    -- not a forced denomination.  Determine what chips are needed to pay the players
+
 
     while (remainingUnpaidAmt > 0 and loopCount1 < maxAllowedLoops) do
       loopCount2= 0
@@ -116,7 +179,7 @@ function payPlayerBag (playerBag, amt)
         yValue = yValue + yIncrement
       end
       loopCount1 = loopCount1 + 1
-      if (payCount > 1) then
+      if (payCount > 0) then
         Wait.Time(function () groupAndUnlockSpawnedChips (spawnedChips) end,2 )
       end
     end
@@ -124,6 +187,7 @@ function payPlayerBag (playerBag, amt)
       print ('While loop timed out')
     end
     broadcastToAll("Paid player "..amt)
+    end
     return true
   else
     print ('Unable to pay player by color.  Could not locate a payout bag for player or amount was zero: '..playerBag..':'..amt)
@@ -136,12 +200,16 @@ function lockSelf(obj)
 end
 
 function groupAndUnlockSpawnedChips (chips)
+  local count = 0
   for _,v in pairs(chips) do
     v.setLock(false)
+    count = count + 1
   end
-  group(chips)
-end
+  if (count > 1) then
+    group(chips)
+  end
 
+end
 
 function getNextDenom (denom)
   if denom == nil then
@@ -159,4 +227,266 @@ function getNextDenom (denom)
     end
   end
   return newDenom
+end
+
+
+
+function makeChange (changeParams)
+  --pos - the destination position for the change chips. -or-
+  --color - the player color to send the change chips to
+  --chip - the chip/stack object to change.
+  if(changeParams.chip.getQuantity() > 0) then
+    --it's a stack
+    currentDenom = changeParams.chip.value / changeParams.chip.getQuantity()
+  else
+    --it's a single chip
+    --log(changeParams.chip.value,"Chip")
+    currentDenom = changeParams.chip.value
+  end
+  --log(changeParams,'ChangeParams')
+  changeValue = changeParams.chip.value
+  local lowerDenom = nil
+  newDenom = nil
+  --log(chipDenoms,'ChipDenoms')
+  for i,v in pairs(chipDenoms) do
+    if (currentDenom == v) then
+      newDenom = lowerDenom
+      break
+    else
+      lowerDenom = v
+    end
+  end
+
+  if (newDenom) then
+    --we have a new denomination
+  else
+    newDenom = currentDenom
+  end
+  changeParams.chip.destruct()
+  print('Changing '..changeValue..' in '..newDenom..'s for '..changeParams.color)
+  if(changeParams.color) then
+    payPlayerByColor (changeParams.color, changeValue, newDenom)
+  end
+end
+
+
+
+-------------------------------scripting to manage the player payout bags.
+defLocy = 2
+buttonColorSelected = "Black"
+activeColor = "Green"
+spawnedButtonCount = 0
+payoutBagDefaultButtonData = {
+  readOnly = {
+    {pos   = {0,defLocy,0},rot = {0,270,0}, height  = 500, width = 2000,size = 500, state = 1, name='Total', buttonNumber = 0, labelColor="Black", fontColor = "White"}
+},
+  take = {
+    {pos   = {2,defLocy,-2},rot = {0,270,0}, height  = 500, width = 500,size = 200, state = 1, name='Take1k',chipName = "$1K",label="$1k", buttonNumber = 0, labelColor="Black", fontColor = "White", activeColor = activeColor},
+    {pos   = {2,defLocy,-1},rot = {0,270,0}, height  = 500, width = 500,size = 200, state = 1, name='Take500',chipName = "$500",label="$500", buttonNumber = 0, labelColor="Black", fontColor = "White", activeColor = activeColor},
+    {pos   = {2,defLocy,0},rot = {0,270,0}, height  = 500, width = 500,size = 200, state = 1, name='Take100',chipName = "$100",label="$100", buttonNumber = 0, labelColor="Black", fontColor = "White", activeColor = activeColor},
+    {pos   = {2,defLocy,1},rot = {0,270,0}, height  = 500, width = 500,size = 200, state = 1, name='Take25',chipName = "$25",label="$25", buttonNumber = 0, labelColor="Black", fontColor = "White", activeColor = activeColor},
+    {pos   = {2,defLocy,2},rot = {0,270,0}, height  = 500, width = 500,size = 200, state = 1, name='Take10',chipName = "$10",label="$10", buttonNumber = 0, labelColor="Black", fontColor = "White", activeColor = activeColor},
+    {pos   = {2,defLocy,3},rot = {0,270,0}, height  = 500, width = 500,size = 200, state = 1, name='Take5',chipName = "$5",label="$5", buttonNumber = 0, labelColor="Black", fontColor = "White", activeColor = activeColor},
+    {pos   = {2,defLocy,4},rot = {0,270,0}, height  = 500, width = 500,size = 200, state = 1, name='Take1',chipName = "$1",label="$1", buttonNumber = 0, labelColor="Black", fontColor = "White", activeColor = activeColor}
+  }}
+bagButtons = {}
+
+function createButtonsForPayoutBags ()
+  for color,v in pairs(payoutBag) do
+    local bag = getObjectFromGUID(v)
+    createReadOnlyButtons(bag)
+    createTakeButtons(bag,color)
+  end
+end
+
+function none()
+  --do nothing
+end
+
+function takeDenom (takeParams)
+  --chipName - the name as it displays on the chip, such as $1K or $5
+  --qty - how many to take (up to amount in the bag)
+  --bag - where to take them from
+  --color - player color
+  takeObjects = {}
+  local totalCount = 0 -- to total count of chip/stack objects of this denom in the bag
+  --log(takeParams.bag.getObjects(),'PayoutManager -- takeDenom -- bag objects')
+  if (takeParams.bag.getObjects()) then
+    for _,v in pairs(takeParams.bag.getObjects()) do
+      if(v.name == takeParams.chipName) then
+        --log(v,'PayoutManager -- takeDenom -- bag object')
+        takeObjects[v.guid..totalCount] = v --guids apparently aren't unique for bag objects? so had to make this more unique
+        totalCount = totalCount + 1
+
+      end
+    end
+    if totalCount <= takeParams.qty then
+      -- taking these chips will bring the qty to zero in the bag for this denom.
+      for i,w in pairs(bagButtons[takeParams.bag.guid].buttons) do
+        if w.chipName == takeParams.chipName then
+          -- set the take button for this denom to its empty color
+          takeParams.bag.editButton({index = i, color = w.labelColor})
+        end
+      end
+    end
+    local yval = 16.87 -- how high above the table to start spawning the chips
+    local qtyCount = 1 -- how many chips we have taken from the bag so far
+    qtys = {} -- table with index numbers as values for each chip removed
+              -- we pass this instead of qtyCount to the callback function because after the 1 second wait, qtyCount would just send its max value for all the callbacks
+
+    for c_guid,v in pairs(takeObjects) do
+
+      if (qtyCount > takeParams.qty) then
+        break
+      else
+        -- spawn a chip and increment the qty spawned and the position yval of the next chip (avoids premature grouping)
+        qtys[c_guid] = qtyCount
+        takeParams.bag.takeObject({
+          position          = {50.79,yval,-41.93},
+          callback_function = function (obj) obj.setLock(true) Wait.time(function () moveSpawnedChipToPlayerBoard(obj,takeParams.color,qtys[c_guid]) end,0) end,
+          smooth            = false,
+          guid              = v.guid
+        })
+
+        yval = yval + 1
+        qtyCount = qtyCount + 1
+      end
+    end
+  end
+end
+
+function moveSpawnedChipToPlayerBoard (theChip,pcolor,qty)
+  --the qty number is used to adjust the position yval
+  local playerBoardPos = PlayerBetManager[pcolor].call('getBetZone').getPosition()
+  theChip.setLock(false)
+  theChip.setPosition({playerBoardPos.x,playerBoardPos.y + qty,playerBoardPos.z})
+end
+
+function createReadOnlyButtons(obj)
+  local thisObjButtons = {}
+  if (bagButtons[obj.guid] == nil) then
+    bagButtons[obj.guid] = {spawnedButtonCount = 0, buttons = {}}
+  end
+    for i, data in ipairs(ref_buttonData.readOnly) do
+        --Sets up reference function
+        local buttonNumber = spawnedButtonCount
+        local funcName = obj.guid.."readOnly"..i
+        self.setVar(funcName, function() end)
+        --Sets up label
+        local label = ""
+        obj.createButton({
+            label=label, click_function=funcName, function_owner=self,
+            position=data.pos, height=data.height, width=data.width,
+            font_size=data.size,
+            --scale=buttonScale,
+            press_color = buttonColorSelected,
+            color=data.labelColor, font_color=data.fontColor,
+            rotation = data.rot
+        })
+        bagButtons[obj.guid].buttons[bagButtons[obj.guid].spawnedButtonCount] = data
+        bagButtons[obj.guid].spawnedButtonCount = bagButtons[obj.guid].spawnedButtonCount + 1
+
+        --bagButtons[obj.guid].buttons[bagButtons[obj.guid].spawnedButtonCount].buttonNumber = bagButtons[obj.guid].buttons[bagButtons[obj.guid].spawnedButtonCount]
+      end
+end
+
+function createTakeButtons(obj,pcolor)
+  local thisObjButtons = {}
+  if (bagButtons[obj.guid] == nil) then
+    bagButtons[obj.guid] = {spawnedButtonCount = 0, buttons = {}}
+  end
+    for i, data in ipairs(ref_buttonData.take) do
+        --Sets up reference function
+        local buttonNumber = spawnedButtonCount
+        local funcName = obj.guid.."take"..i
+        self.setVar(funcName, function() takeDenom({chipName = data.chipName, qty = 10, bag = obj, color=pcolor}) end)
+
+        obj.createButton({
+            label=data.label, click_function=funcName, function_owner=self,
+            position=data.pos, height=data.height, width=data.width,
+            font_size=data.size,
+            --scale=buttonScale,
+            press_color = buttonColorSelected,
+            color=data.labelColor, font_color=data.fontColor,
+            rotation = data.rot
+        })
+        bagButtons[obj.guid].buttons[bagButtons[obj.guid].spawnedButtonCount] = data
+        bagButtons[obj.guid].spawnedButtonCount = bagButtons[obj.guid].spawnedButtonCount + 1
+
+        --bagButtons[obj.guid].buttons[bagButtons[obj.guid].spawnedButtonCount].buttonNumber = bagButtons[obj.guid].buttons[bagButtons[obj.guid].spawnedButtonCount]
+      end
+end
+
+function onObjectEnterContainer(bag, obj)
+
+  for _,v in pairs(payoutBag) do
+    if (bag.guid == v and obj.tag == "Chip") then
+      local total = 0
+      targetBag = getObjectFromGUID(v)
+      --print("Update total for "..targetBag.getName()..'-'..targetBag.getDescription())
+
+      if targetBag.getVar('total') == nil then
+        total = 0
+      else
+        total = targetBag.getVar('total')
+        --print('found prev total was '..total)
+      end
+      total = total + obj.value
+      --print('Adding '..obj.value..'for new total of '..total)
+      targetBag.setVar('total',total)
+      --log(bagButtons[v].buttons,'Bag Buttons of this guid')
+      for i,w in pairs(bagButtons[v].buttons) do
+        --log(w,'row object values')
+        if w.name == 'Total' then
+          --log(targetBag.getButtons(),'Target bag buttons')
+          targetBag.editButton({index = i, label = total})
+        end
+        if w.chipName == obj.getName() then
+          targetBag.editButton({index = i, color = w.activeColor})
+        end
+      end
+      -- light up the take button for this denomination
+      activateTakeButton(targetBag,obj.getName())
+    end
+  end
+end
+
+function activateTakeButton(payoutBag, buttonName)
+
+end
+
+function onObjectLeaveContainer(bag, obj)
+--  if (bag.guid == thebag.guid) then
+    --Wait.condition(function () leave_callback(obj) end , function () return not obj.spawning end)
+  --end
+  for _,v in pairs(payoutBag) do
+    if (bag.guid == v) then
+      targetBag = getObjectFromGUID(v)
+      Wait.condition(function () leave_callback(obj,targetBag) end , function () return not obj.spawning end)
+    end
+  end
+
+end
+
+function leave_callback (obj, bag)
+  if (obj.tag == 'Chip') then
+
+
+  local total = 0
+  if bag.getVar('total') == nil then
+    total = 0
+  else
+    total = bag.getVar('total')
+  end
+  total = total - obj.value
+  bag.setVar('total',total)
+  for i,w in pairs(bagButtons[bag.guid].buttons) do
+    --log(w,'row object values')
+    if w.name == 'Total' then
+      --log(targetBag.getButtons(),'Target bag buttons')
+      bag.editButton({index = i, label = total})
+    end
+  end
+
+    end
 end

@@ -152,6 +152,10 @@ function diceRoll()
                         destroyZoneBets(zone)
                     end
                 end
+                -- added by TheDorito
+                triggerCustomEvent({eventName = "pointOff"})
+                triggerCustomEvent({eventName = "sevenOut"})
+                ----------------------
             else
                 -- eleven was rolled
                 -- pay field
@@ -413,12 +417,22 @@ function onPlayerChangeColor(player)
 end
 
 function spawnStartingChips(player)
+  -- modified by TheDorito --------------
+  if (player.color ~= 'Grey' and player.color ~= 'Black') then
     print('Spawning starting chips')
+    local payParams = {color = player.color, payout = {
+        {amt = 100, denom = 5},
+        {amt = 500, denom = 25},
+        {amt = 1400, denom = 100},
+        {amt = 1000, denom = 1000}
+      }}
     if(PayoutManager ~= nil) then
-      PayoutManager.call('pay',{color = player.color, amt = 5000})
+      PayoutManager.call('pay',payParams)
     else
-      Wait.condition(function () PayoutManager.call('pay',{color = player.color, amt = 5000}) end,function () return PayoutManager ~= nil end)
+      Wait.condition(function () PayoutManager.call('pay',payParams) end,function () return PayoutManager ~= nil end)
     end
+  end
+  -----------------------------
 end
 
 --------------------------- [[
@@ -689,68 +703,144 @@ function onSubmitBets(_, value, id)
             zone.bets[bettingFor] = {}
         end
     end
+
+    --- added by TheDorito
+    triggerCustomEvent({eventName = 'hostBetPlaced',eventData={player = player}})
+    ----------------------
 end
 
-function playerPlaceBet (params)
-    log(params,"Global- playerPlaceBet - params")
-    player = players[params.player.color]
-    bettingFor = params.player.color
-    placeNumber = params.placeNumber
-    removeFlag = params.removeFlag -- I envision this being used for player to take down their bet
-    bet = {}
-    bet.isOn = not removeFlag
-    bet['amount'] = params.amt
-    log(nil,'Global- playerPlaceBet - variables set')
-    if bet.isOn and bet['amount'] > 0 then
-      print('bet is on and amount is less than zero')
-        zone = bettingZones['place'][tonumber(placeNumber)]
-        print ('zone is set')
-        if not zone['bets'][bettingFor] then
-          print ('bettingFor not set')
-            zone.bets[bettingFor] = {}
-            print ('intializing bettingFor')
+
+
+function playerPlaceBet (paramz)
+  log(paramz, 'Global - playerPlaceBet')
+
+    player = players[paramz.player.color]
+    bettingFor = paramz.player.color
+    placeNumber = paramz.placeNumber
+    removeFlag = paramz.removeFlag -- I envision this being used for player to take down their bet
+    local theBet = {}
+
+    theBet.isOn = not removeFlag
+    theBet['amount'] = tonumber(paramz.amt)
+
+    local PPBzone = bettingZones['place'][tonumber(placeNumber)]
+
+    --log(PPBzone['bets'],'playerPlaceBet - PPBzone[bets]')
+
+    if theBet.isOn and theBet['amount'] > 0 then
+
+
+
+
+        if not PPBzone['bets'][bettingFor] then
+
+            PPBzone.bets[bettingFor] = {}
+
+        elseif (PPBzone['bets'][bettingFor] == 0) then
+
+            PPBzone.bets[bettingFor] = {}
+
         end
-        log(zone['bets'],'playerPlaceBet - zone[bets]')
-        log(nil,'Global- playerPlaceBet - setting marker')
-        marker = zone['bets'][bettingFor].marker
-        log(nil,'Found marker')
-        if not marker then
-            position = payZonePosition(zone, player.index)
-            log(nil,'Spawning Chip')
+    --end
+
+        if(PPBzone['bets'][bettingFor].marker) then
+              marker = PPBzone['bets'][bettingFor].marker
+              log(nil,'Found marker')
+        else
+            position = payZonePosition(PPBzone, player.index)
             marker = spawnObject({
                 type = 'Chip_100',
                 position = position,
             })
             Wait.frames(function() marker.setLock(true) end, 50)
         end
-        log(nil,'aboutToSetMarkerDescription')
-        marker.setDescription(string.format('%s: %d on %s', player.name, bet['amount'], placeNumber))
-        marker.setLock(true)
-        zone.bets[bettingFor] = {
-            value = bet['amount'],
-            marker = marker
-        }
-        log(nil,'doneSettingMarkerDescription')
+
+        if(not marker.spawning) then
+          marker.setDescription(string.format('%s: %d on %s', player.name, theBet['amount'], placeNumber))
+          marker.setLock(true)
+          PPBzone.bets[bettingFor] = {
+              value = theBet['amount'],
+              marker = marker}
+        else
+          PPBzone.bets[bettingFor] = {
+              value = theBet['amount']}
+          Wait.condition(function () setMarker_callback (marker,PPBzone,player, theBet, placeNumber) end, function () return not marker.spawning end  )
+
+        end
+
+
         -- TODO remove value from player's hand
         --print(string.format('set bet %d on %s for %s', bet['amount'], betField, bettingFor))
     else
-      log(nil,'destroyingZoneBets')
         --print(string.format('removing bet %d from %s for %s', bet['amount'], betField, bettingFor))
-        zone.bets[bettingFor].marker.destruct()
-        zone.bets[bettingFor] = {}
+        PPBzone.bets[bettingFor].marker.destruct()
+        PPBzone.bets[bettingFor] = {}
     end
 end
 
-function getPlaceBets (params)
+function setMarker_callback (theMarker,theMarkerZone,thePLR, theBet, placeNum)
+  theMarker.setDescription(string.format('%s: %d on %s', thePLR.name, theBet['amount'], placeNum))
+  theMarker.setLock(true)
+  theMarkerZone.bets[bettingFor] = {
+      value = theBet['amount'],
+      marker = marker}
+end
+
+function getPlaceBets (GPBparams)
   -- player
   -- placeNumber
-  local value = 0
-  plr = params.player
-  zone = bettingZones['place'][tonumber(params.placeNumber)]
-  if(zone.bets[plr.color]) then
-    if (zone.bets[plr.color].value) then
-      value = zone.bets[plr.color].value
+
+  local thevalue = 0
+  plr = GPBparams.player
+
+  local theZone = bettingZones['place'][tonumber(GPBparams.placeNumber)]
+  if(theZone.bets[plr.color] and theZone.bets[plr.color] ~= 0) then
+    if (theZone.bets[plr.color].value) then
+      thevalue = theZone.bets[plr.color].value
     end
   end
-  return value
+  return thevalue
+end
+
+---------------------        Custom Event  Management  --------------------------------------
+-- added by TheDorito
+
+customEvents = {}
+
+function subscribeCustomEvent (eventParams)
+  -- eventName
+  -- subscribingObject
+  if (eventParams.eventName and eventParams.subscribingObject) then
+   if (customEvents[eventParams.eventName]) then
+     -- event already exits
+     if (customEvents[eventParams.eventName][subscribers][eventParams.subscribingObject.guid]) then
+       --already subscribed to this event
+     else
+       --subscribe to the event
+       customEvents[eventParams.eventName][subscribers][eventParams.subscribingObject.guid] = eventParams.subscribingObject
+     end
+   else
+     -- create a new event and subscribe to it
+     customEvents[eventParams.eventName] = {subscribers = {[eventParams.subscribingObject.guid] = eventParams.subscribingObject}}
+   end
+  end
+end
+
+function triggerCustomEvent (eventParams)
+  -- eventName -- string
+  -- eventData -- table (optional)
+  local evd = nil
+  if eventParams.eventData then
+    evd = eventParams.eventData
+  end
+
+  if (eventParams.eventName) then
+    if (customEvents[eventParams.eventName]) then
+      for k,v in pairs(customEvents[eventParams.eventName].subscribers) do
+        v.call('onCustomEvent',{eventName = eventParams.eventName, eventData = evd})
+      end
+    else
+      log (eventParams,'Unsubscribed event triggered')
+    end
+  end
 end

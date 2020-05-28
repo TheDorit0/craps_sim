@@ -8,7 +8,7 @@
     width="500"
     height="300"
     allowDragging="1"
-    visibility="host"
+    visibility="Black"
     returnToOriginalPositionWhenReleased="0">
     <TableLayout rowBackgroundColor="#ffffff" class="PlaceWindow" >
       <Row preferredHeight="50">

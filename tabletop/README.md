@@ -11,6 +11,6 @@ own scripting zone for pass line / fields etc
 what's missing:
 
 - come bet logic
-- cetain middle of the table bets (no hops, no C&E)
+- certain middle of the table bets (no hops, no C&E)
 - Don't Pass / Don't Come
 - better documentation

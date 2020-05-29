@@ -87,10 +87,11 @@ function onLoad()
             end
         end
 
-        spawnStartingChips(ref)
+      --  spawnStartingChips(ref)
     end
 
     startLuaCoroutine(Global, 'addPlayerToBetSheet')
+    Wait.time(passShooter,1)
 end
 
 function addPlayerToBetSheet()
@@ -148,6 +149,10 @@ function diceRoll()
                                 p.bettingSheet = {}
                             end
                         end
+                    elseif key == 'hard' then
+                        for _, hardZone in pairs(zone) do
+                            destroyZoneBets(hardZone)
+                        end
                     else
                         destroyZoneBets(zone)
                     end
@@ -155,6 +160,7 @@ function diceRoll()
                 -- added by TheDorito
                 triggerCustomEvent({eventName = "pointOff"})
                 triggerCustomEvent({eventName = "sevenOut"})
+                passShooter()
                 ----------------------
             else
                 -- eleven was rolled
@@ -162,6 +168,8 @@ function diceRoll()
                 payZoneBets(bettingZones['field'])
                 -- pay comeline
                 payZoneBets(bettingZones['comeLine'])
+                --  pay hardWays bets.
+                payHardZoneBets()
             end
         else
             broadcastToAll('front line winners!')
@@ -176,12 +184,18 @@ function diceRoll()
             -- pay field if 11
             if (diceSum == 11) then
                 payZoneBets(bettingZones['field'])
+              else
+                destroyZoneBets(bettingZones['field']) -- added by TheDorito
             end
         end
     elseif (diceSum == 2) or (diceSum == 3) or (diceSum == 12) then
         if not point then
             -- lose pass line, lose come / pay field
             destroyZoneBets(bettingZones['passLine'])
+            destroyZoneBets(bettingZones['comeLine'])
+          else
+            destroyZoneBets(bettingZones['comeLine'])
+            payHardZoneBets()
         end
         -- always pay field
         payZoneBets(bettingZones['field'])
@@ -191,12 +205,9 @@ function diceRoll()
         if not point then
             broadcastToAll('point established')
             log(diceSum,'diceRoll() diceSum')
-            log(puck,'diceRoll() puck')
-            log(puckPos,'diceRoll() puck position')
             point = diceSum
             puck.setPositionSmooth(puckPos[diceSum].pos, false, true)
             log('Locking placeBets','diceRoll()')
-            log(bettingZones,'diceRoll(bettingZones)')
             lockZoneChips(bettingZones['passLine'])
             -- TODO: allow ON place bets
         else
@@ -211,8 +222,19 @@ function diceRoll()
 
                 -- passline odds
                 payZoneBets(bettingZones['passLineOdds'])
+
+
+
+
             end
 
+            -- hardWays
+            if (dices[1].getValue() == dices[2].getValue()) then
+              payHardZoneBets()
+            elseif (diceSum == 4 or diceSum == 6 or diceSum == 8 or diceSum == 10) then
+              destroyZoneBets(bettingZones['hard'][diceSum])
+              broadcastToAll('Came easy.  Hard ways down.', {1,0,0})
+            end
             -- pay place bets
             payPlaceZoneBets()
             -- TODO: update come bets
@@ -224,6 +246,19 @@ function diceRoll()
         elseif (diceSum == 6) or (diceSum == 8) or (diceSum == 5) then
             destroyZoneBets(bettingZones['field'])
         end
+    end
+    -- single roll bets.
+    -- anyCraps
+    if (diceSum == 2 or diceSum == 3 or diceSum == 12) then
+      payZoneBets(bettingZones['anyCraps'])
+    else
+      destroyZoneBets(bettingZones['anyCraps'])
+    end
+    -- anySeven
+    if (diceSum == 7) then
+      payZoneBets(bettingZones['anySeven'])
+    else
+      destroyZoneBets(bettingZones['anySeven'])
     end
 
     randomized = false
@@ -342,6 +377,47 @@ function payPlaceZoneBets()
     end
 end
 
+function payHardZoneBets()
+    zone = bettingZones['hard'][diceSum]
+    log(bettingZones,'payHardZoneBets -bettingZones')
+    log(zone.bets,'payHardZoneBets -zone.bets')
+    for _, ref in pairs(zone.ref.getObjects()) do
+        if isChips(ref) then
+            ref.destruct()
+        end
+    end
+    for color, bet in pairs(zone.bets) do
+        if bet['value'] then
+            hand_value = 0 -- value send to the hand
+            if (diceSum == 2) or (diceSum == 12) then
+                -- 31 for 1
+                hand_value = 31 * bet.value
+            elseif (diceSum == 3) or (diceSum == 11) then
+                -- 16 for 1
+                hand_value = 16 * bet.value
+            elseif (diceSum == 4) or (diceSum == 10) then
+                -- 8 for 1
+                hand_value = 8 * bet.value
+            elseif (diceSum == 6) or (diceSum == 8) then
+                -- 10 for 1
+                hand_value = 10 * bet.value
+            end
+            if hand_value > 0 then
+              if(PayoutManager ~= nil) then
+                PayoutManager.call('pay',{color = color, amt = hand_value})
+                --zone.bets[player.color] = 0
+              else
+                print(string.format('give player %s: %d', color, hand_value))
+                --TODO: is rounded up to nearest 10 due to chip value
+                for _, c in pairs(chipDemonimator(math.ceil(hand_value/10)*10)) do
+                    spawnChipInHand(c, player)
+                end
+              end
+            end
+        end
+    end
+end
+
 function payZoneBets(zone)
   log (zone.ref,'zone.ref')
     for _, ref in pairs(zone.ref.getObjects()) do
@@ -386,6 +462,12 @@ function payZoneBets(zone)
                     -- 6 to 5
                     next_value = value + (6 * value / 5)
                 end
+            elseif (zone.zonetype == 'anyCraps') then
+                -- 8 for 1
+                next_value = value * 8
+            elseif (zone.zonetype == 'anySeven') then
+                -- 5 for 1
+                next_value = value * 5
             end
         end
 
@@ -413,7 +495,10 @@ function groupHand(player)
 end
 
 function onPlayerChangeColor(player)
-    spawnStartingChips(Player[player])
+    if(player ~= 'Grey' and player ~= 'Black') then
+      spawnStartingChips(Player[player])
+    end
+
 end
 
 function spawnStartingChips(player)
@@ -447,8 +532,10 @@ function assignZoneBet(zone, obj, bettype)
         return
     end
 
-    if not zone.bets[obj.held_by_color] then
+    if not zone.bets[obj.held_by_color] and zone.zonetype ~= 'hard' and zone.zonetype ~= 'place' then
         zone.bets[obj.held_by_color] = 0
+      elseif not zone.bets[obj.held_by_color] then
+        zone.bets[obj.held_by_color]={value = 0}
     end
 
     if zone.zonetype == 'place' then
@@ -476,8 +563,11 @@ function assignZoneBet(zone, obj, bettype)
     if bettype == 'leave' then
       value = value * -1
     end
-
-    zone.bets[obj.held_by_color] = math.max(zone.bets[obj.held_by_color] + value, 0)
+    if(zone.zonetype == 'hard') then
+      zone.bets[obj.held_by_color].value = math.max(zone.bets[obj.held_by_color].value + value, 0)
+    else
+      zone.bets[obj.held_by_color] = math.max(zone.bets[obj.held_by_color] + value, 0)
+    end
 end
 
 function initializeZones()
@@ -512,6 +602,22 @@ function initializeZones()
         bets = {},
     }
     bettingZones['73ffbe'] = bettingZones['field']
+
+    bettingZones['anyCraps'] = {
+        zoneid = 'bdd40d',
+        zonetype = 'anyCraps',
+        ref = getObjectFromGUID('bdd40d'),
+        bets = {},
+    }
+
+    bettingZones['anySeven'] = {
+        zoneid = '69ef6d',
+        zonetype = 'anySeven',
+        ref = getObjectFromGUID('69ef6d'),
+        bets = {},
+    }
+
+    bettingZones['69ef6d'] = bettingZones['anySeven']
 
     bettingZones['place'] = {
         [4] = {
@@ -571,6 +677,75 @@ function initializeZones()
     -- bettingZones[xxxx] = 'come9'
     -- bettingZones[xxxx] = 'come10'
     -- bettingZones[xxxx] = 'dontPassLine'
+
+
+    bettingZones['hard'] = {
+        [2] = {
+            zoneid = '83da3d',
+            zonetype = 'hard',
+            zonevalue = 2,
+            ref = getObjectFromGUID('83da3d'),
+            bets = {},
+        },
+        [3] = {
+            zoneid = '88b93d',
+            zonetype = 'hard',
+            zonevalue = 3,
+            ref = getObjectFromGUID('88b93d'),
+            bets = {},
+        },
+        [4] = {
+            zoneid = '1fcde8',
+            zonetype = 'hard',
+            zonevalue = 4,
+            ref = getObjectFromGUID('1fcde8'),
+            bets = {},
+        },
+        [6] = {
+            zoneid = '215748',
+            zonetype = 'hard',
+            zonevalue = 6,
+            ref = getObjectFromGUID('215748'),
+            bets = {},
+        },
+        [8] = {
+            zoneid = '9a26f5',
+            zonetype = 'hard',
+            zonevalue = 8,
+            ref = getObjectFromGUID('9a26f5'),
+            bets = {},
+        },
+        [10] = {
+            zoneid = '35aa0f',
+            zonetype = 'hard',
+            zonevalue = 10,
+            ref = getObjectFromGUID('35aa0f'),
+            bets = {},
+        },
+        [11] = {
+            zoneid = 'e47bb8',
+            zonetype = 'hard',
+            zonevalue = 11,
+            ref = getObjectFromGUID('e47bb8'),
+            bets = {},
+        },
+        [12] = {
+            zoneid = 'cafbf2',
+            zonetype = 'hard',
+            zonevalue = 12,
+            ref = getObjectFromGUID('cafbf2'),
+            bets = {},
+        }
+    }
+    bettingZones['83da3d'] = bettingZones['hard'][2]
+    bettingZones['88b93d'] = bettingZones['hard'][3]
+    bettingZones['1fcde8'] = bettingZones['hard'][4]
+    bettingZones['215748'] = bettingZones['hard'][6]
+    bettingZones['9a26f5'] = bettingZones['hard'][8]
+    bettingZones['35aa0f'] = bettingZones['hard'][10]
+    bettingZones['e47bb8'] = bettingZones['hard'][11]
+    bettingZones['cafbf2'] = bettingZones['hard'][12]
+
 end
 
 function lockZoneChips(zone)
@@ -802,7 +977,60 @@ function getPlaceBets (GPBparams)
   return thevalue
 end
 
----------------------        Custom Event  Management  --------------------------------------
+--------------------------- [[
+-- Shooter Management
+--------------------------- ]]
+shooter = 0
+PlayerSeatOrder = {"Blue", "Green", "White", "Red", "Pink", "Purple"}
+
+function passShooter()
+  local foundNextShooter = false
+log(PlayerSeatOrder, 'PlayerOrder..')
+ for i = 1, #PlayerSeatOrder, 1 do
+   nextShooter()
+    if (Player[PlayerSeatOrder[shooter]].seated) then
+      foundNextShooter = true
+      break
+    end
+  end
+  if (foundNextShooter) then
+    -- set UI Shooter buttons visible to shooter
+    attributeTable = {
+    fontSize = 300,
+    color = "#000000"
+}
+  --UI.setAttributes("ShooterPanel", {visibility = PlayerSeatOrder[shooter]})
+  --UI.hide("ShooterPanel")
+  --UI.show("ShooterPanel")
+  UI.setAttribute('ShooterPanel', 'visibility', PlayerSeatOrder[shooter])
+  UI.setAttribute('ShooterPassButton', 'visibility', PlayerSeatOrder[shooter])
+  UI.setAttribute('ShooterRollButton', 'visibility', PlayerSeatOrder[shooter])
+  UI.show("ShooterPanel")
+    broadcastToAll(Player[PlayerSeatOrder[shooter]].steam_name..' is the next shooter.')
+    --print('Visibility is'..UI.getAttribute("ShooterPanel", "visibility"))
+  else
+    print('Could not find next shooter')
+  end
+
+end
+
+function nextShooter ()
+ if (shooter + 1 <= #PlayerSeatOrder) then
+   shooter = shooter + 1
+  else
+   shooter = 1
+ end
+end
+
+function rollDice()
+  for k,v in pairs(dices) do
+    v.roll()
+    v.randomize(PlayerSeatOrder[shooter])
+  end
+end
+--------------------------- [[
+-- Custom Event Management
+--------------------------- ]]
 -- added by TheDorito
 
 customEvents = {}
@@ -810,15 +1038,23 @@ customEvents = {}
 function subscribeCustomEvent (eventParams)
   -- eventName
   -- subscribingObject
+  log(eventParams,'EventParams')
   if (eventParams.eventName and eventParams.subscribingObject) then
    if (customEvents[eventParams.eventName]) then
      -- event already exits
-     if (customEvents[eventParams.eventName][subscribers][eventParams.subscribingObject.guid]) then
-       --already subscribed to this event
+     if( customEvents[eventParams.eventName].subscribers) then
+       if (customEvents[eventParams.eventName].subscribers[eventParams.subscribingObject.guid]) then
+         --already subscribed to this event
+       else
+         --subscribe to the event
+         customEvents[eventParams.eventName].subscribers[eventParams.subscribingObject.guid] = eventParams.subscribingObject
+       end
      else
-       --subscribe to the event
-       customEvents[eventParams.eventName][subscribers][eventParams.subscribingObject.guid] = eventParams.subscribingObject
+       log(customEvents.subscribers,'CustomEvents')
+       customEvents[eventParams.eventName].subscribers = {}
+       customEvents[eventParams.eventName].subscribers[eventParams.subscribingObject.guid] = eventParams.subscribingObject
      end
+
    else
      -- create a new event and subscribe to it
      customEvents[eventParams.eventName] = {subscribers = {[eventParams.subscribingObject.guid] = eventParams.subscribingObject}}

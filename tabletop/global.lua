@@ -28,12 +28,17 @@ local bettingZones = {}
 --------------------------- [[
 -- event handlers
 --------------------------- ]]
+randomized = false
+
 function onObjectRandomize( obj, color )
-    if (obj.tag == 'Dice') and (not randomized) then
-        randomized = true
-        diceSum = 0
+    if (obj.tag == 'Dice') and (not obj.getVar('randomized'))  then
+        obj.setVar('randomized',true)
+        --diceSum = 0
+        if (not randomized) then
         broadcastToAll(players[color].name .. ': dice is out!')
+        randomized = true
         startLuaCoroutine(Global, 'diceRoll')
+      end
     end
 end
 
@@ -125,144 +130,162 @@ function diceRoll()
         coroutine.yield(0)
     end
     log('dice stopped','diceRoll()')
-    diceSum = dices[1].getValue() + dices[2].getValue()
-    broadcastToAll('rolled: ' .. diceSum)
+    log(dices,'dices')
+    log(dices[1].getVar('randomized'),'dice 1 randomized')
+    log(dices[2].getVar('randomized'),'dice 2 randomized')
+    if(dices[1].getVar('randomized') and dices[2].getVar('randomized')) then
+      --both dice have been rolled.  Good to go.
+      diceSum = dices[1].getValue() + dices[2].getValue()
+      broadcastToAll('rolled: ' .. diceSum)
 
-    if (diceSum == 7) or (diceSum == 11) then
-        if point then
-            if (diceSum == 7) then
-                -- reset the point
-                broadcastToAll('sevened out!')
-                point = nil
+      if (diceSum == 7) or (diceSum == 11) then
+          if point then
+              if (diceSum == 7) then
+                  -- reset the point
+                  broadcastToAll('sevened out!')
+                  point = nil
 
-                puck.setPositionSmooth(puckPos[0].pos, false, true)
+                  puck.setPositionSmooth(puckPos[0].pos, false, true)
 
-                -- destroy all chips except comeLine
-                for key, zone in pairs(bettingZones) do
-                    if key == 'comeLine' then
-                        payZoneBets(bettingZones['comeLine'])
-                    elseif key == 'place' then
-                        for _, placeZone in pairs(zone) do
-                            destroyZoneBets(placeZone)
-                            resetBettingSheet()
-                            for _, p in pairs(players) do
-                                p.bettingSheet = {}
-                            end
-                        end
-                    elseif key == 'hard' then
-                        for _, hardZone in pairs(zone) do
-                            destroyZoneBets(hardZone)
-                        end
-                    else
-                        destroyZoneBets(zone)
-                    end
-                end
-                -- added by TheDorito
-                triggerCustomEvent({eventName = "pointOff"})
-                triggerCustomEvent({eventName = "sevenOut"})
-                passShooter()
-                ----------------------
-            else
-                -- eleven was rolled
-                -- pay field
-                payZoneBets(bettingZones['field'])
-                -- pay comeline
-                payZoneBets(bettingZones['comeLine'])
-                --  pay hardWays bets.
-                payHardZoneBets()
-            end
-        else
-            broadcastToAll('front line winners!')
-
-            -- if no point established
-            -- pay come line
-            payZoneBets(bettingZones['comeLine'])
-
-            -- pay passline
-            payZoneBets(bettingZones['passLine'])
-
-            -- pay field if 11
-            if (diceSum == 11) then
-                payZoneBets(bettingZones['field'])
+                  -- destroy all chips except comeLine
+                  for key, zone in pairs(bettingZones) do
+                      if key == 'comeLine' then
+                          payZoneBets(bettingZones['comeLine'])
+                      elseif key == 'place' then
+                          for _, placeZone in pairs(zone) do
+                              destroyZoneBets(placeZone)
+                              resetBettingSheet()
+                              for _, p in pairs(players) do
+                                  p.bettingSheet = {}
+                              end
+                          end
+                      elseif key == 'hard' then
+                          for _, hardZone in pairs(zone) do
+                              destroyZoneBets(hardZone)
+                          end
+                      else
+                          destroyZoneBets(zone)
+                      end
+                  end
+                  -- added by TheDorito
+                  triggerCustomEvent({eventName = "pointOff"})
+                  triggerCustomEvent({eventName = "sevenOut"})
+                  passShooter()
+                  ----------------------
               else
-                destroyZoneBets(bettingZones['field']) -- added by TheDorito
-            end
-        end
-    elseif (diceSum == 2) or (diceSum == 3) or (diceSum == 12) then
-        if not point then
-            -- lose pass line, lose come / pay field
-            destroyZoneBets(bettingZones['passLine'])
-            destroyZoneBets(bettingZones['comeLine'])
+                  -- eleven was rolled
+                  -- pay field
+                  payZoneBets(bettingZones['field'])
+                  -- pay comeline
+                  payZoneBets(bettingZones['comeLine'])
+                  --  pay hardWays bets.
+                  payHardZoneBets()
+              end
           else
-            destroyZoneBets(bettingZones['comeLine'])
-            payHardZoneBets()
-        end
-        -- always pay field
-        payZoneBets(bettingZones['field'])
-    else
-      log('4,5,6,8,9,10','diceRoll()')
-        -- 4, 5, 6, 8, 9, 10
-        if not point then
-            broadcastToAll('point established')
-            log(diceSum,'diceRoll() diceSum')
-            point = diceSum
-            puck.setPositionSmooth(puckPos[diceSum].pos, false, true)
-            log('Locking placeBets','diceRoll()')
-            lockZoneChips(bettingZones['passLine'])
-            -- TODO: allow ON place bets
-        else
-            if (diceSum == point) then
-                broadcastToAll('point won! puck is OFF')
-                point = nil
-                puck.setPositionSmooth(puckPos[0].pos, false, true)
+              broadcastToAll('front line winners!')
 
-                -- passline
-                payZoneBets(bettingZones['passLine'])
-                unlockZoneChips(bettingZones['passLine'])
+              -- if no point established
+              -- pay come line
+              payZoneBets(bettingZones['comeLine'])
 
-                -- passline odds
-                payZoneBets(bettingZones['passLineOdds'])
+              -- pay passline
+              payZoneBets(bettingZones['passLine'])
 
-
-
-
-            end
-
-            -- hardWays
-            if (dices[1].getValue() == dices[2].getValue()) then
+              -- pay field if 11
+              if (diceSum == 11) then
+                  payZoneBets(bettingZones['field'])
+                else
+                  destroyZoneBets(bettingZones['field']) -- added by TheDorito
+              end
+          end
+      elseif (diceSum == 2) or (diceSum == 3) or (diceSum == 12) then
+          if not point then
+              -- lose pass line, lose come / pay field
+              destroyZoneBets(bettingZones['passLine'])
+              destroyZoneBets(bettingZones['comeLine'])
+            else
+              destroyZoneBets(bettingZones['comeLine'])
               payHardZoneBets()
-            elseif (diceSum == 4 or diceSum == 6 or diceSum == 8 or diceSum == 10) then
-              destroyZoneBets(bettingZones['hard'][diceSum])
-              broadcastToAll('Came easy.  Hard ways down.', {1,0,0})
-            end
-            -- pay place bets
-            payPlaceZoneBets()
-            -- TODO: update come bets
-        end
+          end
+          -- always pay field
+          payZoneBets(bettingZones['field'])
+      else
+        log('4,5,6,8,9,10','diceRoll()')
+          -- 4, 5, 6, 8, 9, 10
+          if not point then
+              broadcastToAll('point established')
+              log(diceSum,'diceRoll() diceSum')
+              point = diceSum
+              puck.setPositionSmooth(puckPos[diceSum].pos, false, true)
+              log('Locking placeBets','diceRoll()')
+              lockZoneChips(bettingZones['passLine'])
+              -- TODO: allow ON place bets
+          else
+              if (diceSum == point) then
+                  broadcastToAll('point won! puck is OFF')
+                  point = nil
+                  puck.setPositionSmooth(puckPos[0].pos, false, true)
 
-        -- pay field bets
-        if (diceSum == 4) or (diceSum == 9) or (diceSum == 10) then
-            payZoneBets(bettingZones['field'])
-        elseif (diceSum == 6) or (diceSum == 8) or (diceSum == 5) then
-            destroyZoneBets(bettingZones['field'])
-        end
-    end
-    -- single roll bets.
-    -- anyCraps
-    if (diceSum == 2 or diceSum == 3 or diceSum == 12) then
-      payZoneBets(bettingZones['anyCraps'])
-    else
-      destroyZoneBets(bettingZones['anyCraps'])
-    end
-    -- anySeven
-    if (diceSum == 7) then
-      payZoneBets(bettingZones['anySeven'])
-    else
-      destroyZoneBets(bettingZones['anySeven'])
-    end
+                  -- passline
+                  payZoneBets(bettingZones['passLine'])
+                  unlockZoneChips(bettingZones['passLine'])
 
-    randomized = false
-    coroutine.yield(1)
+                  -- passline odds
+                  payZoneBets(bettingZones['passLineOdds'])
+
+
+
+
+              end
+
+              -- hardWays
+              if (dices[1].getValue() == dices[2].getValue()) then
+                payHardZoneBets()
+              elseif (diceSum == 4 or diceSum == 6 or diceSum == 8 or diceSum == 10) then
+                destroyZoneBets(bettingZones['hard'][diceSum])
+                broadcastToAll('Came easy.  Hard ways down.', {1,0,0})
+              end
+              -- pay place bets
+              payPlaceZoneBets()
+              -- TODO: update come bets
+          end
+
+          -- pay field bets
+          if (diceSum == 4) or (diceSum == 9) or (diceSum == 10) then
+              payZoneBets(bettingZones['field'])
+          elseif (diceSum == 6) or (diceSum == 8) or (diceSum == 5) then
+              destroyZoneBets(bettingZones['field'])
+          end
+      end
+      -- single roll bets.
+      -- anyCraps
+      if (diceSum == 2 or diceSum == 3 or diceSum == 12) then
+        payZoneBets(bettingZones['anyCraps'])
+      else
+        destroyZoneBets(bettingZones['anyCraps'])
+      end
+      -- anySeven
+      if (diceSum == 7) then
+        payZoneBets(bettingZones['anySeven'])
+      else
+        destroyZoneBets(bettingZones['anySeven'])
+      end
+
+      dices[1].setVar('randomized',false)
+      dices[2].setVar('randomized',false)
+      randomized = false
+      coroutine.yield(1)
+    else
+      --both dice were not randomized
+      --coroutine.yield(1)
+      broadcastToAll('No Roll.  Roll both dice again.')
+      randomized = false
+      print('after randomized')
+      dices[1].setVar('randomized',false)
+      dices[2].setVar('randomized',false)
+      print('after set variables')
+    end
+    return true
 end
 
 --------------------------- [[

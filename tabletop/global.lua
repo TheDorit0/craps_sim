@@ -1,3 +1,5 @@
+debugging = false --set to true to enable debugging UI panel and possibly other logging/printing for troubleshooting
+
 local chipDenom = {
     [1000] = { t = 'Chip_1000' },
     [500] = { t = 'Chip_500' },
@@ -542,7 +544,9 @@ function spawnStartingChips(player)
     if(PayoutManager ~= nil) then
       PayoutManager.call('pay',payParams)
     else
-      Wait.condition(function () PayoutManager.call('pay',payParams) end,function () return PayoutManager ~= nil end)
+      Wait.condition(function () PayoutManager.call('pay',payParams) end,function () return PayoutManager ~= nil end,
+                    10,
+                    function() print('Timed out waiting for PM to pay starting chips to player') end)
     end
   end
   -----------------------------
@@ -969,7 +973,9 @@ function playerPlaceBet (paramz)
         else
           PPBzone.bets[bettingFor] = {
               value = theBet['amount']}
-          Wait.condition(function () setMarker_callback (marker,PPBzone,player, theBet, placeNumber) end, function () return not marker.spawning end  )
+          Wait.condition(function () setMarker_callback (marker,PPBzone,player, theBet, placeNumber) end, function () return not marker.spawning end,
+                        10,
+                        function() print('Timed out waiting for a marker to spawn') end)
 
         end
 
@@ -1112,36 +1118,40 @@ function triggerCustomEvent (eventParams)
 end
 
 function displayBetInfo ()
-  displayInfo = 'Betting Info<br />'
-  for k,v in pairs(bettingZones) do
-    if(k == 'hard' or k == 'place' ) then
-      print('hard or place zone found')
-      for i = 0,13,1 do
-        if v[i] then
-          local zone = v[i]
-            if(zone.bets and type(zone.bets) == 'table') then
-              --log(zone.bets,'Zone.bets')
-            for plr_color,bet in pairs(zone.bets) do
-              if bet.value then
-              displayInfo = displayInfo..k..'['..tostring(i)..']:'..
-              plr_color..':'..bet.value..'<br />'
+  if(debugging) then
+    UI.show('BetInfo')
+    displayInfo = 'Betting Info<br />'
+    for k,v in pairs(bettingZones) do
+      if(k == 'hard' or k == 'place' ) then
+        print('hard or place zone found')
+        for i = 0,13,1 do
+          if v[i] then
+            local zone = v[i]
+              if(zone.bets and type(zone.bets) == 'table') then
+                --log(zone.bets,'Zone.bets')
+              for plr_color,bet in pairs(zone.bets) do
+                if bet.value then
+                displayInfo = displayInfo..k..'['..tostring(i)..']:'..
+                plr_color..':'..bet.value..'<br />'
+              end
+              end
+            else
+              displayInfo = displayInfo..'No bets<br />'
             end
-            end
-          else
-            displayInfo = displayInfo..'No bets<br />'
           end
         end
-      end
-    else
-      displayInfo = displayInfo..'Zone: '..k..':<br />'
-      if(v.bets) then
-        for plr_color,bet in pairs(v.bets) do
-          displayInfo = displayInfo..plr_color..':'..tostring(bet)..'<br />'
-        end
       else
-        displayInfo = displayInfo..'No bets<br />'
+        displayInfo = displayInfo..'Zone: '..k..':<br />'
+        if(v.bets) then
+          for plr_color,bet in pairs(v.bets) do
+            displayInfo = displayInfo..plr_color..':'..tostring(bet)..'<br />'
+          end
+        else
+          displayInfo = displayInfo..'No bets<br />'
+        end
       end
     end
+    UI.setValue('BetInfo',displayInfo)
   end
-  UI.setValue('BetInfo',displayInfo)
+
 end

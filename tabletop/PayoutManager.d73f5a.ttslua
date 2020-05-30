@@ -439,7 +439,7 @@ function onObjectEnterContainer(bag, obj)
         --log(w,'row object values')
         if w.name == 'Total' then
           --log(targetBag.getButtons(),'Target bag buttons')
-          targetBag.editButton({index = i, label = total})
+          targetBag.editButton({index = i, label = abb(total)})
         end
         if w.chipName == obj.getName() then
           targetBag.editButton({index = i, color = w.activeColor})
@@ -462,7 +462,9 @@ function onObjectLeaveContainer(bag, obj)
   for _,v in pairs(payoutBag) do
     if (bag.guid == v) then
       targetBag = getObjectFromGUID(v)
-      Wait.condition(function () leave_callback(obj,targetBag) end , function () return not obj.spawning end)
+      Wait.condition(function () leave_callback(obj,targetBag) end , function () return not obj.spawning end,
+                    10,
+                    function() print('PayoutManager Timed out waiting for a chip to leave a PayoutBag') end)
     end
   end
 
@@ -484,9 +486,28 @@ function leave_callback (obj, bag)
     --log(w,'row object values')
     if w.name == 'Total' then
       --log(targetBag.getButtons(),'Target bag buttons')
-      bag.editButton({index = i, label = total})
+      bag.editButton({index = i, label = abb(total)})
     end
   end
 
+    end
+end
+
+function abb(num)
+  n = tonumber(num)
+    if n>=1*10^4 and n<1*10^6 then
+        n=(n/1*10^-3)
+        return string.sub(tostring(n),1,5).."k"
+    elseif n>=1*10^6 and n<1*10^7 then
+        n=(n/1*10^-6)
+        return string.sub(tostring(n),1,3).."M"
+    elseif n>=1*10^7 and n<1*10^8 then
+        n=(n/1*10^-7)
+        return string.sub(tostring(n),1,3).."B"
+    elseif n>=1*10^8 and n<1*10^9 then
+        n=(n/1*10^-8)
+        return string.sub(tostring(n),1,3).."T"
+    else
+        return n
     end
 end

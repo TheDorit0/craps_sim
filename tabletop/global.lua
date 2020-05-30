@@ -121,6 +121,7 @@ end
 
 function diceRoll()
     diceSum = 0;
+    displayBetInfo ()
 
     while not dices[1].resting do
         coroutine.yield(0)
@@ -129,10 +130,10 @@ function diceRoll()
     while not dices[2].resting do
         coroutine.yield(0)
     end
-    log('dice stopped','diceRoll()')
-    log(dices,'dices')
-    log(dices[1].getVar('randomized'),'dice 1 randomized')
-    log(dices[2].getVar('randomized'),'dice 2 randomized')
+    --log('dice stopped','diceRoll()')
+    --log(dices,'dices')
+    --log(dices[1].getVar('randomized'),'dice 1 randomized')
+    --log(dices[2].getVar('randomized'),'dice 2 randomized')
     if(dices[1].getVar('randomized') and dices[2].getVar('randomized')) then
       --both dice have been rolled.  Good to go.
       diceSum = dices[1].getValue() + dices[2].getValue()
@@ -163,6 +164,8 @@ function diceRoll()
                           for _, hardZone in pairs(zone) do
                               destroyZoneBets(hardZone)
                           end
+                      elseif( key == 'anySeven' or key == bettingZones['anySeven'].zoneid) then
+                        --do nothing.  it's paid in the one roll bets
                       else
                           destroyZoneBets(zone)
                       end
@@ -214,7 +217,7 @@ function diceRoll()
           -- 4, 5, 6, 8, 9, 10
           if not point then
               broadcastToAll('point established')
-              log(diceSum,'diceRoll() diceSum')
+              --log(diceSum,'diceRoll() diceSum')
               point = diceSum
               puck.setPositionSmooth(puckPos[diceSum].pos, false, true)
               log('Locking placeBets','diceRoll()')
@@ -266,9 +269,11 @@ function diceRoll()
       end
       -- anySeven
       if (diceSum == 7) then
+        print('should pay anyseven')
         payZoneBets(bettingZones['anySeven'])
       else
         destroyZoneBets(bettingZones['anySeven'])
+        print('no pay anyseven')
       end
 
       dices[1].setVar('randomized',false)
@@ -387,7 +392,7 @@ function payPlaceZoneBets()
             if hand_value > 0 then
               if(PayoutManager ~= nil) then
                 PayoutManager.call('pay',{color = player.color, amt = hand_value})
-                --zone.bets[player.color] = 0
+                --assasabet.value = 0
               else
                 print(string.format('give player %s: %d', color, hand_value))
                 --TODO: is rounded up to nearest 10 due to chip value
@@ -428,7 +433,7 @@ function payHardZoneBets()
             if hand_value > 0 then
               if(PayoutManager ~= nil) then
                 PayoutManager.call('pay',{color = color, amt = hand_value})
-                --zone.bets[player.color] = 0
+                bet.value = 0
               else
                 print(string.format('give player %s: %d', color, hand_value))
                 --TODO: is rounded up to nearest 10 due to chip value
@@ -632,6 +637,8 @@ function initializeZones()
         ref = getObjectFromGUID('bdd40d'),
         bets = {},
     }
+
+    bettingZones['bdd40d'] = bettingZones['anyCraps']
 
     bettingZones['anySeven'] = {
         zoneid = '69ef6d',
@@ -1102,4 +1109,39 @@ function triggerCustomEvent (eventParams)
       log (eventParams,'Unsubscribed event triggered')
     end
   end
+end
+
+function displayBetInfo ()
+  displayInfo = 'Betting Info<br />'
+  for k,v in pairs(bettingZones) do
+    if(k == 'hard' or k == 'place' ) then
+      print('hard or place zone found')
+      for i = 0,13,1 do
+        if v[i] then
+          local zone = v[i]
+            if(zone.bets and type(zone.bets) == 'table') then
+              --log(zone.bets,'Zone.bets')
+            for plr_color,bet in pairs(zone.bets) do
+              if bet.value then
+              displayInfo = displayInfo..k..'['..tostring(i)..']:'..
+              plr_color..':'..bet.value..'<br />'
+            end
+            end
+          else
+            displayInfo = displayInfo..'No bets<br />'
+          end
+        end
+      end
+    else
+      displayInfo = displayInfo..'Zone: '..k..':<br />'
+      if(v.bets) then
+        for plr_color,bet in pairs(v.bets) do
+          displayInfo = displayInfo..plr_color..':'..tostring(bet)..'<br />'
+        end
+      else
+        displayInfo = displayInfo..'No bets<br />'
+      end
+    end
+  end
+  UI.setValue('BetInfo',displayInfo)
 end

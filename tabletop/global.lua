@@ -27,6 +27,22 @@ local numplayers = 0
 local players = { } -- the player obj
 local bettingZones = {}
 
+payoutBag = {Red = '0d754b',
+                    White = '765aaf',
+                    Pink = 'b36432',
+                    Purple = 'a9e85a',
+                    Green = '076330',
+                    Blue = 'c1116b'
+                  }
+
+revPayoutBag = {    ['0d754b'] = "Red",
+                    ['765aaf'] = "White",
+                    ['b36432']= "Pink",
+                    ['a9e85a']= "Purple",
+                    ['076330'] = "Green",
+                    ['c1116b']= "Blue"
+                  }
+
 --------------------------- [[
 -- event handlers
 --------------------------- ]]
@@ -69,6 +85,16 @@ function setVars ()
   dices[2] = getObjectFromGUID('04e437')
   puck = getObjectFromGUID('8487a4')
   puck.setPositionSmooth(puckPos[0].pos, false, true)
+end
+
+function filterObjectEnterContainer(cont, obj)
+  if PayoutManager then
+    local params = {container = cont, enter_object = obj}
+    return PayoutManager.call('filterStackedChips',params)
+  else
+    return true
+  end
+
 end
 
 function onLoad()
@@ -271,11 +297,9 @@ function diceRoll()
       end
       -- anySeven
       if (diceSum == 7) then
-        print('should pay anyseven')
         payZoneBets(bettingZones['anySeven'])
       else
         destroyZoneBets(bettingZones['anySeven'])
-        print('no pay anyseven')
       end
 
       dices[1].setVar('randomized',false)
@@ -287,10 +311,8 @@ function diceRoll()
       --coroutine.yield(1)
       broadcastToAll('No Roll.  Roll both dice again.')
       randomized = false
-      print('after randomized')
       dices[1].setVar('randomized',false)
       dices[2].setVar('randomized',false)
-      print('after set variables')
     end
     return true
 end
@@ -502,7 +524,7 @@ function payZoneBets(zone)
         end
 
         if next_value > 0 then
-          print('player ' .. color .. ' next  ' .. next_value .. ' in ' .. zone.zonetype)
+          --print('player ' .. color .. ' next  ' .. next_value .. ' in ' .. zone.zonetype)
           --TheDorito use the payout manager to pay
           if(PayoutManager ~= nil) then
             PayoutManager.call('pay',{color = player.color, amt = next_value})
@@ -590,7 +612,8 @@ function assignZoneBet(zone, obj, bettype)
     if(obj.getValue() ~= nil and obj.tag == 'Chip') then
       value = obj.getValue() * math.max(obj.getQuantity(), 1)
     elseif (obj.tag == "Chip") then
-      value = obj.value * math.max(obj.getQuantity(), 1)
+      --value = obj.value * math.max(obj.getQuantity(), 1)
+      value = obj.value
     end
     if bettype == 'leave' then
       value = value * -1
@@ -1021,7 +1044,7 @@ PlayerSeatOrder = {"Blue", "Green", "White", "Red", "Pink", "Purple"}
 
 function passShooter()
   local foundNextShooter = false
-log(PlayerSeatOrder, 'PlayerOrder..')
+--log(PlayerSeatOrder, 'PlayerOrder..')
  for i = 1, #PlayerSeatOrder, 1 do
    nextShooter()
     if (Player[PlayerSeatOrder[shooter]].seated) then
@@ -1123,7 +1146,7 @@ function displayBetInfo ()
     displayInfo = 'Betting Info<br />'
     for k,v in pairs(bettingZones) do
       if(k == 'hard' or k == 'place' ) then
-        print('hard or place zone found')
+        --print('hard or place zone found')
         for i = 0,13,1 do
           if v[i] then
             local zone = v[i]

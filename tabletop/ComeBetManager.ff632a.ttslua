@@ -1,0 +1,279 @@
+--ComeBets Manager - designed to work with custom chips where chip/stack has a .value parameter set
+disabled = true -- prevents buttons and collisions working on the master copy
+appY = 17
+zFront = 19
+xSide = 58
+rotFront = {0,0,0}
+rotSide = {0,90,0}
+appearanceLocations = {
+  Blue = {pos = {21,appY,zFront}, rot = rotFront},
+  Green = {pos = {34,appY,zFront}, rot = rotFront},
+  White = {pos = {48,appY,zFront}, rot = rotFront},
+  Red = {pos = {57.7,appY,18.5}, rot = {0,45,0}},
+  Pink = {pos = {xSide,appY,8}, rot = rotSide},
+  Purple = {pos = {xSide,appY,-4}, rot = rotSide},
+}
+
+
+player = "" -- color of player
+bets = {} -- current active come bets for player
+displayedBetIndex = 1 --bet currently displayed from bets (if there are multiple)
+
+spawnedButtonCount = 0
+placeButtonColorSelected = {0.1,0.1,0.1,0.8}
+buttonScale = 1
+--buttonHoverColor = {0.1,0.1,0.1,0}
+buttonColor = {0,0,0,0}
+displayButtonColor = {0,0,0,1}
+buttonFontColor = {1,1,1,0.8}
+placeButtonLocy = 0.2
+PayoutManager = nil
+
+defaultButtonData = {
+  button = {
+    {pos   = {0,placeButtonLocy,0.53}, height  = 100, width = 400,size = 1, state = 1, name='submit', buttonNumber = 0, labelColor=buttonColor, fontColor = buttonFontColor},
+    {pos   = {0,placeButtonLocy,0.82}, height  = 100, width = 300,size = 1, state = 1, name='noBet', buttonNumber = 0, labelColor=buttonColor, fontColor = buttonFontColor},
+  },
+  display = {
+    {pos   = {0,placeButtonLocy,-0.47}, height  = 1, width = 1,size = 70, state = 1, name='ComeBetInfo', buttonNumber = 0, labelColor=displayButtonColor, fontColor = buttonFontColor},
+    {pos   = {0,placeButtonLocy,0}, height  = 1, width = 1,size = 100, state = 1, name='OddsBetAmt', buttonNumber = 0, labelColor={0,0,0,1}, fontColor = "Yellow"},
+  }
+    }
+
+function onLoad ()
+  ref_buttonData = defaultButtonData
+  createButtons()
+  createDisplay()
+  getPayoutManager ()
+
+  --initialize({player_color = "White", bet = {pointNumber = 4,lineBet = 5, oddsBet = 0}})
+  --hp = Player['Pink'].getHandTransform().position
+  --self.setLock(true)
+  --self.setPosition(appearanceLocations['Purple'].pos)
+  --self.setRotation(appearanceLocations['Purple'].rot)
+end
+
+function initialize(params)
+--player_color
+--bet {int pointNumber, int lineBet, int oddsBet}
+--
+--Called by the global script after a new ComeBetManager has been spawned
+subscribeToEvents()
+if(params.player_color) then
+  self.setDescription(params.player_color)
+  player = params.player_color
+  self.setLock(true)
+  self.setPosition(appearanceLocations[player].pos)
+  self.setRotation(appearanceLocations[player].rot)
+else
+  print(self.getName()..':'..self.getGUID()..':Could not initialize.  No player provided.')
+  return false
+end
+if(params.bet) then
+  table.insert(bets,params.bet)
+else
+  print(self.getName()..':'..self.getGUID()..':Could not initialize.  No bet provided.')
+end
+--see if player has any other existing come bets
+--updatePlayerComeBetAmounts()
+--if so, add those to the bets table
+updateBetAmountsDisplay ()
+updateBetInfoDisplay ()
+disabled = false -- enabled the buttons and collision detection
+end
+
+function getPlayerComeBetAmounts ()
+
+end
+
+function getPayoutManager (i)
+  if (not i) then
+    i = 0
+  end
+  if (Global.getVar('PayoutManager')) then
+    PayoutManager = Global.getVar('PayoutManager')
+  elseif (i < 10) then
+    i = i + 1
+    Wait(function () getPayoutManager(i) end,2)
+  else
+    print('Could not find PayoutManager '..self.getName())
+  end
+end
+
+function payPlayer(amount)
+  PM = PayoutManager
+  if (PM and amount and amount > 0)
+   then
+     --log(PM,'PM')
+     local PPparams = {color = player, amt = amount }
+     PM.call('pay',PPparams)
+   else
+     print('Could not pay player : '..player..':'..amount)
+   end
+end
+
+function onCollisionEnter(info)
+  if(disabled) then
+    --no nothing
+  else
+    --.collision_object
+    --print('Collision '..info.collision_object.value )
+    if(info.collision_object.tag == 'Chip') and info.collision_object.value ~= nil then
+      addChipToCurrentBetAmount (info.collision_object)
+      --can be single chip or stack. Should not matter.
+    end
+    --if it's not a chip, we don't need to do anything.
+  end
+
+end
+
+function addChipToCurrentBetAmount (chip)
+  --log(bets[displayedBetIndex].odds,'OddsBet')
+  if(bets[displayedBetIndex].odds ) then
+    bets[displayedBetIndex].odds = bets[displayedBetIndex].odds + chip.value
+    --log(chip.value,'ComeBetsManager-added to total for bet')
+    chip.destruct()
+  else
+    --print('New oddsBet value is'..chip.value)
+    bets[displayedBetIndex].odds = chip.value
+  end
+  updateBetAmountsDisplay()
+end
+
+function subscribeToEvents ()
+  --Global.call('subscribeCustomEvent', {eventName = 'pointOff', subscribingObject = self})
+  Global.call('subscribeCustomEvent', {eventName = 'diceOut', subscribingObject = self})
+end
+
+function onCustomEvent (eventParams)
+  if(eventParams.eventName == 'diceOut') then
+    Global.call('unsubscribeCustomEvent',{eventName = 'diceOut',subscribingObject = self})
+    --Wait.time(function () self.destruct() end, 2)
+    self.destruct()
+  end
+  --Wait.time(function () updateBetAmountsDisplay () end, 1)
+end
+
+function click_button(tableIndex,buttonIndex)
+  if(disabled) then
+    --do nothing
+    else
+      local param = {}
+      if(ref_buttonData.button[tableIndex] and ref_buttonData.button[tableIndex].name == 'noBet') then
+        if(bets[displayedBetIndex].odds and bets[displayedBetIndex].odds > 0) then
+          payPlayer(bets[displayedBetIndex].odds)
+          bets[displayedBetIndex].odds = 0
+          updateBetAmountsDisplay ()
+        end
+      elseif (ref_buttonData.button[tableIndex] and ref_buttonData.button[tableIndex].name == 'submit') then
+        sendOddsBet ()
+        Global.call('removeDestroyedComeBetManager', {player_color = player})
+        Global.call('unsubscribeCustomEvent',{eventName = 'diceOut',subscribingObject = self})
+        self.destruct()
+        --Wait.time(function () self.destruct() end,2)
+      end
+  end
+end
+
+function sendOddsBet ()
+  --{pointNumber = 4,lineBet = 5, oddsBet = 0}
+  local betTable = {}
+  for _,bet in ipairs(bets) do
+    betTable[bet.pointNumber] = bet.odds
+  end
+  --log(player,'Player')
+  --log(betTable,'Bets')
+  local params = {player_color = player, bets = betTable}
+  Global.call('playerComeOddsBet', params)
+end
+
+function updateBetAmountsDisplay ()
+ for _,v in pairs(ref_buttonData.display) do
+   -- get the place position of the buttonNumber
+   if v.name == 'OddsBetAmt' and bets[displayedBetIndex].odds then
+     self.editButton({index = v.buttonNumber, label='$'..tostring(abb(bets[displayedBetIndex].odds))})
+   end
+ end
+end
+
+function updateBetInfoDisplay ()
+ for _,v in pairs(ref_buttonData.display) do
+   -- get the place position of the buttonNumber
+   if v.name == 'ComeBetInfo' and bets[displayedBetIndex].lineBet and bets[displayedBetIndex].pointNumber  then
+     local displayLabel = 'Come $'..tostring(abb(bets[displayedBetIndex].lineBet))..' on '..tostring(bets[displayedBetIndex].pointNumber)
+     self.editButton({index = v.buttonNumber, label=displayLabel})
+   end
+ end
+end
+
+function createButtons()
+  for i, data in ipairs(ref_buttonData.button) do
+      --Sets up reference function
+      local buttonNumber = spawnedButtonCount
+      local funcName = "clickButton"..i
+      local func = function() click_button(i, buttonNumber) end
+      self.setVar(funcName, func)
+      --Sets up label
+      local label = ""
+      --Creates button and counts it
+      self.createButton({
+          label=label, click_function=funcName, function_owner=self,
+          position=data.pos, height=data.height, width=data.width,
+          font_size=data.size,
+          --scale=buttonScale,
+          press_color = placeButtonColorSelected,
+          color=data.labelColor, font_color=data.fontColor
+          --,tooltip = data.tooltip
+          --,hover_color = buttonHoverColor
+      })
+      spawnedButtonCount = spawnedButtonCount + 1
+      data.buttonNumber = buttonNumber
+    end
+end
+
+function none()
+end
+
+function createDisplay()
+
+    for i, data in ipairs(ref_buttonData.display) do
+        --Sets up reference function
+        local buttonNumber = spawnedButtonCount
+        local funcName = "display"..i
+        local func = function() none() end
+        self.setVar(funcName, func)
+        --Sets up label
+        local label = ""
+        self.createButton({
+            label=label, click_function=funcName, function_owner=self,
+            position=data.pos, height=data.height, width=data.width,
+            font_size=data.size,
+            --scale=buttonScale,
+            press_color = placeButtonColorSelected,
+            color=data.labelColor, font_color=data.fontColor
+        })
+        spawnedButtonCount = spawnedButtonCount + 1
+        data.buttonNumber = buttonNumber
+      end
+end
+
+
+
+function abb(num)
+  n = tonumber(num)
+    if n>=1*10^4 and n<1*10^6 then
+        n=(n/1*10^-3)
+        return string.sub(tostring(n),1,5).."k"
+    elseif n>=1*10^6 and n<1*10^7 then
+        n=(n/1*10^-6)
+        return string.sub(tostring(n),1,3).."M"
+    elseif n>=1*10^7 and n<1*10^8 then
+        n=(n/1*10^-7)
+        return string.sub(tostring(n),1,3).."B"
+    elseif n>=1*10^8 and n<1*10^9 then
+        n=(n/1*10^-8)
+        return string.sub(tostring(n),1,3).."T"
+    else
+        return n
+    end
+end

@@ -1,4 +1,4 @@
-
+payments = {}
 
 registeredPlayer = {
 }
@@ -22,6 +22,14 @@ payoutBag = {Red = '0d754b',
                     Purple = 'a9e85a',
                     Green = '076330',
                     Blue = 'c1116b'
+                  }
+
+revPayoutBag = {    ['0d754b'] = "Red",
+                    ['765aaf'] = "White",
+                    ['b36432']= "Pink",
+                    ['a9e85a']= "Purple",
+                    ['076330'] = "Green",
+                    ['c1116b']= "Blue"
                   }
 
 chipDenoms = {1,5,10,25,100,500,1000,100000}
@@ -72,29 +80,68 @@ function registerPlayer (playerSteamName, bagGUID)
   end
 end
 
+clearPaymentsIsRunning = false
+lastPaymentColor = nil
+paying = {}
+
+function clearPayments()
+  print('clearpayment')
+  if(payments and payments[1]~= nil) then
+    --log(payments,'Payments')
+    if(payments[1].steam_name) then
+      payingColor = revPayoutBag[registeredPlayer[payments[1].steam_name]]
+    elseif(payments[1].color) then
+      payingColor = payments[1].color
+    else
+      payingColor = 'unknown'
+    end
+    if(not paying[payingColor]) then
+      paying[payingColor] = true
+      payNow(payments[1])
+      table.remove(payments,1)
+      clearPayments()
+    else
+      Wait.time(clearPayments,1)
+    end
+  else
+    payments = {}
+    clearPaymentsIsRunning = false
+    --paying = {}
+  end
+end
+
 function pay(p)
+  queuePayments (p)
+
+  if(clearPaymentsIsRunning) then
+    --do nothing
+    else
+      clearPaymentsIsRunning = true
+      clearPayments()
+  end
+end
+
+--function pay(p)
+function payNow(p)
   local params = p
   local payout = params.payout
-  local timer = 3
-  if(params.timer) then
-   timer = params.timer + 3
-   params.timer = timer
- else
-   params.timer = timer
-  end
+
   if(payout) then
       v = payout[#payout]
       payout[#payout] = nil
       params.payout = payout
       if(params.steam_name ~= nil and v.amt ~= nil and v.amt > 0) then
         payPlayerBySteamName(params.steam_name, v.amt, v.denom)
+
         if (#payout > 0) then
-        Wait.time(function () pay(params) end,timer)
+        --Wait.time(function () pay(params) end,timer)
+        pay(params)
       end
       elseif (params.color ~= nil and v.amt ~= nil and v.amt > 0) then
         payPlayerByColor (params.color, v.amt, v.denom)
         if (#payout > 0) then
-        Wait.time(function () pay(params) end,timer)
+        --Wait.time(function () pay(params) end,timer)
+        pay(params)
         end
       end
   else
@@ -124,6 +171,10 @@ function payPlayerByColor (playerColor, amt, forceDenom)
   end
 end
 
+function queuePayments (params)
+  table.insert(payments,params)
+end
+
 function payPlayerBag (playerBag, amt, forceDenom)
   local payLoc = playerBag.getPosition()
   local yIncrement = 1
@@ -147,10 +198,11 @@ function payPlayerBag (playerBag, amt, forceDenom)
           yValue = yValue + yIncrement
         end
         if (payCount > 0) then
-          Wait.Time(function () groupAndUnlockSpawnedChips (spawnedChips) end,2 )
+          Wait.Time(function () groupAndUnlockSpawnedChips (spawnedChips, revPayoutBag[playerBag.getGUID()]) end,2 )
         end
         if(remainingUnpaidAmt > 0) then
-          payPlayerBag(playerBag,remainingUnpaidAmt) -- anything leftover, pay per normal logic
+          ---payPlayerBag(playerBag,remainingUnpaidAmt) -- anything leftover, pay per normal logic
+          pay({color = playerBag.getDescription(),amt=remainingUnpaidAmt})
         end
     else
     -- not a forced denomination.  Determine what chips are needed to pay the players
@@ -180,13 +232,14 @@ function payPlayerBag (playerBag, amt, forceDenom)
       end
       loopCount1 = loopCount1 + 1
       if (payCount > 0) then
-        Wait.Time(function () groupAndUnlockSpawnedChips (spawnedChips) end,2 )
+        Wait.Time(function () groupAndUnlockSpawnedChips (spawnedChips, revPayoutBag[playerBag.getGUID()]) end,2 )
       end
     end
     if (loopCount2 == maxAllowedLoops or loopCount1 == maxAllowedLoops) then
       print ('While loop timed out')
     end
     broadcastToAll("Paid player "..amt)
+    Wait.time(function () recalculateBagTotal(playerBag) end,5)
     end
     return true
   else
@@ -199,15 +252,16 @@ function lockSelf(obj)
   obj.setLock(true)
 end
 
-function groupAndUnlockSpawnedChips (chips)
+function groupAndUnlockSpawnedChips (chips,playerColor)
   local count = 0
   for _,v in pairs(chips) do
     v.setLock(false)
     count = count + 1
   end
   if (count > 1) then
-    group(chips)
+    --group(chips)
   end
+  Wait.time(function () paying[playerColor] = false end,2)
 
 end
 
@@ -267,6 +321,8 @@ function makeChange (changeParams)
   if(changeParams.color) then
     payPlayerByColor (changeParams.color, changeValue, newDenom)
   end
+
+
 end
 
 
@@ -308,7 +364,19 @@ function takeDenom (takeParams)
   --qty - how many to take (up to amount in the bag)
   --bag - where to take them from
   --color - player color
+  --rightClick = true if player used other than left click to click the button
+  if(not takeParams.qty) then
+    -- right click = take out a single chip
+    if(takeParams.rightClick) then
+      qty = 1
+    else
+      qty = 10
+    end
+  else
+    qty = takeParams.qty
+ end
   takeObjects = {}
+  --log(takeParams.bag.getObjects(),'Bag Objects')
   local totalCount = 0 -- to total count of chip/stack objects of this denom in the bag
   --log(takeParams.bag.getObjects(),'PayoutManager -- takeDenom -- bag objects')
   if (takeParams.bag.getObjects()) then
@@ -320,7 +388,7 @@ function takeDenom (takeParams)
 
       end
     end
-    if totalCount <= takeParams.qty then
+    if totalCount <= qty then
       -- taking these chips will bring the qty to zero in the bag for this denom.
       for i,w in pairs(bagButtons[takeParams.bag.guid].buttons) do
         if w.chipName == takeParams.chipName then
@@ -336,7 +404,7 @@ function takeDenom (takeParams)
 
     for c_guid,v in pairs(takeObjects) do
 
-      if (qtyCount > takeParams.qty) then
+      if (qtyCount > qty) then
         break
       else
         -- spawn a chip and increment the qty spawned and the position yval of the next chip (avoids premature grouping)
@@ -353,7 +421,10 @@ function takeDenom (takeParams)
       end
     end
   end
+  Wait.time(function () recalculateBagTotal(takeParams.bag) end,5)
 end
+
+--function breakUpChipStack
 
 function moveSpawnedChipToPlayerBoard (theChip,pcolor,qty)
   --the qty number is used to adjust the position yval
@@ -399,7 +470,7 @@ function createTakeButtons(obj,pcolor)
         --Sets up reference function
         local buttonNumber = spawnedButtonCount
         local funcName = obj.guid.."take"..i
-        self.setVar(funcName, function() takeDenom({chipName = data.chipName, qty = 10, bag = obj, color=pcolor}) end)
+        self.setVar(funcName, function(_,__,right_Click) takeDenom({chipName = data.chipName, bag = obj, color=pcolor, rightClick=right_Click}) end)
 
         obj.createButton({
             label=data.label, click_function=funcName, function_owner=self,
@@ -408,7 +479,8 @@ function createTakeButtons(obj,pcolor)
             --scale=buttonScale,
             press_color = buttonColorSelected,
             color=data.labelColor, font_color=data.fontColor,
-            rotation = data.rot
+            rotation = data.rot,
+            tooltip = "Left Click: Take 10\nRigh Click: Take 1"
         })
         bagButtons[obj.guid].buttons[bagButtons[obj.guid].spawnedButtonCount] = data
         bagButtons[obj.guid].spawnedButtonCount = bagButtons[obj.guid].spawnedButtonCount + 1
@@ -416,6 +488,41 @@ function createTakeButtons(obj,pcolor)
         --bagButtons[obj.guid].buttons[bagButtons[obj.guid].spawnedButtonCount].buttonNumber = bagButtons[obj.guid].buttons[bagButtons[obj.guid].spawnedButtonCount]
       end
 end
+
+function filterStackedChips (param)
+--called from Global whenever an object is placed in a bag or stacked
+  container = param.container
+  enter_object = param.enter_object
+  xparam = 2
+  if revPayoutBag[container.getGUID()] ~= nil then
+    if(enter_object.tag == "Chip") then
+      if(enter_object.getQuantity() > 1) then
+        local yval = 5
+        for i = 1,enter_object.getQuantity() -1 ,1 do
+          enter_object.takeObject({
+            position          = {container.getPosition().x+xparam,container.getPosition().y + yval,container.getPosition().z},
+            smooth            = false
+          })
+          yval = yval + 2
+          xparam = -1 * xparam
+          if(i > 500) then
+            break
+          end
+        end
+        --print('Prevented entering container')
+        return false
+      else
+        --print('Allowing single chip in ')
+        return true -- allows single chip to enter bag
+      end
+    else
+      print('Cannot put anything other than chips into Payouts')
+      return false
+    end
+  end
+  return true-- Allows object to enter.
+end
+
 
 function onObjectEnterContainer(bag, obj)
 
@@ -491,6 +598,30 @@ function leave_callback (obj, bag)
   end
 
     end
+end
+
+function recalculateBagTotal (bag)
+  -- count up all the chips in the bag and update total dipslayed
+  local total = 0
+  if(bag.getGUID()) then
+    chips = bag.getObjects()
+    for k,v in pairs(chips) do
+      local value = nil
+      if(v.lua_script_state ~= "") then
+        value = JSON.decode(v.lua_script_state).value
+      else
+        chipvalstr = v.name:gsub('%$',''):gsub('K','000')
+        value = tonumber(chipvalstr)
+      end
+
+      if(value) then
+        --print(value)
+      total = total + value
+    end
+    end
+    bag.setVar('total',total)
+    bag.editButton({index = i, label = abb(total)})
+  end
 end
 
 function abb(num)

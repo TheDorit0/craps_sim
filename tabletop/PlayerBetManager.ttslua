@@ -1,9 +1,11 @@
 
-betZone = {guid = '4a68e8'} --betZone.obj set by onLoad
+betZone = {guid = '262b2c'} --betZone.obj set by onLoad
 spawnedButtonCount = 0
 placeButtonColorSelected = "White"
 buttonScale = 1
 placeButtonColor = {0,0,0,0}
+displayButtonColor = {0,0,0,0.5}
+changeButtonColor = {0,0,0,0}
 buttonFontColor = "Black"
 placeButtonLocy = 0.6
 PayoutManager = nil
@@ -11,41 +13,50 @@ PayoutManager = nil
 defaultButtonData = {
   placeButton = {
     --claim
-    {pos   = {-4.2,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place4', placeNumber = "4", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
-    {pos   = {-2.35,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place5', placeNumber = "5", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
-    {pos   = {-0.55,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place6', placeNumber = "6", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
-    {pos   = {1.25,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place8', placeNumber = "8", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
-    {pos   = {3.05,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place9', placeNumber = "9", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
-    {pos   = {4.85,placeButtonLocy,-2}, height  = 500, width = 500,size = 500, state = 1, name='Place10', placeNumber = "10", buttonNumber = 0, labelColor="Black", fontColor = "Black"}
+    {pos   = {-2.9,placeButtonLocy,3.4}, height  = 500, width = 600,size = 500, state = 1, name='Place4', placeNumber = "4", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {-1.26,placeButtonLocy,3.4}, height  = 500, width = 600,size = 500, state = 1, name='Place5', placeNumber = "5", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {0.38,placeButtonLocy,3.4}, height  = 500, width = 600,size = 500, state = 1, name='Place6', placeNumber = "6", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {2.02,placeButtonLocy,3.4}, height  = 500, width = 600,size = 500, state = 1, name='Place8', placeNumber = "8", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {3.66,placeButtonLocy,3.4}, height  = 500, width = 600,size = 500, state = 1, name='Place9', placeNumber = "9", buttonNumber = 0, labelColor="Black", fontColor = "Black"},
+    {pos   = {5.3,placeButtonLocy,3.4}, height  = 500, width = 600,size = 500, state = 1, name='Place10', placeNumber = "10", buttonNumber = 0, labelColor="Black", fontColor = "Black"}
 },
 
   placeDisplay = {
-    {pos   = {-4.2,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display4', buttonNumber = 0,placeNumber = "4", labelColor={0,0,0,1}, fontColor = "White"},
-    {pos   = {-2.35,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display5', buttonNumber = 0,placeNumber = "5", labelColor={0,0,0,1}, fontColor = "White"},
-    {pos   = {-0.55,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display6', buttonNumber = 0,placeNumber = "6", labelColor={0,0,0,1}, fontColor = "White"},
-    {pos   = {1.25,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display8', buttonNumber = 0,placeNumber = "8", labelColor={0,0,0,1}, fontColor = "White"},
-    {pos   = {3.05,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display9', buttonNumber = 0,placeNumber = "9", labelColor={0,0,0,1}, fontColor = "White"},
-    {pos   = {4.85,placeButtonLocy,-0.2}, height  = 500, width = 520,size = 200, state = 1, name='Display10', buttonNumber = 0,placeNumber = "10", labelColor={0,0,0,1}, fontColor = "White"}
+    {pos   = {-2.9,placeButtonLocy,1.4}, height  = 400, width = 600,size = 200, state = 1, name='Display4', buttonNumber = 0,placeNumber = "4", labelColor=displayButtonColor, fontColor = "White"},
+    {pos   = {-1.26,placeButtonLocy,1.4}, height  = 400, width = 600,size = 200, state = 1, name='Display5', buttonNumber = 0,placeNumber = "5", labelColor=displayButtonColor, fontColor = "White"},
+    {pos   = {0.38,placeButtonLocy,1.4}, height  = 400, width = 600,size = 200, state = 1, name='Display6', buttonNumber = 0,placeNumber = "6", labelColor=displayButtonColor, fontColor = "White"},
+    {pos   = {2.02,placeButtonLocy,1.4}, height  = 400, width = 600,size = 200, state = 1, name='Display8', buttonNumber = 0,placeNumber = "8", labelColor=displayButtonColor, fontColor = "White"},
+    {pos   = {3.66,placeButtonLocy,1.4}, height  = 400, width = 600,size = 200, state = 1, name='Display9', buttonNumber = 0,placeNumber = "9", labelColor=displayButtonColor, fontColor = "White"},
+    {pos   = {5.3,placeButtonLocy,1.4}, height  = 400, width = 600,size = 200, state = 1, name='Display10', buttonNumber = 0,placeNumber = "10", labelColor=displayButtonColor, fontColor = "White"}
   },
   removeButton= {
-    {pos   = {-4.15,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove4', buttonNumber = 0,placeNumber = "4", labelColor={0,0,0,0}, fontColor = "White"},
-    {pos   = {-2.35,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove5', buttonNumber = 0,placeNumber = "5", labelColor={0,0,0,0}, fontColor = "White"},
-    {pos   = {-0.55,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove6', buttonNumber = 0,placeNumber = "6", labelColor={0,0,0,0}, fontColor = "White"},
-    {pos   = {1.25,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove8', buttonNumber = 0,placeNumber = "8", labelColor={0,0,0,0}, fontColor = "White"},
-    {pos   = {3.05,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove9', buttonNumber = 0,placeNumber = "9", labelColor={0,0,0,0},fontColor = "White"},
-    {pos   = {4.85,placeButtonLocy,1.75}, height  = 500, width = 520,size = 200, state = 1, name='Remove10', buttonNumber = 0,placeNumber = "10", labelColor={0,0,0,0}, fontColor = "White"}
-  }}
+    {pos   = {-2.9,placeButtonLocy,4.5}, height  = 500, width = 600,size = 200, state = 1, name='Remove4', buttonNumber = 0,placeNumber = "4", labelColor=placeButtonColor, fontColor = "White"},
+    {pos   = {-1.26,placeButtonLocy,4.5}, height  = 500, width = 600,size = 200, state = 1, name='Remove5', buttonNumber = 0,placeNumber = "5", labelColor=placeButtonColor, fontColor = "White"},
+    {pos   = {0.38,placeButtonLocy,4.5}, height  = 500, width = 600,size = 200, state = 1, name='Remove6', buttonNumber = 0,placeNumber = "6", labelColor=placeButtonColor, fontColor = "White"},
+    {pos   = {2.02,placeButtonLocy,4.5}, height  = 500, width = 600,size = 200, state = 1, name='Remove8', buttonNumber = 0,placeNumber = "8", labelColor=placeButtonColor, fontColor = "White"},
+    {pos   = {3.66,placeButtonLocy,4.5}, height  = 500, width = 600,size = 200, state = 1, name='Remove9', buttonNumber = 0,placeNumber = "9", labelColor=placeButtonColor,fontColor = "White"},
+    {pos   = {5.3,placeButtonLocy,4.5}, height  = 500, width = 600,size = 200, state = 1, name='Remove10', buttonNumber = 0,placeNumber = "10", labelColor=placeButtonColor, fontColor = "White"}
+  },
+  changeButton= {
+    {pos   = {5.65,placeButtonLocy,-3.25}, height  = 500, width = 600,size = 200, state = 1, name='ChangeUp', buttonNumber = 0, labelColor=changeButtonColor, fontColor = "White", tooltip = 'Color up'},
+    {pos   = {5.65,placeButtonLocy,-1.65}, height  = 500, width = 600,size = 200, state = 1, name='ChangeDown', buttonNumber = 0, labelColor=changeButtonColor, fontColor = "White", tooltip = 'Get change'}
+  }
+}
 
 function onLoad ()
   ref_buttonData = defaultButtonData
   createPlaceButtons()
   createCurrentAmtButtons()
   createRemoveButtons()
+  createChangeButtons()
   betZone['obj'] = getObjectFromGUID(betZone.guid)
   getPayoutManager ()
+  subscribeToEvents()
+end
+
+function subscribeToEvents ()
   Global.call('subscribeCustomEvent', {eventName = 'pointOff', subscribingObject = self})
   Global.call('subscribeCustomEvent', {eventName = 'hostBetPlaced', subscribingObject = self})
-
 end
 
 function onCollisionEnter(collision_info)
@@ -53,19 +64,9 @@ function onCollisionEnter(collision_info)
   --   collision_object    Object
   --   contact_points      Table     {Vector, ...}
   --   relative_velocity   Vector
-  --log(collision_info.contact_points,'Collision INfo')
-  --print('Collision points '..collision_info.contact_points.x..','..collision_info.contact_points.y..','..collision_info.contact_points.z)
-  if(collision_info.contact_points[1][1] > 52 and collision_info.contact_points[3][1] < 55 and collision_info.contact_points[2][3] > 44 and collision_info.collision_object.tag == 'Chip') then
-    -- it's in the change corner
-    if(PayoutManager) then
-      Wait.time(function () PayoutManager.call('makeChange',{color = self.getDescription(), chip = collision_info.collision_object}) end,0)
-
-    end
-  end
 end
 
 function onCustomEvent (eventParams)
-  print ('Custom event received in PlayerBetManager')
   Wait.time(function () updateBetAmountsDisplay () end, 1)
 end
 
@@ -115,6 +116,17 @@ function getBetAmt ()
     end
   end
   return amount
+end
+
+function getBetZoneChips()
+  local betZoneChips = {}
+  local ChipsInZone = betZone.obj.getObjects()
+  for _,v in pairs(ChipsInZone) do
+    if v.tag == "Chip" or v.tag == "Generic" then
+      table.insert(betZoneChips,v)
+    end
+  end
+  return betZoneChips
 end
 
 function destroyBetZoneChips ()
@@ -176,6 +188,21 @@ function click_remove(tableIndex,buttonIndex)
   Wait.time(updateBetAmountsDisplay,1)
 end
 
+function click_change(tableIndex,buttonIndex)
+  --print('Change')
+  local param = {}
+  param.changeType = ref_buttonData.changeButton[tableIndex].name
+
+  if(PayoutManager and param.changeType == 'ChangeDown' ) then
+    for _,v in pairs(getBetZoneChips()) do
+      Wait.time(function () PayoutManager.call('makeChange',{color = self.getDescription(), chip = v}) end,0)
+    end
+  elseif (PayoutManager and param.changeType == 'ChangeUp') then
+    payPlayer(getBetAmt ())
+    destroyBetZoneChips()
+  end
+end
+
 function updateBetAmountsDisplay ()
  for _,v in pairs(ref_buttonData.placeDisplay) do
    -- get the place position of the buttonNumber
@@ -186,7 +213,7 @@ function updateBetAmountsDisplay ()
    if(betAmt == nil) then
      betAmt = 0
    end
-   self.editButton({index = v.buttonNumber, label=tostring(betAmt)})
+   self.editButton({index = v.buttonNumber, label=abb(betAmt)})
  end
 end
 
@@ -238,6 +265,32 @@ function createRemoveButtons()
       end
 end
 
+function createChangeButtons()
+
+    for i, data in ipairs(ref_buttonData.changeButton) do
+        --Sets up reference function
+        local buttonNumber = spawnedButtonCount
+        local funcName = "change"..i
+        local func = function() click_change(i, buttonNumber) end
+        self.setVar(funcName, func)
+        --Sets up label
+        local label = ""
+        --Creates button and counts it
+        self.createButton({
+            label=label, click_function=funcName, function_owner=self,
+            position=data.pos, height=data.height, width=data.width,
+            font_size=data.size,
+            --scale=buttonScale,
+            press_color = placeButtonColorSelected,
+            color=data.labelColor, font_color=data.fontColor,
+            tooltip = data.tooltip
+        })
+        spawnedButtonCount = spawnedButtonCount + 1
+        data.buttonNumber = buttonNumber
+      end
+end
+
+
 function none()
 end
 
@@ -281,3 +334,23 @@ function payPlayer(amount)
      PM.call('pay',PPparams)
    end
 end
+
+function abb(num)
+  n = tonumber(num)
+    if n>=1*10^4 and n<1*10^6 then
+        n=(n/1*10^-3)
+        return string.sub(tostring(n),1,5).."k"
+    elseif n>=1*10^6 and n<1*10^7 then
+        n=(n/1*10^-6)
+        return string.sub(tostring(n),1,3).."M"
+    elseif n>=1*10^7 and n<1*10^8 then
+        n=(n/1*10^-7)
+        return string.sub(tostring(n),1,3).."B"
+    elseif n>=1*10^8 and n<1*10^9 then
+        n=(n/1*10^-8)
+        return string.sub(tostring(n),1,3).."T"
+    else
+        return n
+    end
+end
+--> 1.3T

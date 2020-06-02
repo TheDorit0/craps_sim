@@ -54,6 +54,8 @@ function onObjectRandomize( obj, color )
         --diceSum = 0
         if (not randomized) then
         broadcastToAll(players[color].name .. ': dice is out!')
+        triggerCustomEvent({eventName = 'diceOut'})
+        cbm = {} -- clear out references to old comeBetManagers
         randomized = true
         startLuaCoroutine(Global, 'diceRoll')
       end
@@ -90,6 +92,7 @@ end
 function filterObjectEnterContainer(cont, obj)
   if PayoutManager then
     local params = {container = cont, enter_object = obj}
+    --log(params,'Global - filterObjEnterCont - calling PayoutManager')
     return PayoutManager.call('filterStackedChips',params)
   else
     return true
@@ -98,6 +101,7 @@ function filterObjectEnterContainer(cont, obj)
 end
 
 function onLoad()
+    log(Player['White'].getHandTransform(),'Player Hand Zone')
     Wait.time(setVars,2)
 
     -- initialize betting zones
@@ -120,7 +124,7 @@ function onLoad()
             end
         end
 
-      --  spawnStartingChips(ref)
+       --spawnStartingChips(ref)
     end
 
     startLuaCoroutine(Global, 'addPlayerToBetSheet')
@@ -190,10 +194,13 @@ function diceRoll()
                           end
                       elseif key == 'hard' then
                           for _, hardZone in pairs(zone) do
+                            --print('destroyzone:'..key..':'.._)
                               destroyZoneBets(hardZone)
                           end
                       elseif( key == 'anySeven' or key == bettingZones['anySeven'].zoneid) then
                         --do nothing.  it's paid in the one roll bets
+                      elseif key == "comeOdds" then
+                        destroyComeOddsBets(true)
                       else
                           destroyZoneBets(zone)
                       end
@@ -228,6 +235,7 @@ function diceRoll()
                 else
                   destroyZoneBets(bettingZones['field']) -- added by TheDorito
               end
+              destroyComeOddsBets(false)
           end
       elseif (diceSum == 2) or (diceSum == 3) or (diceSum == 12) then
           if not point then
@@ -252,6 +260,7 @@ function diceRoll()
               lockZoneChips(bettingZones['passLine'])
               -- TODO: allow ON place bets
           else
+              moveAndPayComeBets (diceSum)
               if (diceSum == point) then
                   broadcastToAll('point won! puck is OFF')
                   point = nil
@@ -388,18 +397,20 @@ function payZonePosition(zone, index)
 end
 
 function destroyZoneBets(zone)
-    for _, obj in pairs(zone.ref.getObjects()) do
-        if isChips(obj) then
-            obj.destroy()
-        end
+    if(zone.ref) then--added for established come bets, they have no actual zone
+      for _, obj in pairs(zone.ref.getObjects()) do
+          if isChips(obj) then
+              obj.destroy()
+          end
+      end
     end
     zone.bets = {}
 end
 
 function payPlaceZoneBets()
     zone = bettingZones['place'][diceSum]
-    log(bettingZones,'payPlaceZoneBets -bettingZones')
-    log(zone.bets,'payPlacezoneBets -zone.bets')
+    --log(bettingZones,'payPlaceZoneBets -bettingZones')
+    --log(zone.bets,'payPlacezoneBets -zone.bets')
     for color, bet in pairs(zone.bets) do
         if bet['value'] then
             hand_value = 0 -- value send to the hand
@@ -431,8 +442,8 @@ end
 
 function payHardZoneBets()
     zone = bettingZones['hard'][diceSum]
-    log(bettingZones,'payHardZoneBets -bettingZones')
-    log(zone.bets,'payHardZoneBets -zone.bets')
+    --log(bettingZones,'payHardZoneBets -bettingZones')
+    --log(zone.bets,'payHardZoneBets -zone.bets')
     for _, ref in pairs(zone.ref.getObjects()) do
         if isChips(ref) then
             ref.destruct()
@@ -471,7 +482,7 @@ function payHardZoneBets()
 end
 
 function payZoneBets(zone)
-  log (zone.ref,'zone.ref')
+  --log (zone.ref,'zone.ref')
     for _, ref in pairs(zone.ref.getObjects()) do
       --print('obj is '..ref.tag)
         if isChips(ref) then
@@ -548,7 +559,7 @@ end
 
 function onPlayerChangeColor(player)
     if(player ~= 'Grey' and player ~= 'Black') then
-      spawnStartingChips(Player[player])
+      --spawnStartingChips(Player[player])
     end
 
 end
@@ -726,6 +737,40 @@ function initializeZones()
     bettingZones['47145d'] = bettingZones['place'][8]
     bettingZones['5861c8'] = bettingZones['place'][9]
     bettingZones['b315b4'] = bettingZones['place'][10]
+
+    bettingZones['comeOdds'] = {
+      [4] = {
+        zonetype = 'comeOdds',
+        zonevalue = 4,
+        bets = {--<PlayerColor> = {flat = #, odds = #, marker = object}
+                      }
+    },
+      [5] = {
+        zonetype = 'comeOdds',
+        zonevalue = 5,
+        bets = {}
+    },
+      [6] = {
+        zonetype = 'comeOdds',
+        zonevalue = 6,
+        bets = {}
+    },
+      [8] = {
+        zonetype = 'comeOdds',
+        zonevalue = 8,
+        bets = {}
+    },
+      [9] = {
+        zonetype = 'comeOdds',
+        zonevalue = 9,
+        bets = {}
+    },
+      [10] = {
+        zonetype = 'comeOdds',
+        zonevalue = 10,
+        bets = {}
+    },
+    }
 
     -- bettingZones[xxxx] = 'come4'
     -- bettingZones[xxxx] = 'come5'
@@ -910,7 +955,7 @@ function onSubmitBets(_, value, id)
             if not zone['bets'][bettingFor] then
                 zone.bets[bettingFor] = {}
             end
-            log(zone['bets'],'onSubmitBets - zone[bets]')
+            --log(zone['bets'],'onSubmitBets - zone[bets]')
             marker = zone['bets'][bettingFor].marker
 
             if not marker then
@@ -942,9 +987,8 @@ function onSubmitBets(_, value, id)
 end
 
 
-
 function playerPlaceBet (paramz)
-  log(paramz, 'Global - playerPlaceBet')
+  --log(paramz, 'Global - playerPlaceBet')
 
     player = players[paramz.player.color]
     bettingFor = paramz.player.color
@@ -956,25 +1000,13 @@ function playerPlaceBet (paramz)
     theBet['amount'] = tonumber(paramz.amt)
 
     local PPBzone = bettingZones['place'][tonumber(placeNumber)]
-
     --log(PPBzone['bets'],'playerPlaceBet - PPBzone[bets]')
-
     if theBet.isOn and theBet['amount'] > 0 then
-
-
-
-
         if not PPBzone['bets'][bettingFor] then
-
             PPBzone.bets[bettingFor] = {}
-
         elseif (PPBzone['bets'][bettingFor] == 0) then
-
             PPBzone.bets[bettingFor] = {}
-
         end
-    --end
-
         if(PPBzone['bets'][bettingFor].marker) then
               marker = PPBzone['bets'][bettingFor].marker
               log(nil,'Found marker')
@@ -986,7 +1018,6 @@ function playerPlaceBet (paramz)
             })
             Wait.frames(function() marker.setLock(true) end, 50)
         end
-
         if(not marker.spawning) then
           marker.setDescription(string.format('%s: %d on %s', player.name, theBet['amount'], placeNumber))
           marker.setLock(true)
@@ -999,18 +1030,50 @@ function playerPlaceBet (paramz)
           Wait.condition(function () setMarker_callback (marker,PPBzone,player, theBet, placeNumber) end, function () return not marker.spawning end,
                         10,
                         function() print('Timed out waiting for a marker to spawn') end)
-
         end
 
-
-        -- TODO remove value from player's hand
-        --print(string.format('set bet %d on %s for %s', bet['amount'], betField, bettingFor))
     else
         --print(string.format('removing bet %d from %s for %s', bet['amount'], betField, bettingFor))
         PPBzone.bets[bettingFor].marker.destruct()
         PPBzone.bets[bettingFor] = {}
     end
 end
+
+function playerComeOddsBet (params)
+    --player_color
+    --bets {pointNum =  oddsBet}
+    player = players[params.player_color]
+    bets = params.bets
+
+
+    -- For each bet row in the bets table...
+    for pointNum, oddsBet in pairs(bets) do
+
+      if(bettingZones['comeOdds'][pointNum].bets) then
+        local b = bettingZones['comeOdds'][pointNum].bets[player.color]
+        if(b) then
+          -- Confirm that player has an active come bet on the pointNumber
+
+          if(b.flat ~= nil and b.flat > 0) then
+            -- create/replace the oddsBet in the player's come bet entry
+            b.odds = oddsBet
+            --this overrides any existing odds bet.  The ComeOddsManager object should already have paid it out
+            log(b,'Global - playerComeOddsBet - Player Bet for point '..tostring(pointNum))
+            --TODO add/update marker for come bet
+          else
+            --player has and entry for this number, but there is no current flat bet
+            print('Could not place come bet odds for player '..params.player_color..'. No active come bet found for point '..tostring(pointNum))
+          end
+        else
+          --player has no come bet entry for this number
+          print('Could not place come bet odds for player '..params.player_color..'. No active come bet found for point '..tostring(pointNum))
+        end
+      else
+        --no bets table exists for this point.  Something's borked if you end up here.
+      end
+    end
+end
+
 
 function setMarker_callback (theMarker,theMarkerZone,thePLR, theBet, placeNum)
   theMarker.setDescription(string.format('%s: %d on %s', thePLR.name, theBet['amount'], placeNum))
@@ -1021,6 +1084,7 @@ function setMarker_callback (theMarker,theMarkerZone,thePLR, theBet, placeNum)
 end
 
 function getPlaceBets (GPBparams)
+  -- can be called from other objects (specifically PlayerBetManager boards)
   -- player
   -- placeNumber
 
@@ -1034,6 +1098,206 @@ function getPlaceBets (GPBparams)
     end
   end
   return thevalue
+end
+
+--------------------------- [[
+-- Come Bets
+--------------------------- ]]
+--TODO If point is off and player has flat come bets on numbers,
+  --   and that point is rolled, the flat come bet should be paid and the odds returned.
+--TODO Add markers for come bets
+--TODO Add a button somewhere for player to manage their come odds bets.
+--TODO add arrow 'next' buttons to the comeBetManager so that it cycles through the palyer's come bets
+
+ComeBetManagerGUID = 'ff632a' -- widget that appears in front of player to provide their odds bet
+cbm = {} -- table of active comeBetManager objects  color : object
+
+function promptPlayerForComeBetOdds (plrColor,pointNum, lineBet, oddsBet)
+
+  cbmParams = {player_color = plrColor, bet = {pointNumber = pointNum, lineBet = lineBet, odds = oddsBet}}
+
+  if(cbm[plrColor]) then
+    initializeComeBetManager (cbmParams)
+    --cbm[plrColor].initialize()
+  else
+    local pos = getObjectFromGUID(ComeBetManagerGUID).getPosition()
+    local newCBM = getObjectFromGUID(ComeBetManagerGUID).clone({
+      position     = {pos.x,pos.y+2,pos.z},
+    })
+    cbm[plrColor] = newCBM
+
+    Wait.condition(function () initializeComeBetManager (cbmParams) end, function () return not newCBM.spawning end)--initialize,--finishedspawning
+  end
+  --initialize params
+  --player_color
+  --bet {int pointNumber, int lineBet, int oddsBet}
+end
+
+function removeDestroyedComeBetManager (params)
+  cbm[params.player_color] = nil
+end
+
+function initializeComeBetManager (params)
+  cbm[params.player_color].call('initialize',params)
+end
+
+function moveAndPayComeBets (pointNum)
+  local zoneBets = bettingZones['comeLine'].bets
+  local oddsBets = bettingZones['comeOdds'][pointNum].bets
+  local newOddsBets = {}
+  local newComeBets = {}
+  local destroyBetsTable = {}
+  log(zoneBets,'comeLine bets')
+  for plr,amt in pairs(zoneBets) do
+    if(oddsBets[plr] and oddsBets[plr].flat == amt) then
+      --player is off-and-on
+      --pay player their winnings, leave their oddsBet as is
+      broadcastToColor("Come bet is off-and-on for point : "..tostring(pointNum),plr)
+      newOddsBets[plr] = oddsBets[plr]
+      --leave their come bet as is
+      newComeBets[plr] = zoneBets[plr]
+      --payPlayer (calculateComeWin(oddsBets.flat, oddsBets.odds, pointNum))
+      PayoutManager.call('pay',{color = plr, amt = calculateComeWin(oddsBets[plr].flat, oddsBets[plr].odds, pointNum)})
+      promptPlayerForComeBetOdds (plr,pointNum,oddsBets[plr].flat,oddsBets[plr].odds)
+    else
+      --player has a new come bet or different amount.
+      if(oddsBets[plr] and oddsBets[plr].flat > 0) then
+        payout = 0
+        --pay player their winnings plus their bet, move their come bet to the odds zones
+        payout = oddsBets[plr].flat + oddsBets[plr].odds + calculateComeWin(oddsBets[plr].flat, oddsBets[plr].odds, pointNum)
+        newOddsBets[plr] = {flat = amt, odds = 0}
+        PayoutManager.call('pay',{color = plr, amt = payout})
+        table.insert(destroyBetsTable,plr)
+        promptPlayerForComeBetOdds (plr,pointNum,newOddsBets[plr].flat,newOddsBets[plr].odds)
+      else
+        print('new come point established')
+        --player has no existing come bet.  just move the new one to the point numbers
+        newOddsBets[plr] = {flat = amt, odds = 0}
+        log(newOddsBets[plr],'NewOddsBet for Player')
+        table.insert(destroyBetsTable,plr)
+        promptPlayerForComeBetOdds (plr,pointNum,newOddsBets[plr].flat,newOddsBets[plr].odds)
+      end
+    end
+
+  end
+  --pay existing come bets.
+  for plr,bet in pairs(oddsBets) do
+    if(zoneBets[plr]) then
+      --they've already been paid
+    else
+      payout = 0
+      if(oddsBets[plr].flat and oddsBets[plr].flat > 0) then
+        payout = oddsBets[plr].flat + oddsBets[plr].odds + calculateComeWin(oddsBets[plr].flat, oddsBets[plr].odds, pointNum)
+        PayoutManager.call('pay',{color = plr, amt = payout})
+        bettingZones['comeOdds'][pointNum].bets[plr] = nil
+        --newOddsBets[plr] = nil
+      end
+    end
+  end
+  destroyComelineChipForPlayers(destroyBetsTable)
+  for plr,bet in pairs(newOddsBets) do
+    oddsBets[plr] = bet
+    log(bettingZones['comeOdds'],'comeOdds')
+    log(bettingZones['comeOdds'][pointNum].bets[plr],'bettingZone oddsbets')
+    log(oddsBets[plr],'oddsBets shortcut for plr')
+  end
+  bettingZones['comeLine'].bets = newComeBets
+end
+
+function destroyComelineChipForPlayers(playerTable)
+  --TODO look through chips in the zone, any belonging to players in this table, destruct
+  zone = bettingZones['comeLine'].ref
+  zoneObjects = zone.getObjects()
+  for _, chip in pairs(zoneObjects) do
+
+    if (chip.tag == "Chip") then
+      -- determine owner of the chips
+      local chipOwner = getObjOwner(chip)
+      -- TODO check the current value of the player's flat bet and add it up
+      --  if there are more chips for the player than their flat bet, pay the player
+      --  any excess and clear the the unbet chip.
+      for _,v in ipairs(playerTable) do
+        if (chipOwner == v) then
+          -- if the player is in the player destruct table, destroy the chip.
+          chip.destruct()
+          print('destructing chip for player '..chipOwner)
+        end
+      end
+    end
+  end
+end
+
+function destroyComeOddsBets(oddsOn)
+    --oddsOn -true if odds of the come bets are on and should be destroyed
+    payouts = {}
+    if(oddsOn) then
+      --all bets can zero out safely
+    else
+      --return odds to player before zero out bets
+      for _,zone in pairs(bettingZones['comeOdds']) do
+        if(zone and zone.bets) then
+          for plr,bet in pairs(zone.bets) do
+            if(bet and bet.odds and bet.odds > 0) then
+               if(payouts[plr]) then
+                 payouts[plr] = payouts[plr] + bet.odds
+               else
+                 payouts[plr] = bet.odds
+               end
+               broadcastToColor('Returning $'..tostring(bet.odds)..'come odds to you from '..tostring(_),plr)
+            end
+          end
+        end
+      end
+      for plr,payout in pairs(payouts) do
+      PayoutManager.call('pay',{color = plr, amt = payout})
+      end
+    end
+    --zero out bets
+    for _,zone in pairs(bettingZones['comeOdds']) do
+      zone.bets = {}
+    end
+end
+
+function getObjOwner(obj)
+  steamNameTable = {}
+  if(obj.getDescription() and obj.getDescription() ~= nil) then
+    ownerText = string.sub(obj.getDescription(),string.find(obj.getDescription(),"Owner %s+ %w%p"))
+    log(ownerText,'OwnerText')
+    if(ownerText) then
+      steamName = string.gsub(ownerText,"Owner %s*","")
+      if(steamName) then
+        log(steamName,'Obj Owner Steam Name')
+        for _,plrColor in ipairs(getSeatedPlayers()) do
+          steamNameTable[Player[plrColor].steam_name] = plrColor
+        end
+        if(steamNameTable[steamName]) then
+          --found the player who owns this object.
+          return steamNameTable[steamName]
+        else
+          log('Could not find steam name'..steamName..'in seated players','Global -- getObjOwner')
+        end
+      end
+    else
+      log('Could not determine chip owner from '..obj.getDescription(),'Global -- getObjOwner')
+    end
+
+  end
+  return nil
+end
+
+function calculateComeWin(flat,odds,pointNum)
+  local winAmount = 0
+  if(pointNum == 4 or pointNum == 10) then
+    --pays 2 to 1
+    winAmount = flat + (odds * 2)
+  elseif(pointNum == 5 or pointNum == 9) then
+    -- pays 3 to 2
+    winAmount = flat + ((odds * 3) / 2)
+  elseif(pointNum == 6 or pointNum == 8) then
+    -- pays 6 to 5
+    winAmount = flat + ((odds * 6) / 5)
+  end
+  return winAmount
 end
 
 --------------------------- [[
@@ -1097,7 +1361,7 @@ customEvents = {}
 function subscribeCustomEvent (eventParams)
   -- eventName
   -- subscribingObject
-  log(eventParams,'EventParams')
+  --log(eventParams,'EventParams')
   if (eventParams.eventName and eventParams.subscribingObject) then
    if (customEvents[eventParams.eventName]) then
      -- event already exits
@@ -1109,7 +1373,7 @@ function subscribeCustomEvent (eventParams)
          customEvents[eventParams.eventName].subscribers[eventParams.subscribingObject.guid] = eventParams.subscribingObject
        end
      else
-       log(customEvents.subscribers,'CustomEvents')
+       --log(customEvents.subscribers,'CustomEvents')
        customEvents[eventParams.eventName].subscribers = {}
        customEvents[eventParams.eventName].subscribers[eventParams.subscribingObject.guid] = eventParams.subscribingObject
      end
@@ -1119,6 +1383,24 @@ function subscribeCustomEvent (eventParams)
      customEvents[eventParams.eventName] = {subscribers = {[eventParams.subscribingObject.guid] = eventParams.subscribingObject}}
    end
   end
+end
+
+function unsubscribeCustomEvent (eventParams)
+  -- eventName
+  -- subscribingObject
+  log(eventParams,'Global - Unsubscribe call')
+  if (eventParams.eventName and eventParams.subscribingObject) then
+   if (customEvents[eventParams.eventName]) then
+     -- event already exits
+     if( customEvents[eventParams.eventName].subscribers) then
+       if (customEvents[eventParams.eventName].subscribers[eventParams.subscribingObject.guid]) then
+         --already subscribed to this event
+         log(customEvents[eventParams.eventName].subscribers[eventParams.subscribingObject.guid] , 'Global - Unsubscribing')
+         customEvents[eventParams.eventName].subscribers[eventParams.subscribingObject.guid] = nil
+       end
+     end
+   end
+ end
 end
 
 function triggerCustomEvent (eventParams)
@@ -1135,7 +1417,7 @@ function triggerCustomEvent (eventParams)
         v.call('onCustomEvent',{eventName = eventParams.eventName, eventData = evd})
       end
     else
-      log (eventParams,'Unsubscribed event triggered')
+      --log (eventParams,'Unsubscribed event triggered')
     end
   end
 end
@@ -1145,7 +1427,7 @@ function displayBetInfo ()
     UI.show('BetInfo')
     displayInfo = 'Betting Info<br />'
     for k,v in pairs(bettingZones) do
-      if(k == 'hard' or k == 'place' ) then
+      if(k == 'hard' or k == 'place' or k == 'comeOdds' ) then
         --print('hard or place zone found')
         for i = 0,13,1 do
           if v[i] then
@@ -1156,6 +1438,11 @@ function displayBetInfo ()
                 if bet.value then
                 displayInfo = displayInfo..k..'['..tostring(i)..']:'..
                 plr_color..':'..bet.value..'<br />'
+              elseif k =='comeOdds' then
+                if bet.flat then
+                  displayInfo = displayInfo..k..'['..tostring(i)..']:'..
+                  plr_color..':'..bet.flat..'<br />'
+                end
               end
               end
             else
